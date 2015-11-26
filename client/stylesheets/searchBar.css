@@ -1,0 +1,13 @@
+#searchBar .first-select {
+	margin: 0px -1px;
+}
+
+#searchBar .query-input-container,
+#searchBar .budget-input-container {
+	padding: 0px;
+}
+
+#searchBar .query-input-container input,
+#searchBar .budget-input-container input {
+	text-align: left;
+}
