@@ -1,5 +1,5 @@
 Template.navbar_menu.helpers({
-	current: function(){
+	current_user: function(){
 		return Meteor.user().username;
 	}
 });
