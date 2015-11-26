@@ -25,3 +25,4 @@ accounts-base
 ian:accounts-ui-bootstrap-3
 zimme:iron-router-auth
 peppelg:bootstrap-3-modal
+emdagon:bootstrap-multiselect
