@@ -1,8 +1,5 @@
 Template.Dashboard.events({
-	'click #home_admin_val': function() {
-		var opt = {
-		};
-
-
+	'click #dashboard_logout': function() {
+		Meteor.logout();
 	}
 });
