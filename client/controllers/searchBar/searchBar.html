@@ -1,5 +1,5 @@
 <template name="searchBar">
-	<div id="searchBar">
+	<div id="searchBar" class="container">
 		<div class="btn-group col-md-12" role="group">
 				<select id="transaction-type" multiple="multiple" class="inline-input">
 					<option>Vente</option>
@@ -10,13 +10,13 @@
 					<option>Appartement</option>
 					<option>Terrain</option>
 				</select>
-				<div class='btn-group query-input-container col-md-4' role='group'>
+				<div class='btn-group query-input-container col-md-5' role='group'>
 					<input type="text" class="btn btn-default col-md-12" placeholder="Rechercher" />
 				</div>
 				<div class='btn-group budget-input-container budget-input col-md-2' role='group'>
-					<input type="number" class="btn btn-default col-md-12" placeholder="Budget Max">
+					<input type="number" class="btn btn-default col-md-12" placeholder="Budget">
 				</div>
-				<button class="btn btn-danger" type="button">
+				<button class="btn btn-danger col-md-1" type="button">
 					<span class="glyphicon glyphicon-search"></span>
 				</button>
 		</div>
