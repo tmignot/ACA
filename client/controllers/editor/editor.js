@@ -10,12 +10,16 @@ Template.Editor.events({
 	},
 	'click #preview-admin-submit-g': function(e, t){
 		e.preventDefault();
-		var opt = {
-			bg: $('#form-g-admin-bg').val(),
-			logo: $('#form-g-admin-logo').val()
+
+		var homePage = HomePage.findOne();
+
+		var preview = {
+			bgColor: $('#form-g-admin-bg-color').val() != "" ? $('#form-g-admin-bg-color').val() : homePage.bgColor,
+			mainColor: $('#form-g-admin-main-color').val() != "" ? $('#form-g-admin-main-color').val() : homePage.mainColor,
+			logoUrl: $('#form-g-admin-logo-url').val() != "" ? $('#form-g-admin-logo').val() : homePage.logoUrl
 		};
 
-		console.log(opt);
-		Router.go('previewHome', opt);
+		Session.set("preview", preview);
+		Router.go('previewHome');
 	},
 });
