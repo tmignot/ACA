@@ -11,3 +11,7 @@
 #searchBar .budget-input-container input {
 	text-align: left;
 }
+
+input[type='checkbox'] {
+	visibility: hidden;
+}
