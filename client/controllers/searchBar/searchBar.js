@@ -5,9 +5,9 @@ Template.searchBar.onRendered(function(){
 			selectAllText: "Toutes",
 			selectAllNumber: false,
 			allSelectedText: "Toutes",
-			nonSelectedText: "Nature de la transaction",
+			nonSelectedText: "Transactions",
 			buttonContainer: "<div class='btn-group first-select' role='group' />",
-			buttonWidth: "200px"
+			buttonWidth: "150px"
 		}
 	);
 	$("#property-type").multiselect(
@@ -16,9 +16,9 @@ Template.searchBar.onRendered(function(){
 			selectAllText: "Tous",
 			selectAllNumber: false,
 			allSelectedText: "Tous",
-			nonSelectedText: "Type de bien",
+			nonSelectedText: "Biens",
 			buttonContainer: "<div class='btn-group' role='group' />",
-			buttonWidth: "200px"
+			buttonWidth: "100px"
 		}
 	);
 });
