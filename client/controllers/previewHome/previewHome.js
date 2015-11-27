@@ -8,9 +8,9 @@ Template.previewHome.events({
 	'click #preview-home-cancel': function(){
 		Router.go('Editor');
 	},
-	'click #preview-home-save': function(){
-		console.log("on fait des trucs et on retourne sur l'editeur.");
-		Router.go('Editor');
+	'click #preview-home-save': function(e, t){
+		console.log(UI.getData());
+		// Router.go('Editor');
 	}
 });
 
