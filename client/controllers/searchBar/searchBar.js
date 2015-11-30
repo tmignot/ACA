@@ -1,14 +1,3 @@
-Template.searchBar.onCreated(function() {
-	this.results = new ReactiveVar([]);
-
-});
-
-Template.searchBar.helpers({
-	results: function() {
-		return;
-	}
-});
-
 Template.searchBar.onRendered(function(){
 	$("#transaction-type").multiselect(
 		{
