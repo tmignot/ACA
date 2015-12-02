@@ -4,12 +4,24 @@ Template.searchBar.onCreated(function() {
 });
 
 Template.searchBar.helpers({
+	parentData: function() {
+		return Template.parentData(1);
+	},
 	results: function() {
-		return;
+		return Template.instance().results.get();
+	}
+});
+
+Template.searchBar.events({
+	'submit': function(e,t) {
+	},
+	'change .query-input': function(e,t) {
 	}
 });
 
 Template.searchBar.onRendered(function(){
+	$("button.col-md-1.btn-danger").css("background-color", Template.parentData(1).mainColor);
+	$("button.col-md-1.btn-danger").css("border-color", Template.parentData(1).mainColor);
 	$("#transaction-type").multiselect(
 		{
 			includeSelectAllOption: true,

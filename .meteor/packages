@@ -27,3 +27,6 @@ zimme:iron-router-auth
 peppelg:bootstrap-3-modal
 emdagon:bootstrap-multiselect
 aldeed:geocoder
+reactive-var
+cfs:standard-packages
+cfs:filesystem
