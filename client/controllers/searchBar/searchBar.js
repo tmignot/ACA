@@ -15,7 +15,8 @@ Template.searchBar.helpers({
 Template.searchBar.events({
 	'submit': function(e,t) {
 	},
-	'change .query-input': function(e,t) {
+	'onchange .query-input': function(e,t) {
+		console.log($(e.target).val());
 	}
 });
 

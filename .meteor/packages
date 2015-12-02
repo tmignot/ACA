@@ -30,3 +30,5 @@ aldeed:geocoder
 reactive-var
 cfs:standard-packages
 cfs:filesystem
+multiply:iron-router-progress
+underscorestring:underscore.string
