@@ -1,0 +1,32 @@
+<template name="Properties">
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="page-header">
+			Gestion des propriétés
+		</h1>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i>Propriétés</h3>
+			</div>
+			<div class="panel-body">
+				<div id="morris-area-chart">
+					{{> quickForm
+						collection="Properties"
+						id="insertPropertyForm"
+						class="autoform-form col-sm-12"
+						type="insert"
+						template="bootstrap3-horizontal"
+						label-class="col-sm-4 col-md-3 col-lg-2"
+						input-col-class="col-sm-8 col-md-3 col-lg-4"
+						omitFields="history,reference"
+					}}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</template>

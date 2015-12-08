@@ -32,3 +32,4 @@ cfs:standard-packages
 cfs:filesystem
 multiply:iron-router-progress
 underscorestring:underscore.string
+aldeed:autoform
