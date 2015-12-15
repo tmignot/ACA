@@ -1,6 +1,5 @@
 Template.searchBar.onCreated(function() {
 	this.results = new ReactiveVar([]);
-
 });
 
 Template.searchBar.helpers({
@@ -13,7 +12,8 @@ Template.searchBar.helpers({
 });
 
 Template.searchBar.events({
-	'submit': function(e,t) {
+	'click button': function(e,t) {
+		console.log("coucou");
 	},
 	'onchange .query-input': function(e,t) {
 		console.log($(e.target).val());

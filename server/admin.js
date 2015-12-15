@@ -1,12 +1,21 @@
-var verif = true;
+Accounts.urls.enrollAccount = function (token) {
+	return Meteor.absoluteUrl('enroll-account/' + token);
+};
 
-if (verif == false) {
-	Meteor.startup(function(){
+
+Meteor.startup(function(){
+	if (Meteor.users.find().count() == 0) {
 		var users = {
 			username: "test",
 			password: "test"
 		};
 
-		Accounts.createUser(users);
-	});
-}
+		var uid = Accounts.createUser(users);
+		Roles.addUsersToRoles(uid, ['r','w','rm'], 'Agents');
+		Roles.addUsersToRoles(uid, ['r','w','rm'], 'Customers');
+		Roles.addUsersToRoles(uid, ['r','w','rm'], 'Meetings');
+		Roles.addUsersToRoles(uid, ['r','w','rm'], 'Properties');
+		Roles.addUsersToRoles(uid, ['r','w','rm'], 'Estimations');
+		Roles.addUsersToRoles(uid, ['r','w','rm'], 'Editor');
+	}
+});

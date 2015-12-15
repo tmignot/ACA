@@ -22,7 +22,6 @@ twbs:bootstrap
 iron:router
 accounts-password
 accounts-base
-ian:accounts-ui-bootstrap-3
 zimme:iron-router-auth
 peppelg:bootstrap-3-modal
 emdagon:bootstrap-multiselect
@@ -33,3 +32,8 @@ cfs:filesystem
 multiply:iron-router-progress
 underscorestring:underscore.string
 aldeed:autoform
+accounts-google
+accounts-ui
+service-configuration
+isotope:isotope
+alanning:roles

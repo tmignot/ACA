@@ -10,10 +10,25 @@
 	<div class="col-lg-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i>Propriétés</h3>
+				<h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i>Liste des propriétés</h3>
+			</div>
+			<div class="panel-body">
+				{{#Transitions}}
+					{{#each properties}}
+						<div class="row">
+							{{_id}}
+						</div>
+					{{/each}}
+				{{/Transitions}}
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i>Ajouter une propriété</h3>
 			</div>
 			<div class="panel-body">
 				<div id="morris-area-chart">
+					<!--
 					{{> quickForm
 						collection="Properties"
 						id="insertPropertyForm"
@@ -24,6 +39,7 @@
 						input-col-class="col-sm-8 col-md-3 col-lg-4"
 						omitFields="history,reference"
 					}}
+					-->
 				</div>
 			</div>
 		</div>

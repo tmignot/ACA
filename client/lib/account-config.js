@@ -1,4 +1,6 @@
 Accounts.ui.config({
-  requestPermissions: {},
+  requestPermissions: {
+		google: ['https://www.googleapis.com/auth/calendar']
+	},
   passwordSignupFields: 'USERNAME_ONLY'
 });
