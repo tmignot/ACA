@@ -100,6 +100,10 @@ html, body
 	cursor: pointer;
 }
 
+#calendar h2
+{
+	font-size: 1.1rem;
+}
 /* property css */
 #add_property_form
 {

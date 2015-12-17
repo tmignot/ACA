@@ -14,18 +14,21 @@
 					<img class="responsive-img" src="/logoagence.png">			
 				</div>
 			</li>
+			
 			<li class="bold">
 				<div class="sidebar-icon center">
 					<i class="material-icons">dashboard</i>
 					<a href="/admin/dashboard" class="waves-effect waves-teal">Accueil</a>			
 				</div>
 			</li>
+			{{#if isAdmin}}
 			<li class="bold">
 				<div class="sidebar-icon center">
 					<i class="material-icons">supervisor_account</i>
 					<a href="/admin/agents" class="waves-effect waves-teal">Admin</a>			
 				</div>
 			</li>
+			{{/if}}
 			<li class="bold">
 				<div class="sidebar-icon center">
 					<i class="material-icons">perm_contact_calendar</i>
