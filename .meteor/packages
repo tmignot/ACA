@@ -40,3 +40,4 @@ alanning:roles
 raix:handlebar-helpers
 percolate:google-api
 scmart:fullcalendar-2
+momentjs:moment

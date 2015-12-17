@@ -17,9 +17,7 @@ Template.Admin.events({
 			if (res.google) {
 				Meteor.loginWithGoogle({
 						loginHint: e.currentTarget.inputEmail.value,
-						requestPermissions: ['email','https://www.googleapis.com/auth/calendar','https://www.googleapis.com/auth/calendar.readonly'],
-						forceApprovalPrompt: true,
-						includeGrantedScopes: true
+						requestPermissions: ['email','https://www.googleapis.com/auth/calendar','https://www.googleapis.com/auth/calendar.readonly']
 				});
 			} else {
 				console.log(e.currentTarget);

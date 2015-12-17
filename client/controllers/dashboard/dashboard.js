@@ -1,5 +1,9 @@
 Template.Dashboard.onRendered(function() {
-	Meteor.call('gapiGetEventList', Meteor.user()._id, function(e,r) {
+	data = {
+		timeMin: moment().subtract(1, 'month').toISOString()
+	}
+	console.log(data);
+	Meteor.call('gapiGetEventList', Meteor.user()._id, data, function(e,r) {
 		console.log(r);
 		$('#calendar').fullCalendar({
 			events: _.map(r.result.items, function(item) {

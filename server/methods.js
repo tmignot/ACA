@@ -37,13 +37,17 @@ Meteor.methods({
 	setEnrolledPassword: function(password) {
 		Accounts.setPassword(this.userId, password);
 	},
-	'gapiGetEventList': function(uid) {
+	'gapiGetEventList': function(uid, options) {
 		var user = Agents.findOne({_id: uid})
 		if (user.services.google) {
 			var addr = user.emails[0].address;
+			var query = "";
+			_.each(_.keys(options), function(key) {
+				query += '&'+key+'='+options[key];
+			});
 			var path = 'calendar/v3/calendars/'+addr+'/events';
 			var fiber = Fiber.current;
-			GoogleApi.get(path, {user: user}, function(e,r) {
+			GoogleApi.get(path, {user: user, params: options}, function(e,r) {
 				fiber.run({error: e, result: r});
 			});
 			return Fiber.yield();

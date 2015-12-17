@@ -7,8 +7,6 @@ Template.Enroll.onCreated(function() {
 			Meteor.loginWithGoogle({
 				loginHint: agent.username,
 				requestPermissions: ['email', 'https://www.googleapis.com/auth/calendar','https://www.googleapis.com/auth/calendar.readonly'],
-				forceApprovalPrompt: true,
-				includeGrantedScopes: true,
 				redirectUrl: Meteor.absoluteUrl() + 'enroll-callback/' + agent.services.password.reset.token
 			}, function(e) {
 				if (e) {console.log(e)}
