@@ -37,3 +37,6 @@ accounts-ui
 service-configuration
 isotope:isotope
 alanning:roles
+raix:handlebar-helpers
+percolate:google-api
+scmart:fullcalendar-2

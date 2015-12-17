@@ -1,11 +1,22 @@
 Template.Agent.onRendered(function() {
-		$('.grid').isotope('insert', this.find('.grid-item'));
+		if ($('.grid').data('isotope')) {
+			$('.grid').isotope('insert', this.find('.grid-item'));
+		}
 });
 
 Template.Agents.onRendered(function(){
 	this.grid = $('.grid').isotope({
 		itemSelector: '.grid-item',
-		masonry: {}
+		getSortData: {
+			group: function(elem) {
+				if ($(elem).hasClass('usercard')) {
+					return '0_usercard';
+				} else {
+					return '1_footer';
+				}
+			}
+		},
+		sortBy: ['group']
 	});
 });
 
@@ -28,10 +39,7 @@ Template.Agents.events({
 			$(e.currentTarget).addClass('size-2');
 		}
 		Meteor.setTimeout(function() {
-			$('.grid').isotope({
-				itemSelector: '.grid-item',
-				masonry: {}
-			});
+			$('.grid').isotope('arrange');
 		}, 220);
 	}
 });

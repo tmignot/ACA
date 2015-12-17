@@ -11,9 +11,24 @@ Template.Admin.onRendered(function(){
 });
 
 Template.Admin.events({
-	'submit': function(e,t) {
+	'submit form': function(e,t) {
 		e.preventDefault();
-		Meteor.loginWithPassword(e.target.inputEmail.value, e.target.inputPassword.value);
+		Meteor.call('loginMethod', e.currentTarget.inputEmail.value, function(err,res) {
+			if (res.google) {
+				Meteor.loginWithGoogle({
+						loginHint: e.currentTarget.inputEmail.value,
+						requestPermissions: ['email','https://www.googleapis.com/auth/calendar','https://www.googleapis.com/auth/calendar.readonly'],
+						forceApprovalPrompt: true,
+						includeGrantedScopes: true
+				});
+			} else {
+				console.log(e.currentTarget);
+				Meteor.loginWithPassword(
+					e.currentTarget.inputEmail.value,
+					e.currentTarget.inputPassword.value
+				);
+			}
+		});
 	},
 	'click .logout-button': function(e,t) {
 		Meteor.logout();
