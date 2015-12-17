@@ -17,9 +17,3 @@ Template.Dashboard.onRendered(function() {
 		});
 	});
 });
-
-Template.Dashboard.events({
-	'click #dashboard_logout': function() {
-		Meteor.logout();
-	}
-});

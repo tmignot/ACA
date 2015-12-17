@@ -1,90 +1,77 @@
 <template name="Agents">
-<!-- Page Heading -->
-<div class="row">
-	<div class="col-lg-12">
-		<h1 class="page-header">
-			Gestion des membres
-		</h1>
-	</div>
-</div>
-<!-- /.row -->
-
-<div class="row">
-	<div class="col-lg-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i>Personel Agency</h3>
-			</div>
-			<div class="panel-body">
-				<div id="morris-area-chart" class="grid">
-					{{#each agents}}
-						{{>Agent }}
-					{{/each}}
-					<div class="col-sm-12 grid-item grid-footer" id="grid-footer">
-						<button class="btn btn-primary addAgent">Ajouter</button>
-					</div>
-				</div>
-			</div>
+<div id="dashboard_container">
+	<!-- Page Heading -->
+	<div class="row">
+		<div class="col s12">
+			<h6 class="left">Gestion des membres</h6>
+			<button class="btn btn-primary addAgent right">Ajouter</button>
 		</div>
 	</div>
-</div>
-<!-- /.row -->
+	<!-- /.row -->
+
+	<div class="row">
+		<div id="morris-area-chart" class="grid">
+			{{#each agents}}
+				{{>Agent }}
+			{{/each}}
+		</div>
+	</div>
+	  <div id="addAgent" class="modal">
+	  		{{> addAgent}}
+	  </div>
+	</div>
 </template>
 
 <template name="Agent">
-<div class="grid-item usercard col-xs-12 col-md-6 col-lg-4">
-	<div class="row well well-sm">
-		<div class="col-xs-5">
-			<img class="center-block" src="//placehold.it/100x100">
-		</div>
-		<div class="col-xs-7">
-			<h3>{{username}}</h3>
-			<div class="infos">
-				<div>
-					Rendez-vous <span class="badge badge-info">1</span>
+	<div class="grid-item usercard col s12 m6 l4">
+		<div class="row">
+			<div class="card">
+				<div class="card-image waves-effect waves-block waves-light">
+					<img class="center-block" src="//placehold.it/100x100">
+				</div>
+				<div class="card-content">
+					<span class="card-title activator grey-text text-darken-4">{{ username }}</span>
+					<p>Rendez-vous <span class="new badge">4</span></p>
+				</div>
+				<div class="card-reveal">
+					<span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+					<p>Here is some more information about this product that is only revealed once clicked on.</p>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </template>
 
 <template name="addAgent">
-<div class="modal fade">
-	<div class="modal-dialog">
-		<div class="modal-content">
 
-			<div class="modal-header">
-				<h4 class="modal-title">Ajouter un membre à l'équipe</h4>
-			</div>
+	<div class="modal-content">
 
-			<div class="modal-body">
-				<form class="form-inline"> 
-					<p class="text-info">
-						Entrez l'identifiant Google du nouveau membre,
-						ce dernier recevra un e-mail l'invitant à créer un compte
-						et à renseigner ses informations personnelles.
-					</p>
-					<div class="form-group">
-						<label for="inputUsername" class="control-label">Google ID</label>
-						<div class="input-group">
-							<input type="text" class="form-control" id="inputUsername" placeholder="username">
-							<span class="input-group-addon">@gmail.com</span>
-						</div>
+		<h4 class="modal-title">Ajouter un membre à l'équipe</h4>
+
+		<div class="modal-body">
+			
+			<p class="text-info">
+				Entrez l'identifiant Google du nouveau membre,
+				ce dernier recevra un e-mail l'invitant à créer un compte
+				et à renseigner ses informations personnelles.
+			</p>
+			<form class="form-inline"> 
+				<div class="row">
+					<div class="input-field col s8">
+						<input id="inputUsername" type="text" class="validate">
+						<label for="inputUsername">Google ID</label>
 					</div>
-					<div class="form-group">
-						<div class="input-group">
-							<button type="submit" class="btn btn-primary">Ajouter</button>
-						</div>
-					</div>
-				</form>
-			</div>
-
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
+					<button id="button_modal_add_agent" class="btn waves-effect waves-light" type="submit">Ajouter
+						<i class="material-icons right">send</i>
+					</button>
+				</div>
+			</form>
 
 		</div>
+		<div class="modal-footer">
+			<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+		</div>
+
 	</div>
-</div>
+
 </template>

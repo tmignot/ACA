@@ -1,5 +1,5 @@
 Template.Properties.onRendered(function() {
-	$(".autoform-form").removeClass('form-horizontal');
+	$('select').material_select();
 });
 
 Template.Properties.helpers({

@@ -1,7 +1,7 @@
 Template.Agent.onRendered(function() {
-		if ($('.grid').data('isotope')) {
-			$('.grid').isotope('insert', this.find('.grid-item'));
-		}
+	if ($('.grid').data('isotope')) {
+		$('.grid').isotope('insert', this.find('.grid-item'));
+	}
 });
 
 Template.Agents.onRendered(function(){
@@ -28,25 +28,31 @@ Template.Agents.helpers({
 
 Template.Agents.events({
 	'click button.addAgent': function(e,t) {
-		Modal.show('addAgent');
-	},
-	'click .grid-item.usercard': function(e,t) {
-		if ($(e.currentTarget).hasClass('size-2')) {
-			$(e.currentTarget).removeClass('size-2');
-			$(e.currentTarget).addClass('size-1');
-		} else {
-			$(e.currentTarget).removeClass('size-1');
-			$(e.currentTarget).addClass('size-2');
-		}
-		Meteor.setTimeout(function() {
-			$('.grid').isotope('arrange');
-		}, 220);
+		$('#addAgent').openModal();
 	}
+	// 'click .grid-item.usercard': function(e,t) {
+	// 	if ($(e.currentTarget).hasClass('size-2')) {
+	// 		$(e.currentTarget).removeClass('size-2');
+	// 		$(e.currentTarget).addClass('size-1');
+	// 	} else {
+	// 		$(e.currentTarget).removeClass('size-1');
+	// 		$(e.currentTarget).addClass('size-2');
+	// 	}
+	// 	Meteor.setTimeout(function() {
+	// 		$('.grid').isotope('arrange');
+	// 	}, 220);
+	// }
 });
 
 Template.addAgent.events({
 	'submit form': function(e,t) {
 		e.preventDefault();
-		Meteor.call('addUser', e.currentTarget.inputUsername.value);
+		Meteor.call('addUser', e.currentTarget.inputUsername.value, function(err){
+			if (err)
+				console.log(err);
+			else
+				$('#addAgent').closeModal();
+		});
 	}
 });
+

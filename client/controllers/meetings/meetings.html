@@ -1,26 +1,55 @@
 <template name="Meetings">
-<div class="row">
-	<div class="col-lg-12">
-		<h1 class="page-header">
-			Rendez-vous
-		</h1>
-	</div>
-</div>
-<div class="row">
-	<div class="col-lg-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">
-					<i class="fa fa-bar-chart-o fa-fw">
-					</i>Ajouter un rendez-vous
-				</h3>
-			</div>
-			<div class="panel-body">
-				<div id="morris-area-chart">
-					{{> quickForm collection="Meetings" id="insertMeetingForm" type="insert"}}
+<div id="dashboard_container">
+		<div class="row">
+			<div class="col s8 m8">
+				<div class="card">
+					<div class="card-content white-text">
+						<span class="card-title">Ajouter un rendez-vous</span>
+						<div class="card-content">
+							<div class="row">
+								<form id="calendar_form" class="col s12">
+							      <div class="row">
+							        <div class="col s4">
+							          <label for="inputDate_cal">Date</label>
+							          <input id="inputDate_cal" type="date" class="datepicker validate">
+							        </div>
+							        <div class="col s4">
+								        <label for="inputProperty_cal">Property</label>
+									    <input id="inputProperty_cal" type="text" class="validate">
+							        </div>
+							        <div class="col s4">
+							          <label for="inputAgent_cal">Agent</label>
+							          <input id="inputAgent_cal" type="text" class="validate">
+							        </div>
+							      </div>
+							      <div class="row">
+									<div class="input-field col s8">
+										<textarea id="inputDesc_cal" class="materialize-textarea"></textarea>
+										<label for="inputDesc_cal">Description</label>
+									</div>
+							      </div>
+							      <div class="row">
+							        <div class="input-field col s8">
+							          <input id="inputAdress_cal" type="text" class="validate">
+							          <label for="inputAdress_cal">Adresse</label>
+							        </div>
+							     	<div class="input-field col s4">
+										<input id="inputBuyer_cal" type="text" class="validate">
+										<label for="inputBuyer_cal">Buyer</label>
+									</div>
+							      </div>
+							      <div class="row">
+										<button class="btn waves-effect waves-light right" type="submit" name="action">Submit
+											<i class="material-icons right">send</i>
+										</button>	
+							      </div>
+							    </form>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+
 </div>
 </template>

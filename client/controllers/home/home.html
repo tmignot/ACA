@@ -1,12 +1,124 @@
 <template name="Home">
-	<div id="home-wrapper">
-		<div class="container">
-			<div class="row">
-				<img id="home_logo">
-			</div>
-			<div class="row">
-				{{> searchBar }}
-			</div>
-		</div>
-	</div>
+  <div id="homepage_container">
+    <div class="section no-pad-bot" id="index-banner">
+      <div class="container">
+        <br><br>
+        <div class="row center">
+          <img class="responsive-img" src="/logoagence.png">
+        </div>
+        <br><br>
+        <br><br>
+        <div class="row">
+          <form class="col s12">
+            <div class="row">
+              <div class="input-field col s2">
+                <select multiple>
+                  <option value="" disabled selected>Transaction</option>
+                  <option value="1">Ventes</option>
+                  <option value="2">Location</option>
+                </select>
+              </div>
+              <div class="input-field col s2">
+                <select multiple>
+                  <option value="" disabled selected>Proprietes</option>
+                  <option value="1">Maison</option>
+                  <option value="2">Appartement</option>
+                  <option value="2">Terrain</option>
+                </select>
+              </div>
+              <div class="input-field col s4">
+                <input id="search_input" type="text" class="validate">
+                <label for="search_input">Rechercher</label>
+              </div>
+              <div class="input-field col s2">
+                <input id="budget_input" type="text" class="validate">
+                <label for="budget_input">Budget</label>
+              </div>
+              <div class="input-field col s2">
+                <a class="waves-effect waves-light btn"><i class="material-icons">search</i></a>
+              </div>
+            </div>
+          </form>
+        </div>
+        <br><br>
+
+      </div>
+    </div>
+
+
+    <div class="container">
+      <div class="section">
+
+        <!--   Icon Section   -->
+        <div class="row">
+          <div class="col s12 m4">
+            <div class="icon-block">
+              <h2 class="center light-blue-text"><i class="material-icons">flash_on</i></h2>
+              <h5 class="center">Speeds up development</h5>
+
+              <p class="light">Nam mauris sapien, porttitor vel eleifend et, mollis commodo neque. Morbi accumsan, sem at consectetur lacinia, orci tellus elementum lacus, a scelerisque urna enim ac elit. Sed pellentesque dictum nunc, sed tempus augue ultrices vitae. Nam vitae ultrices mi. Fusce lobortis condimentum pulvinar. Donec tincidunt tellus vitae leo luctus egestas.</p>
+            </div>
+          </div>
+
+          <div class="col s12 m4">
+            <div class="icon-block">
+              <h2 class="center light-blue-text"><i class="material-icons">group</i></h2>
+              <h5 class="center">User Experience Focused</h5>
+
+              <p class="light">Sed pellentesque dictum nunc, sed tempus augue ultrices vitae. Nam vitae ultrices mi. Fusce lobortis condimentum pulvinar. Donec tincidunt tellus vitae leo luctus egestas. Vivamus sit amet eleifend sapien. Donec tempus quam molestie sapien rhoncus consectetur.</p>
+            </div>
+          </div>
+
+          <div class="col s12 m4">
+            <div class="icon-block">
+              <h2 class="center light-blue-text"><i class="material-icons">settings</i></h2>
+              <h5 class="center">Easy to work with</h5>
+
+              <p class="light">Nam mauris sapien, porttitor vel eleifend et, mollis commodo neque. Morbi accumsan, sem at consectetur lacinia, orci tellus elementum lacus, a scelerisque urna enim ac elit. Sed pellentesque dictum nunc, sed tempus augue ultrices vitae. Nam vitae ultrices mi. Fusce lobortis condimentum pulvinar. Donec tincidunt tellus vitae leo luctus egestas. Vivamus sit amet eleifend sapien. Donec tempus quam molestie sapien rhoncus consectetur.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <br><br>
+
+    </div>
+
+    <footer class="page-footer deep-purple darken-2">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Company Bio</h5>
+            <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+
+
+          </div>
+          <div class="col l3 s12">
+            <h5 class="white-text">Settings</h5>
+            <ul>
+              <li><a class="white-text" href="#!">Link 1</a></li>
+              <li><a class="white-text" href="#!">Link 2</a></li>
+              <li><a class="white-text" href="#!">Link 3</a></li>
+              <li><a class="white-text" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+          <div class="col l3 s12">
+            <h5 class="white-text">Connect</h5>
+            <ul>
+              <li><a class="white-text" href="#!">Link 1</a></li>
+              <li><a class="white-text" href="#!">Link 2</a></li>
+              <li><a class="white-text" href="#!">Link 3</a></li>
+              <li><a class="white-text" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">
+          <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+        </div>
+      </div>
+    </footer>
+    
+  </div>
 </template>

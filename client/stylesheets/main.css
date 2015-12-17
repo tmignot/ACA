@@ -1,0 +1,173 @@
+/* General */
+html, body
+{
+	height: 100%;
+	width: 100%;
+}
+
+/* helpers */
+.padding-lr15
+{
+	padding-left: 15px;
+	padding-right: 15px;
+}
+/* modal add agent */
+#button_modal_add_agent
+{
+	margin-top: 25px;
+}
+
+
+
+
+/* Home page css */
+#homepage_container
+{
+	background-color: black;
+	color: white;
+}
+
+/* login page css */
+#admin_container
+{
+	background-color: black;
+	min-height: 100%;
+	min-width: 100%;
+	color: white;
+}
+
+/* agents css */
+/*.grid {
+	margin: 0 auto;
+}
+
+.grid-item {
+	height: 150px;
+	padding: 15px;
+	padding-left: 25px;
+}
+
+.grid-item .well {
+	width: 100%;
+	height: 100%;
+}
+
+.grid-item.size-2 {
+	animation: grow 0.2s both;
+}
+
+.grid-item.size-1 {
+	animation: shrink 0.2s both;
+}
+
+.grid-item.grid-footer {
+	width: 100%;
+}
+
+@keyframes grow {
+	0%		{height: 150px;}
+	100%	{height: 450px;}
+}
+
+@keyframes shrink {
+	0%		{height: 450px;}
+	100%	{height: 150px;}
+}*/
+/* dashboard page css */
+#dashboard_container
+{
+	background-color: #505050;
+	min-height: 100%;
+	margin-left: 140px;
+	padding: 15px;
+}
+
+#dashboard_container_side
+{
+	background-color: #505050;
+	min-height: 100%;
+	margin-left: 340px;
+	padding: 15px;
+}
+
+.d-head-logo
+{
+	background-color: #9575cd;
+}
+
+.d-logout-btn
+{
+	cursor: pointer;
+}
+
+/* property css */
+#add_property_form
+{
+	color: black;
+}
+/* meetingds css */
+#calendar_form
+{
+	color: black;
+}
+
+
+
+
+
+
+
+
+
+/* == fix materialize */
+nav
+{
+	background-color: white;
+	color: black;
+	height: 48px;
+	line-height: 48px;
+	z-index: 999;
+}
+
+nav .brand-logo
+{
+	font-size: 1rem;
+	color: black;
+}
+nav .nav-wrapper i
+{
+	height: 48px;
+	line-height: 48px;
+	font-size: 1rem;	
+}
+
+ul.side-nav.fixed {
+    overflow: hidden;
+    z-index: 0;
+}
+
+.side-nav
+{
+	width: 140px;
+}
+
+.side-nav li
+{
+	padding-left: 10px;
+	padding-bottom: 20px;
+	padding-top: 20px;
+	padding-right: 10px;
+}
+
+.side-nav a
+{
+	height: 24px;
+	line-height: 24px;
+	font-size: 0.8rem;
+	cursor: pointer;
+}
+
+.card-title
+{
+	color: black;
+}
