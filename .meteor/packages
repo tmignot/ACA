@@ -37,4 +37,5 @@ momentjs:moment
 poetic:materialize-scss
 percolate:google-api
 raix:handlebar-helpers
-scmart:fullcalendar-2
+ryanswapp:datetime-picker
+rzymek:fullcalendar

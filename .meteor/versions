@@ -85,7 +85,6 @@ momentjs:moment@2.10.6
 mongo@1.1.3
 mongo-id@1.0.1
 mongo-livedata@1.0.9
-mrt:moment@2.6.0
 mrt:q@1.0.1
 multiply:iron-router-progress@1.0.2
 npm-bcrypt@0.7.8_2
@@ -106,7 +105,8 @@ reactive-var@1.0.6
 reload@1.1.4
 retry@1.0.4
 routepolicy@1.0.6
-scmart:fullcalendar-2@2.0.2
+ryanswapp:datetime-picker@0.0.1
+rzymek:fullcalendar@2.5.0
 service-configuration@1.0.5
 session@1.1.1
 sha@1.0.4

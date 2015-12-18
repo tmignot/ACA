@@ -1,3 +1,10 @@
+Tracker.autorun(function (c) {
+	if (Session.equals("mergingUserOk", false))
+		Router.go('/');
+	if (Session.equals("mergingUserOk", true))
+		Router.go('/admin/dashboard');
+});
+
 Template.Enroll.onCreated(function() {
 	var agent = this.data.enrolledUser;
 	var state = this.data.enrollState;
@@ -14,8 +21,7 @@ Template.Enroll.onCreated(function() {
 		} else {
 			Router.go('/enroll-callback/error');
 		}
-	} else if (state === 'finish') {
-	} else {
+	} else if (state !== 'finish') {
 		console.log('error: '+ state);
 	}
 });

@@ -1,58 +1,88 @@
 <template name="navbar_menu">
-	<header id="d-sidebar">
-	  	<nav>
-			<div class="nav-wrapper padding-lr15">
-			  <a class="brand-logo center">dashboard</a>
-			  <div id="d_logout" class="right hide-on-med-and-down">
-			    <i class="material-icons d-logout-btn">power_settings_new</i>
-			  </div>
+<header>
+</header>
+<nav>
+	<ul class="hide-on-small-and-down fixed side-nav">
+		<li class="bold waves-effect waves-teal">
+			<div class="sidebar-icon center">
+				<i class="material-icons">dashboard</i>
+				<h6 class="center">Accueil</h6>			
 			</div>
-		</nav>
-		<ul id="nav-mobile" class="side-nav fixed">
-			<li class="bold d-head-logo">
-				<div class="sidebar-icon center">
-					<img class="responsive-img" src="/logoagence.png">			
-				</div>
-			</li>
-			
-			<li class="bold">
-				<div class="sidebar-icon center">
-					<i class="material-icons">dashboard</i>
-					<a href="/admin/dashboard" class="waves-effect waves-teal">Accueil</a>			
-				</div>
-			</li>
-			{{#if isAdmin}}
-			<li class="bold">
-				<div class="sidebar-icon center">
-					<i class="material-icons">supervisor_account</i>
-					<a href="/admin/agents" class="waves-effect waves-teal">Admin</a>			
-				</div>
-			</li>
-			{{/if}}
-			<li class="bold">
-				<div class="sidebar-icon center">
-					<i class="material-icons">perm_contact_calendar</i>
-					<a href="/admin/meetings" class="waves-effect waves-teal">Agenda</a>			
-				</div>
-			</li>
-			<li class="bold">
-				<div class="sidebar-icon center">
-					<i class="material-icons">person_pin</i>
-					<a href="/admin/customers" class="waves-effect waves-teal">Acquereurs</a>			
-				</div>
-			</li>
-			<li class="bold">
-				<div class="sidebar-icon center">
-					<i class="material-icons">store</i>
-					<a href="/admin/properties" class="waves-effect waves-teal">Property</a>			
-				</div>
-			</li>
-			<li class="bold">
-				<div class="sidebar-icon center">
-					<i class="material-icons">assessment</i>
-					<a href="/admin/estimations" class="waves-effect waves-teal">Estimations</a>	
-				</div>
-			</li>
-		</ul>
-	</header>
+		</li>
+		{{#if hasPermission 'list' 'Agents'}}
+		<li class="bold waves-effect waves-teal">
+			<div class="sidebar-icon center">
+				<i class="material-icons">supervisor_account</i>
+				<h6 class="center">Equipe</h6>
+			</div>
+		</li>
+		{{/if}}
+		<li class="bold waves-effect waves-teal">
+			<div class="sidebar-icon center">
+				<i class="material-icons">perm_contact_calendar</i>
+				<h6 class="center">Agenda</h6>
+			</div>
+		</li>
+		<li class="bold waves-effect waves-teal">
+			<div class="sidebar-icon center">
+				<i class="material-icons">person_pin</i>
+				<h6 class="center">Acquéreurs</h6>
+			</div>
+		</li>
+		<li class="bold waves-effect waves-teal">
+			<div class="sidebar-icon center">
+				<i class="material-icons">store</i>
+				<h6 class="center">Propriétés</h6>
+			</div>
+		</li>
+		<li class="bold waves-effect waves-teal">
+			<div class="sidebar-icon center">
+				<i class="material-icons">assessment</i>
+				<h6 class="center">Estimations</h6>
+			</div>
+		</li>
+	</ul>
+	<ul id="slide-out" class="side-nav">
+		<li class="bold waves-effect waves-teal">
+			<div class="sidebar-icon center">
+				<i class="material-icons">dashboard</i>
+				<h6 class="center">Accueil</h6>			
+			</div>
+		</li>
+		{{#if hasPermission 'list' 'Agents'}}
+		<li class="bold waves-effect wavec-teal">
+			<div class="sidebar-icon center">
+				<i class="material-icons">supervisor_account</i>
+				<h6 class="center">Equipe</h6>
+			</div>
+		</li>
+		{{/if}}
+		<li class="bold waves-effect waves-teal">
+			<div class="sidebar-icon center">
+				<i class="material-icons">perm_contact_calendar</i>
+				<h6 class="center">Agenda</h6>
+			</div>
+		</li>
+		<li class="bold waves-effect waves-teal">
+			<div class="sidebar-icon center">
+				<i class="material-icons">person_pin</i>
+				<h6 class="center">Acquéreurs</h6>
+			</div>
+		</li>
+		<li class="bold waves-effect waves-teal">
+			<div class="sidebar-icon center">
+				<i class="material-icons">store</i>
+				<h6 class="center">Propriétés</h6>
+			</div>
+		</li>
+		<li class="bold waves-effect waves-teal">
+			<div class="sidebar-icon center">
+				<i class="material-icons">assessment</i>
+				<h6 class="center">Estimations</h6>
+			</div>
+		</li>
+	</ul>
+	<a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+	<a href="#" class="right"><i class="material-icons" id="d_logout">power_settings_new</i></a>
+</nav>
 </template>

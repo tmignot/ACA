@@ -76,18 +76,10 @@ html, body
 /* dashboard page css */
 #dashboard_container
 {
-	background-color: #505050;
-	min-height: 100%;
-	margin-left: 140px;
-	padding: 15px;
 }
 
 #dashboard_container_side
 {
-	background-color: #505050;
-	min-height: 100%;
-	margin-left: 380px;
-	padding: 15px;
 }
 
 .d_sidebar_property
@@ -147,11 +139,10 @@ ul#nav-mobile.side-nav.fixed.d_sidebar_property
 /* == fix materialize */
 nav
 {
-	background-color: white;
-	color: black;
-	height: 48px;
-	line-height: 48px;
-	z-index: 999;
+}
+
+nav a {
+	color: inherit;
 }
 
 nav .brand-logo
@@ -171,9 +162,31 @@ ul.side-nav.fixed {
     z-index: 0;
 }
 
+header, main, footer {
+	padding-left: 140px;
+}
+
+@media only screen and (max-width : 992px) {
+	header,	main, footer {
+		padding-left: 0;
+	}
+}
+
+nav {
+	background-color: teal;
+}
+
+#d_logout {
+	display: inline;
+	font-size: 2em;
+	padding: 10px;
+	line-height: 64px;
+}
+
 .side-nav
 {
 	width: 140px;
+	background-color: teal;
 }
 
 .side-nav li
@@ -182,14 +195,21 @@ ul.side-nav.fixed {
 	padding-bottom: 20px;
 	padding-top: 20px;
 	padding-right: 10px;
+	display:block;
+	color: white;
 }
 
-.side-nav a
+.side-nav li:hover,
+.side-nav li.active
 {
-	height: 24px;
-	line-height: 24px;
-	font-size: 0.8rem;
-	cursor: pointer;
+	background-color: teal;
+}
+
+.side-nav li.waves-effect:hover,
+.side-nav li.waves-effect.active
+{
+	background-color: white;
+	color: black;
 }
 
 .card-title
