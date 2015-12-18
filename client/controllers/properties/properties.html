@@ -1,7 +1,48 @@
 <template name="Properties">
-<div id="dashboard_container">
+	{{> sidebar_property }}
+	{{> whichOne}}
+</template>
+
+<template name="listProperty">
+	<div id="dashboard_container_side">
 		<div class="row">
-			<div class="col s9 m9">
+			<div class="col s12 m12">
+				<nav>
+					<div class="nav-wrapper">
+						<form>
+							<div class="input-field">
+								<input id="search" type="search" placeholder="rechercher" required>
+								<label for="search"><i class="material-icons">search</i></label>
+								<i class="material-icons">close</i>
+							</div>
+						</form>
+					</div>
+				</nav>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col s12 m12">
+				<div class="card">
+					<div class="card-content">
+						<span class="card-title">Card Title</span>
+						<p>I am a very simple card. I am good at containing small bits of information.
+						I am convenient because I require little markup to use effectively.</p>
+						</div>
+						<div class="card-action">
+						<a href="#">This is a link</a>
+						<a href="#">This is a link</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="addProperty">
+	<div id="dashboard_container_side">
+
+		<div class="row">
+			<div class="col s12 m12">
 				<div class="card">
 					<div class="card-content white-text">
 						<span class="card-title">Add property</span>
@@ -10,7 +51,7 @@
 								<div class="row">
 									<form id="add_property_form" class="col s12">
 										<div class="row">
-											<div class="input-field col s3 ">
+											<div class="input-field col s3">
 												<input id="inputRef_prop" type="text" class="browser-default validate">
 												<label for="inputRef_prop">Reference</label>
 											</div>
@@ -174,51 +215,5 @@
 			</div>
 		</div>
 
-</div>
-<!-- <div class="row">
-	<div class="col-lg-12">
-		<h1 class="page-header">
-			Gestion des propriétés
-		</h1>
 	</div>
-</div>
-<div class="row">
-	<div class="col-lg-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i>Liste des propriétés</h3>
-			</div>
-			<div class="panel-body">
-				{{#Transitions}}
-					{{#each properties}}
-						<div class="row">
-							{{_id}}
-						</div>
-					{{/each}}
-				{{/Transitions}}
-			</div>
-		</div>
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i>Ajouter une propriété</h3>
-			</div>
-			<div class="panel-body">
-				<div id="morris-area-chart"> -->
-					<!--
-					{{> quickForm
-						collection="Properties"
-						id="insertPropertyForm"
-						class="autoform-form col-sm-12"
-						type="insert"
-						template="bootstrap3-horizontal"
-						label-class="col-sm-4 col-md-3 col-lg-2"
-						input-col-class="col-sm-8 col-md-3 col-lg-4"
-						omitFields="history,reference"
-					}}
-					-->
-<!-- 				</div>
-			</div>
-		</div>
-	</div>
-</div> -->
 </template>

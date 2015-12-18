@@ -86,8 +86,25 @@ html, body
 {
 	background-color: #505050;
 	min-height: 100%;
-	margin-left: 340px;
+	margin-left: 380px;
 	padding: 15px;
+}
+
+.d_sidebar_property
+{
+	margin-left: 140px;
+	margin-top: 48px;
+	background-color: #ede7f6;
+}
+
+ul#nav-mobile.side-nav.fixed.d_sidebar_property
+{
+	width: 240px;
+	-moz-box-shadow: inset 1px 1px 1px 0px #656565;
+	-webkit-box-shadow: inset 1px 1px 1px 0px #656565;
+	-o-box-shadow: inset 1px 1px 1px 0px #656565;
+	box-shadow: inset 1px 1px 1px 0px #656565;
+	filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=134, Strength=1);
 }
 
 .d-head-logo
@@ -105,23 +122,27 @@ html, body
 	font-size: 1.1rem;
 }
 /* property css */
+
 #add_property_form
 {
 	color: black;
 }
-/* meetingds css */
+
+#addProperty
+{
+	cursor: pointer;
+}
+
+#listProperty
+{
+	cursor: pointer;
+}
+
+/* meetings css */
 #calendar_form
 {
 	color: black;
 }
-
-
-
-
-
-
-
-
 
 /* == fix materialize */
 nav
@@ -174,4 +195,9 @@ ul.side-nav.fixed {
 .card-title
 {
 	color: black;
+}
+
+.input-field input[type="search"] ~ .mdi-navigation-close, .input-field input[type="search"] ~ .material-icons
+{
+	font-size: 1.1rem;
 }
