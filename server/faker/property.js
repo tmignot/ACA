@@ -5,7 +5,7 @@ function getRandomInt(min, max) {
 Meteor.startup(function() {
 	if (Properties.find().count() == 0) {
 
-		console.log("No properties found,\n\t- generate properties");
+		console.log("## No properties found,\n\t- generate properties");
 		console.log("Error Message:");
 		_.each(_.range(25), function(){
 			var transaction = ['Vente', 'Location'];
