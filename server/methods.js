@@ -39,13 +39,11 @@ Meteor.methods({
 	},
 	'gapiGetEventList': function(uid, options) {
 		var user = Agents.findOne({_id: uid});
-		console.log(user);
 		if (user && user.services && user.services.google) {
 			var addr = user.emails[0].address;
 			var path = 'calendar/v3/calendars/'+addr+'/events';
 			var fiber = Fiber.current;
 			GoogleApi.get(path, {user: user, params: options}, function(e,r) {
-				console.log(e, r);
 				fiber.run({error: e, result: r});
 			});
 			return Fiber.yield();

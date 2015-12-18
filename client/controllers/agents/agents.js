@@ -5,6 +5,8 @@ Template.Agent.onRendered(function() {
 });
 
 Template.Agents.onRendered(function(){
+	$('.side-nav li').removeClass('active');
+	$('.side-nav li.agents').addClass('active');
 	this.grid = $('.grid').isotope({
 		itemSelector: '.grid-item',
 		getSortData: {

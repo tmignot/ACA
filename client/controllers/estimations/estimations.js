@@ -1,4 +1,6 @@
 Template.Estimations.onRendered(function() {
+	$('.side-nav li').removeClass('active');
+	$('.side-nav li.estimations').addClass('active');
 	$(".autoform-form").removeClass('form-horizontal');
 });
 

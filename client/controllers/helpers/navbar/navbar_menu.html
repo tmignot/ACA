@@ -3,84 +3,100 @@
 </header>
 <nav>
 	<ul class="hide-on-small-and-down fixed side-nav">
-		<li class="bold waves-effect waves-teal">
+		<li class="bold waves-effect waves-teal dashboard" data-link='dashboard'>
 			<div class="sidebar-icon center">
 				<i class="material-icons">dashboard</i>
 				<h6 class="center">Accueil</h6>			
 			</div>
 		</li>
-		{{#if hasPermission 'list' 'Agents'}}
-		<li class="bold waves-effect waves-teal">
+		{{#if hasListPermission 'Agents'}}
+		<li class="bold waves-effect waves-teal agents" data-link='agents'>
 			<div class="sidebar-icon center">
 				<i class="material-icons">supervisor_account</i>
 				<h6 class="center">Equipe</h6>
 			</div>
 		</li>
 		{{/if}}
-		<li class="bold waves-effect waves-teal">
+		{{#if hasListPermission 'Meetings'}}
+		<li class="bold waves-effect waves-teal meetings" data-link='meetings'>
 			<div class="sidebar-icon center">
 				<i class="material-icons">perm_contact_calendar</i>
 				<h6 class="center">Agenda</h6>
 			</div>
 		</li>
-		<li class="bold waves-effect waves-teal">
+		{{/if}}
+		{{#if hasListPermission 'Customers'}}
+		<li class="bold waves-effect waves-teal customers" data-link='customers'>
 			<div class="sidebar-icon center">
 				<i class="material-icons">person_pin</i>
 				<h6 class="center">Acquéreurs</h6>
 			</div>
 		</li>
-		<li class="bold waves-effect waves-teal">
+		{{/if}}
+		{{#if hasListPermission 'Properties'}}
+		<li class="bold waves-effect waves-teal properties" data-link='properties'>
 			<div class="sidebar-icon center">
 				<i class="material-icons">store</i>
 				<h6 class="center">Propriétés</h6>
 			</div>
 		</li>
-		<li class="bold waves-effect waves-teal">
+		{{/if}}
+		{{#if hasListPermission 'Estimations'}}
+		<li class="bold waves-effect waves-teal estimations" data-link='estimations'>
 			<div class="sidebar-icon center">
 				<i class="material-icons">assessment</i>
 				<h6 class="center">Estimations</h6>
 			</div>
 		</li>
+		{{/if}}
 	</ul>
 	<ul id="slide-out" class="side-nav">
-		<li class="bold waves-effect waves-teal">
+		<li class="bold waves-effect waves-teal dashboard" data-link='dashbaord'>
 			<div class="sidebar-icon center">
 				<i class="material-icons">dashboard</i>
 				<h6 class="center">Accueil</h6>			
 			</div>
 		</li>
-		{{#if hasPermission 'list' 'Agents'}}
-		<li class="bold waves-effect wavec-teal">
+		{{#if hasListPermission 'Agents'}}
+		<li class="bold waves-effect wavec-teal agents" data-link='agents'>
 			<div class="sidebar-icon center">
 				<i class="material-icons">supervisor_account</i>
 				<h6 class="center">Equipe</h6>
 			</div>
 		</li>
 		{{/if}}
-		<li class="bold waves-effect waves-teal">
+		{{#if hasListPermission 'Meetings'}}
+		<li class="bold waves-effect waves-teal meetings" data-link='meetings'>
 			<div class="sidebar-icon center">
 				<i class="material-icons">perm_contact_calendar</i>
 				<h6 class="center">Agenda</h6>
 			</div>
 		</li>
-		<li class="bold waves-effect waves-teal">
+		{{/if}}
+		{{#if hasListPermission 'Customers'}}
+		<li class="bold waves-effect waves-teal customers" data-link='customers'>
 			<div class="sidebar-icon center">
 				<i class="material-icons">person_pin</i>
 				<h6 class="center">Acquéreurs</h6>
 			</div>
 		</li>
-		<li class="bold waves-effect waves-teal">
+		{{/if}}
+		{{#if hasListPermission 'Properties'}}
+		<li class="bold waves-effect waves-teal properties" data-link='properties'>
 			<div class="sidebar-icon center">
 				<i class="material-icons">store</i>
 				<h6 class="center">Propriétés</h6>
 			</div>
 		</li>
-		<li class="bold waves-effect waves-teal">
+		{{/if}}
+		{{#if hasListPermission 'Estimations'}}
+		<li class="bold waves-effect waves-teal estimations" data-link='estimations'>
 			<div class="sidebar-icon center">
 				<i class="material-icons">assessment</i>
 				<h6 class="center">Estimations</h6>
 			</div>
 		</li>
+		{{/if}}
 	</ul>
 	<a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 	<a href="#" class="right"><i class="material-icons" id="d_logout">power_settings_new</i></a>

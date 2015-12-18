@@ -3,6 +3,8 @@ Template.Properties.onCreated(function(){
 });
 
 Template.Properties.onRendered(function() {
+	$('.side-nav li').removeClass('active');
+	$('.side-nav li.properties').addClass('active');
 	$('select').material_select();
 });
 

@@ -160,6 +160,7 @@ nav .nav-wrapper i
 ul.side-nav.fixed {
     overflow: hidden;
     z-index: 0;
+		padding-top: 64px;
 }
 
 header, main, footer {
