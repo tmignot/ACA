@@ -1,14 +1,9 @@
 <template name='layoutDashboard'>
 	{{#if currentUser}}
-			{{> navbar_menu }}
+		{{> navbar_menu }}
 		<main>
 			{{> yield }}
 		</main>
-		<footer>
-			<p>
-			Ce site est fait par nous,qu'as-tu-cru?
-			</p>
-		</footer>
 	{{else}}
 		{{>yield}}
 	{{/if}}

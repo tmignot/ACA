@@ -37,51 +37,8 @@ html, body
 }
 
 /* agents css */
-/*.grid {
-	margin: 0 auto;
-}
 
-.grid-item {
-	height: 150px;
-	padding: 15px;
-	padding-left: 25px;
-}
-
-.grid-item .well {
-	width: 100%;
-	height: 100%;
-}
-
-.grid-item.size-2 {
-	animation: grow 0.2s both;
-}
-
-.grid-item.size-1 {
-	animation: shrink 0.2s both;
-}
-
-.grid-item.grid-footer {
-	width: 100%;
-}
-
-@keyframes grow {
-	0%		{height: 150px;}
-	100%	{height: 450px;}
-}
-
-@keyframes shrink {
-	0%		{height: 450px;}
-	100%	{height: 150px;}
-}*/
 /* dashboard page css */
-#dashboard_container
-{
-}
-
-#dashboard_container_side
-{
-}
-
 .d_sidebar_property
 {
 	margin-left: 140px;

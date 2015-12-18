@@ -24,7 +24,7 @@ Template.Dashboard.onRendered(function() {
 			})
 		});
 		$("button.fc-button").removeClass('fc-button')
-												 .removeClass('fc-state-default')
-												 .addClass('btn');
+			 .removeClass('fc-state-default')
+			 .addClass('btn');
 	});
 });

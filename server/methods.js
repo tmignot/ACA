@@ -48,5 +48,11 @@ Meteor.methods({
 			});
 			return Fiber.yield();
 		}
+	},
+	'addMeetings': function(opt) {
+		console.log("add meetings methods call");
+	},
+	'addProperty': function(opt) {
+		console.log("add property methods call");
 	}
 });
