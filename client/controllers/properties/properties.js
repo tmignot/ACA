@@ -1,6 +1,7 @@
 Template.Properties.onRendered(function() {
 	$('.side-nav li').removeClass('active');
 	$('.side-nav li.properties').addClass('active');
+	$('ul.tabs').tabs();
 	$('select').material_select();
 });
 
@@ -49,5 +50,28 @@ Template.Properties.events({
 		console.log(opt);
 
 		var res = Meteor.call('addProperty', opt);
+	}
+});
+
+Template.listProperty.onCreated(function(){
+	this.searchList = new ReactiveVar([]);
+	Template.instance().searchList.set(Properties.find({}));
+});
+
+Template.listProperty.helpers({
+	searchList: function(){
+		return Template.instance().searchList.get();
+	}
+});
+
+Template.listProperty.events({
+	'keyup #search': function(e, t){
+		if ($(e.target).val() != '') {
+			query = new RegExp($(e.target).val(), 'i');
+			list = Properties.find({ title: query }).fetch();
+		} else {
+			list = [];
+		}
+		t.searchList.set(list);
 	}
 });
