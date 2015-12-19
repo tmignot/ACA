@@ -20,7 +20,6 @@ Template.Admin.events({
 						requestPermissions: ['email','https://www.googleapis.com/auth/calendar','https://www.googleapis.com/auth/calendar.readonly']
 				});
 			} else {
-				console.log(e.currentTarget);
 				Meteor.loginWithPassword(
 					e.currentTarget.inputEmail.value,
 					e.currentTarget.inputPassword.value

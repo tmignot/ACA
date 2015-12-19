@@ -16,6 +16,28 @@ Meteor.startup(function(){
 		Roles.addUsersToRoles(uid, ['get','list','insert', 'update', 'remove'], 'Properties');
 		Roles.addUsersToRoles(uid, ['get','list','insert', 'update', 'remove'], 'Estimations');
 		Roles.addUsersToRoles(uid, ['get','list','insert', 'update', 'remove'], 'Editor');
+	
+
+		/*** FAKER ***/
+
+		console.log("## You have less than 10 agents,\n\t- generate agents");
+		console.log("Error Message:");
+
+		_.each(_.range(10), function(){
+			var randomEmail = faker.internet.email();
+			var randomName = faker.name.findName();
+			var userName = faker.internet.userName();
+
+			Accounts.createUser({
+				username: userName,
+				profile: {
+					name: randomName,
+				},
+				email: randomEmail,
+				password: 'password'
+			});
+		});
+
 	}
 
 	Accounts.validateNewUser(function(user) {
@@ -31,4 +53,5 @@ Meteor.startup(function(){
 		}
 		throw new Meteor.Error(403, "Not authorized to create new users");
 	});
+
 });

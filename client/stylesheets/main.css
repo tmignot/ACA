@@ -46,16 +46,6 @@ html, body
 	background-color: #ede7f6;
 }
 
-ul#nav-mobile.side-nav.fixed.d_sidebar_property
-{
-	width: 240px;
-	-moz-box-shadow: inset 1px 1px 1px 0px #656565;
-	-webkit-box-shadow: inset 1px 1px 1px 0px #656565;
-	-o-box-shadow: inset 1px 1px 1px 0px #656565;
-	box-shadow: inset 1px 1px 1px 0px #656565;
-	filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=134, Strength=1);
-}
-
 .d-head-logo
 {
 	background-color: #9575cd;
@@ -102,17 +92,6 @@ nav a {
 	color: inherit;
 }
 
-nav .brand-logo
-{
-	font-size: 1rem;
-	color: black;
-}
-nav .nav-wrapper i
-{
-	height: 48px;
-	line-height: 48px;
-	font-size: 1rem;	
-}
 
 ul.side-nav.fixed {
     overflow: hidden;
@@ -173,9 +152,4 @@ nav {
 .card-title
 {
 	color: black;
-}
-
-.input-field input[type="search"] ~ .mdi-navigation-close, .input-field input[type="search"] ~ .material-icons
-{
-	font-size: 1.1rem;
 }

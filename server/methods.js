@@ -50,9 +50,12 @@ Meteor.methods({
 		}
 	},
 	'addMeetings': function(opt) {
-		console.log("add meetings methods call");
+		console.log("meetings methods call");
 	},
 	'addProperty': function(opt) {
-		console.log("add property methods call");
+		console.log("property methods call");
+	},
+	'addCustomers': function(opt) {
+		console.log("customers methods call")
 	}
 });
