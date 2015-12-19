@@ -38,9 +38,14 @@ html, body
 
 /* agents css */
 
+.usercard .card {
+	overflow: hidden;
+}
+
 .usercard .card-image {
 	overflow: hidden;
 	height: 280px;
+	z-index: 1;
 }
 
 .usercard .card-image img.bg-img{
@@ -57,7 +62,17 @@ html, body
 }
 
 .usercard .waves-ripple {
-	z-index:2;
+}
+
+.usercard .card-activator {
+	position: absolute;
+	display: block;
+	width: 100%;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	opacity: 0;
+	z-index: 2;
 }
 
 .usercard img.ico-img {
@@ -68,7 +83,7 @@ html, body
 	margin-left: -50px;
 	left: 50%;
 	top: 200px;
-	z-index: 1;
+	z-index: 2;
 	filter: saturate(60%);
 	-webkit-filter: saturate(60%);
 }
@@ -76,6 +91,10 @@ html, body
 .usercard:hover img.ico-img{
 	filter: saturate(110%);
 	-webkit-filter: saturate(110%);
+}
+
+.usercard .card-reveal {
+	z-index: 2;
 }
 
 /* dashboard page css */
