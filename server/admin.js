@@ -48,10 +48,16 @@ Meteor.startup(function(){
 		}
 		if (user && user.services && user.services.google && 
 				user.services.google.email &&
-				Accounts.findUserByEmail(user.services.google.email)) {
-			return true;
+				Accounts.users.findOne({
+					'emails.0.address': user.services.google.email,
+					'emails.0.verified': true
+				}))
+		{
+			Meteor.call('mergeUser', Accounts.users.findOne({
+				'emails.0.address': user.services.google.email
+			}), user);
+			return false;
 		}
 		throw new Meteor.Error(403, "Not authorized to create new users");
 	});
-
 });

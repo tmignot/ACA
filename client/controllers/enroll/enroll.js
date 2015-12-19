@@ -11,6 +11,7 @@ Template.Enroll.onCreated(function() {
 	console.log(this.data);
 	if (state === 'start') {
 		if (agent) {
+			Meteor.call('verifEmail', agent);
 			Meteor.loginWithGoogle({
 				loginHint: agent.username,
 				requestPermissions: ['email', 'https://www.googleapis.com/auth/calendar','https://www.googleapis.com/auth/calendar.readonly'],
@@ -23,23 +24,7 @@ Template.Enroll.onCreated(function() {
 		}
 	} else if (state !== 'finish') {
 		console.log('error: '+ state);
-	}
-});
-
-Template.Enroll.onRendered(function() {
-});
-
-Template.Enroll.events({
-	'submit form': function(e,t) {
-		e.preventDefault();
-		if (e.currentTarget.accountPasswordInput.value === e.currentTarget.accountPasswordConfirmInput.value) {
-			Meteor.call('setEnrolledPassword', e.currentTarget.accountPasswordInput.value, function(e,r) {
-				if (e) {
-					console.log(e);
-				}
-			});
-		} else {
-			console.log('error');
-		}
+	} else {
+		Router.go('/admin/dashboard');
 	}
 });

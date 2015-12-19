@@ -11,28 +11,28 @@ Meteor.methods({
 	loginMethod: function(email) {
 		return {google: email == 'test' ? false : true};
 	},
-	mergeUser: function(oldv) {
-		if (!oldv) { return false; }
-		var old = Meteor.users.findOne({_id: oldv._id});
+	mergeUser: function(olduser, newuser) {
+		if (!olduser) { return false; }
+		var old = Meteor.users.findOne({_id: olduser._id});
 		if (!old) { return false;	}
-		if (old._id !== this.userId && this.userId) {
-			var username = old.username;
-			var emails = old.emails;
-			emails[0].verified = true;
-			var password = old.services.password;
-			Meteor.users.remove({_id: old._id});
-			Meteor.users.update({
-				_id: this.userId
-			},
-			{
-				$set: {
-					'services.password': password,
-					'username': username,
-					'emails': emails
-				}
-			});
-		}
+		Meteor.users.update({
+			_id: old._id
+		},
+		{
+			$set: {
+				'services.google': newuser.services.google,
+				'emails.0.verified': true
+			}
+		});
 		return true;
+	},
+	verifEmail: function(user) {
+		Accounts.users.update({_id: user._id},
+		{
+			$set: {
+				'emails.0.verified': true
+			}
+		});
 	},
 	setEnrolledPassword: function(password) {
 		Accounts.setPassword(this.userId, password);
