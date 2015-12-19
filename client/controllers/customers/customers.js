@@ -23,7 +23,7 @@ Template.Customers.events({
 			query = new RegExp($(e.target).val(), 'i');
 			list = Customers.find({ name: query }).fetch();
 		} else {
-			list = [];
+			list = Customers.find({});
 		}
 		t.searchList.set(list);
 	}

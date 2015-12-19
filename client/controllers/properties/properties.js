@@ -70,7 +70,7 @@ Template.listProperty.events({
 			query = new RegExp($(e.target).val(), 'i');
 			list = Properties.find({ title: query }).fetch();
 		} else {
-			list = [];
+			list = Properties.find({});
 		}
 		t.searchList.set(list);
 	}
