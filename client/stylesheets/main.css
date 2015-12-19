@@ -38,6 +38,35 @@ html, body
 
 /* agents css */
 
+.usercard .card-image {
+	overflow: hidden;
+	height: 280px;
+}
+
+.usercard .card-image img.bg-img{
+	width: 200%;
+	margin: -50%;
+	opacity: 0.8;
+	filter: blur(20px) saturate(20%);
+	-webkit-filter: blur(8px) saturate(20%);
+}
+
+.usercard:hover .card-image img.bg-img{
+	filter: blur(20px) saturate(90%);
+	-webkit-filter: blur(8px) saturate(90%);
+}
+
+.usercard img.ico-img {
+	position: absolute !important;
+	width: 100px;
+	height: 100px;
+	margin: 0 auto;
+	margin-left: -50px;
+	left: 50%;
+	top: 200px;
+	z-index: 1;
+}
+
 /* dashboard page css */
 .d_sidebar_property
 {
