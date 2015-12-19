@@ -23,16 +23,14 @@
 </template>
 
 <template name="Agent">
-	<div class="grid-item usercard col s12 m6 l4">
+	<div class="grid-item usercard waves-effect waves-block waves-light col s12 m6 l4">
 		<div class="row">
 			<div class="card">
-				<div class="card-image waves-effect waves-block waves-light">
-					<img class="bg-img center-block" src="{{ services.google.picture }}">
+				<div class="card-image z-depth-2">
+					<img class="bg-img center-block" src="{{ picture }}">
 				</div>
-				<img class="ico-img circle responsive-img center-block z-depth-2" src="{{ services.google.picture }}">
-				<div>
-				</div>
-				<div class="card-content">
+				<img class="ico-img circle responsive-img center-block z-depth-2" src="{{ picture }}">
+				<div class="card-content z-depth-2">
 					<span class="card-title activator grey-text text-darken-4">{{ username }}</span>
 					<p>Rendez-vous <span class="new badge">4</span></p>
 				</div>

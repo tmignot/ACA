@@ -4,6 +4,16 @@ Template.Agent.onRendered(function() {
 	}
 });
 
+Template.Agent.helpers({
+	picture: function() {
+		if (Template.instance().data.services.google) {
+			return Template.instance().data.services.google.picture;
+		} else {
+			return '/user-default.png';
+		}
+	}
+});
+
 Template.Agents.onRendered(function(){
 	$('.side-nav li').removeClass('active');
 	$('.side-nav li.agents').addClass('active');
