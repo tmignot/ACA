@@ -14,6 +14,18 @@ Template.Agent.helpers({
 	}
 });
 
+Template.Agent.events({
+	'click .usercard': function(e,t) {
+		if ($(e.currentTarget).hasClass('grow')) {
+			$(e.currentTarget).removeClass('grow');
+			$(e.currentTarget).addClass('shrink');
+		} else {
+			$(e.currentTarget).removeClass('shrink');
+			$(e.currentTarget).addClass('grow');
+		}
+	}
+});
+
 Template.Agents.onRendered(function(){
 	$('.side-nav li').removeClass('active');
 	$('.side-nav li.agents').addClass('active');
