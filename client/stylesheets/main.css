@@ -80,20 +80,9 @@ html, body
 	-webkit-filter: blur(20px) saturate(80%);
 }
 
-.usercard .waves-ripple {
+.usercard .button-container {
+	margin-top: 80px;
 }
-
-.usercard .card-activator {
-	position: absolute;
-	display: block;
-	width: 100%;
-	top: 0px;
-	bottom: 0px;
-	left: 0px;
-	opacity: 0;
-	z-index: 2;
-}
-
 .usercard img.ico-img {
 	position: absolute !important;
 	width: 100px;
@@ -119,6 +108,10 @@ html, body
 
 .usercard .card-reveal {
 	z-index: 2;
+}
+
+.checkboxes div.col {
+	padding: 5%;
 }
 
 /* dashboard page css */

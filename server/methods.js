@@ -37,7 +37,7 @@ Meteor.methods({
 	setEnrolledPassword: function(password) {
 		Accounts.setPassword(this.userId, password);
 	},
-	'gapiGetEventList': function(uid, options) {
+	gapiGetEventList: function(uid, options) {
 		var user = Agents.findOne({_id: uid});
 		if (user && user.services && user.services.google) {
 			var addr = user.emails[0].address;
@@ -49,13 +49,37 @@ Meteor.methods({
 			return Fiber.yield();
 		}
 	},
-	'addMeetings': function(opt) {
+	updateRoles: function(data) {
+		console.log(data);
+		if (data && data.uid && data.collection && data.method) {
+			var methods = ['get','list','insert','update','remove'];
+			var collections = ['Agents','Customers','Meetings','Properties','Estimations','Editor'];
+			if (methods.indexOf(data.method) >= 0 && collections.indexOf(data.collection) >= 0) {
+				console.log('good query');
+				if (Roles.userIsInRole(this.userId, ['update'], 'Agents')) {
+					console.log('access granted');
+					var usr = Meteor.users.findOne({_id: data.uid});
+					if (usr && usr.username != 'test') {
+						console.log('user found:' + usr.username);
+						if (Roles.userIsInRole(data.uid, [data.method], data.collection))
+							Roles.removeUsersFromRoles(data.uid, [data.method], data.collection);
+						else
+							Roles.addUsersToRoles(data.uid, [data.method], data.collection);
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	},
+	addMeetings: function(opt) {
 		console.log("meetings methods call");
 	},
-	'addProperty': function(opt) {
+	addProperty: function(opt) {
 		console.log("property methods call");
 	},
-	'addCustomers': function(opt) {
+	addCustomers: function(opt) {
 		console.log("customers methods call")
 	}
+
 });
