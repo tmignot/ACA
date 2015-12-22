@@ -49,9 +49,17 @@
 			</div>
 		</li>
 		{{/if}}
+		{{#if hasListPermission 'Editor'}}
+		<li class="bold waves-effect waves-teal editor" data-link='editor'>
+			<div class="sidebar-icon center">
+				<i class="material-icons">web</i>
+				<h6 class="center">Edition</h6>
+			</div>
+		</li>
+		{{/if}}
 	</ul>
 	<ul id="slide-out" class="side-nav">
-		<li class="bold waves-effect waves-teal dashboard" data-link='dashbaord'>
+		<li class="bold waves-effect waves-teal dashboard" data-link='dashboard'>
 			<div class="sidebar-icon center">
 				<i class="material-icons">dashboard</i>
 				<h6 class="center">Accueil</h6>			
@@ -94,6 +102,14 @@
 			<div class="sidebar-icon center">
 				<i class="material-icons">assessment</i>
 				<h6 class="center">Estimations</h6>
+			</div>
+		</li>
+		{{/if}}
+		{{#if hasListPermission 'Editor'}}
+		<li class="bold waves-effect waves-teal editor" data-link='editor'>
+			<div class="sidebar-icon center">
+				<i class="material-icons">web</i>
+				<h6 class="center">Edition</h6>
 			</div>
 		</li>
 		{{/if}}
