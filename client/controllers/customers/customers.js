@@ -1,9 +1,6 @@
 Template.Customers.onRendered(function(){
-	$('.side-nav li').removeClass('active');
-	$('.side-nav li.customers').addClass('active');
-	$('.collapsible').collapsible({
-		accordion : false
-	});
+	$('.sidebar-nav li').removeClass('active');
+	$('.sidebar-nav li.customers').addClass('active');
 });
 
 Template.Customers.onCreated(function(){

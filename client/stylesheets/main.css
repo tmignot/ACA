@@ -5,227 +5,61 @@ html, body
 	width: 100%;
 }
 
-/* helpers */
-.padding-lr15
+.reduce-mbot
 {
-	padding-left: 15px;
-	padding-right: 15px;
+    margin-bottom: 0px;
 }
-/* modal add agent */
-#button_modal_add_agent
+
+#wrapper {
+  padding-left: 150px;
+  transition: all 0.4s ease 0s;
+}
+
+#sidebar-wrapper {
+  margin-left: -150px;
+  left: 150px;
+  width: 150px;
+  background: #CCCCCC;
+  position: fixed;
+  height: 100%;
+  overflow-y: auto;
+  z-index: 1000;
+  transition: all 0.4s ease 0s;
+}
+
+#page-content-wrapper {
+  width: 100%;
+}
+
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 150px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-nav li 
 {
-	margin-top: 25px;
+    cursor: pointer;
 }
 
-
-
-
-/* Home page css */
-#homepage_container
-{
-	background-color: black;
-	color: white;
+@media (max-width:767px) {
+  #wrapper {
+    padding-left: 0;
+  }
+  #sidebar-wrapper {
+    left: 0;
+  }
+  #wrapper.active {
+    position: relative;
+    left: 150px;
+  }
+  #wrapper.active #sidebar-wrapper {
+    left: 150px;
+    width: 150px;
+    transition: all 0.4s ease 0s;
+  }
 }
 
-/* login page css */
-#admin_container
-{
-	background-color: black;
-	min-height: 100%;
-	min-width: 100%;
-	color: white;
-}
-
-/* agents css */
-
-@keyframes usercardShrink {
-	0% { height: 280px; }
-	100% { height: 90px; }
-}
-
-@keyframes usercardGrow {
-	0% { height: 90px; }
-	100% { height: 280px; }
-}
-
-.usercard.shrink .card-image{
-	animation: usercardShrink 0.2s both;
-}
-
-.usercard.grow .card-image{
-	animation: usercardGrow 0.2s both;
-}
-
-.usercard .card {
-	overflow: hidden;
-	height: 350px;
-}
-
-.usercard .card-image {
-	overflow: hidden;
-	height: 280px;
-	z-index: 1;
-}
-
-.usercard .card-image img.bg-img{
-	width: 200%;
-	margin: -50%;
-	opacity: 0.8;
-	filter: blur(20px) saturate(20%);
-	-webkit-filter: blur(20px) saturate(20%);
-}
-
-.usercard:hover .card-image img.bg-img{
-	filter: blur(20px) saturate(80%);
-	-webkit-filter: blur(20px) saturate(80%);
-}
-
-.usercard .button-container {
-	margin-top: 80px;
-}
-.usercard img.ico-img {
-	position: absolute !important;
-	width: 100px;
-	height: 100px;
-	margin: 0 auto;
-	margin-left: -50px;
-	left: 50%;
-	top: -80px;
-	z-index: 2;
-	filter: saturate(60%);
-	-webkit-filter: saturate(60%);
-}
-
-.usercard:hover img.ico-img{
-	filter: saturate(110%);
-	-webkit-filter: saturate(110%);
-}
-
-.usercard .card-content {
-	position: relative;
-	height: 280px;
-}
-
-.usercard .card-reveal {
-	z-index: 2;
-}
-
-.checkboxes div.col {
-	padding: 5%;
-}
-
-/* dashboard page css */
-.d_sidebar_property
-{
-	margin-left: 140px;
-	margin-top: 48px;
-	background-color: #ede7f6;
-}
-
-.d-head-logo
-{
-	background-color: #9575cd;
-}
-
-.d-logout-btn
-{
-	cursor: pointer;
-}
-
-#calendar h2
-{
-	font-size: 1.1rem;
-}
-/* property css */
-
-#add_property_form
-{
-	color: black;
-}
-
-#addProperty
-{
-	cursor: pointer;
-}
-
-#listProperty
-{
-	cursor: pointer;
-}
-
-/* meetings css */
-#calendar_form
-{
-	color: black;
-}
-
-/* == fix materialize */
-nav
-{
-}
-
-nav a {
-	color: inherit;
-}
-
-
-ul.side-nav.fixed {
-    overflow: hidden;
-    z-index: 0;
-		padding-top: 64px;
-}
-
-header, main, footer {
-	padding-left: 140px;
-}
-
-@media only screen and (max-width : 992px) {
-	header,	main, footer {
-		padding-left: 0;
-	}
-}
-
-nav {
-	background-color: teal;
-}
-
-#d_logout {
-	display: inline;
-	font-size: 2em;
-	padding: 10px;
-	line-height: 64px;
-}
-
-.side-nav
-{
-	width: 140px;
-	background-color: teal;
-}
-
-.side-nav li
-{
-	padding-left: 10px;
-	padding-bottom: 20px;
-	padding-top: 20px;
-	padding-right: 10px;
-	display:block;
-	color: white;
-}
-
-.side-nav li:hover,
-.side-nav li.active
-{
-	background-color: teal;
-}
-
-.side-nav li.waves-effect:hover,
-.side-nav li.waves-effect.active
-{
-	background-color: white;
-	color: black;
-}
-
-.card-title
-{
-	color: black;
-}

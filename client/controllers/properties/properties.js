@@ -1,4 +1,4 @@
-Template.Properties.onRendered(function() {
+/*Template.Properties.onRendered(function() {
 	$('.side-nav li').removeClass('active');
 	$('.side-nav li.properties').addClass('active');
 	$('ul.tabs').tabs();
@@ -74,4 +74,4 @@ Template.listProperty.events({
 		}
 		t.searchList.set(list);
 	}
-});
+});*/

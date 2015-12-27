@@ -1,6 +1,6 @@
 Template.Dashboard.onRendered(function() {
-	$('.side-nav li').removeClass('active');
-	$('.side-nav li.dashboard').addClass('active');
+	$('.sidebar-nav li').removeClass('active');
+	$('.sidebar-nav li.dashboard').addClass('active');
 	data = {
 		timeMin: moment().subtract(1, 'month').toISOString()
 	}

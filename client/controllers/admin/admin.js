@@ -40,7 +40,7 @@ Template.Admin.events({
 							'https://www.googleapis.com/auth/calendar',
 							'https://www.googleapis.com/auth/calendar.readonly'
 						]
-				});
+					});
 				} else {
 					t.email.set(true);
 				}

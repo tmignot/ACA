@@ -1,6 +1,17 @@
 <template name="navbar_menu">
-<header>
-</header>
+    <nav class="navbar navbar-default reduce-mbot">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">
+            <img alt="Brand" src="...">
+          </a>
+        </div>
+        <p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">{{ username }}</a>
+			<span id="d_logout" class="glyphicon glyphicon-off"></span>
+        </p>
+      </div>
+    </nav>
+<!--
 <nav>
 	<ul class="hide-on-small-and-down fixed side-nav">
 		<li class="bold waves-effect waves-teal dashboard" data-link='dashboard'>
@@ -117,4 +128,5 @@
 	<a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 	<a href="#" class="right"><i class="material-icons" id="d_logout">power_settings_new</i></a>
 </nav>
+-->
 </template>

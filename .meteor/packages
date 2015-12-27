@@ -34,10 +34,10 @@ service-configuration
 isotope:isotope
 alanning:roles
 momentjs:moment
-poetic:materialize-scss
 percolate:google-api
 raix:handlebar-helpers
 ryanswapp:datetime-picker
 rzymek:fullcalendar
 practicalmeteor:faker
 alethes:lodash
+twbs:bootstrap
