@@ -13,29 +13,159 @@
 					</form>
 				</div>
 			</nav>		
+			{{#if isInRole 'insert' 'Customers'}}
+				<button class="btn btn-primary addCustomer right">Ajouter</button>
+			{{/if}}
 		</div>
 	</div>
+	{{#if isInRole 'insert' 'Customers'}}
+		<div id="addCustomer" class="modal">
+			{{>addCustomer}}
+		</div>
+	{{/if}}
+	{{#if isInRole 'update' 'Customers'}}
+		{{#if $.Session.get 'currentCustomer'}}
+		<div id="editCustomer" class="modal">
+			{{>editCustomer $.Session.get 'currentCustomer'}}
+		</div>
+		{{/if}}
+	{{/if}}
 	{{#each searchList}}
+		{{>Customer}}
+	{{/each}}
+</div>
+
+</template>
+
+<template name='Customer'>
 		<div class="row">
 			<div class="col s12">
 				<div class="card">
 					<div class="card-content">
 						<span class="card-title">
-							<i class="material-icons">supervisor_account</i>
-							{{ name }}
+							<h4><small>{{#if $eq gender 'male'}}Mr{{else}}Mme{{/if}}</small> {{ name }}</h4>
 						</span>
 						<div class="row">
-							<p><i class="material-icons">phone</i>{{ phones }}</p>
-							<p><i class="material-icons">info</i>{{ contribution }}</p>
-							<p><i class="material-icons">store</i>{{ earnings }}</p>
+							<h5>Contact</h5>
+							{{#each phones}}
+							<h6><small>{{label}}</small> {{number}}</h6>
+							{{/each}}
+							Apport: {{ contribution }}
+							Gains: {{ earnings }}
 						</div>
-<!-- 						<div class="card-action">
-						</div> -->
+ 						<div class="card-action">
+							<button type="button"> edit </button>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	{{/each}}
-</div>
+</template>
 
+<template name='addCustomer'>
+	<div class="modal-content">
+		<h4 class="modal-title">Ajouter Acquereur</h4>
+		<div class="modal-body">
+			<form class="form-inline insert"> 
+				<div class="row">
+					<div class="input-field col s8">
+						Mr<input type="radio" name="gender" value="male" checked>
+						Mme<input type="radio" name="gender" value="female">
+					</div>
+					<div class="input-field col s8">
+						<label for="inputName">Nom</label>
+						<input id="inputName" type="text" class="validate">
+					</div>
+					<div class="input-field col s8">
+						<label for="inputPhone">Contact</label>
+						{{#each phoneInputs}}
+						<div>
+						<label for="inputPhone{{this}}"> {{this}}</label>
+						<input id="inputPhone{{this}}" type="phone" class="validate" data-plabel='{{this}}'>
+						<button type="button" class="removePhone"> - </button>
+						</div>
+						{{/each}}
+						<input type="text" class="validate newPhoneLabel">
+						<button type='button' class="addPhone"> + </button>
+					</div>
+					<div class="input-field col s8">
+						<label for="inputContrib">Contribution</label>
+						<input id="inputContrib" type="number" class="validate">
+					</div>
+					<div class="input-field col s8">
+						<label for="inputEarning">Gains</label>
+						<input id="inputEarning" type="number" class="validate">
+					</div>
+					<div class="input-field col s8">
+						<label for="inputOwner">Proprietaire</label>
+						<input id="inputOwner" type="checkbox" class="validate">
+					</div>
+					<button id="button_modal_add_customer" class="btn waves-effect waves-light" type="submit">Ajouter
+						<i class="material-icons right">send</i>
+					</button>
+				</div>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<button class=" modal-action modal-close waves-effect waves-green btn-flat">Close</button>
+		</div>
+	</div>
+</template>
+
+<template name="editCustomer">
+	<div class="modal-content">
+		<h4 class="modal-title">Editer Acquereur</h4>
+		<div class="modal-body">
+			<form class="form-inline edit"> 
+				<div class="row">
+					<div class="input-field col s8">
+						{{#if $eq gender 'male'}}
+							Mr<input type="radio" name="gender" value="male" checked>
+							Mme<input type="radio" name="gender" value="female">
+						{{else}}
+							Mr<input type="radio" name="gender" value="male">
+							Mme<input type="radio" name="gender" value="female" checked>
+						{{/if}}
+					</div>
+					<div class="input-field col s8">
+						<label for="inputName">Nom</label>
+						<input id="inputName" type="text" class="validate" value="{{name}}">
+					</div>
+					<div class="input-field col s8">
+						{{#each nPhones}}
+						<div>
+						<label for="inputPhone{{this}}"> {{this}}</label>
+						<input id="inputPhone{{this}}" type="phone" class="validate" data-plabel='{{this}}' value="{{getPhone this}}">
+						<button type="button" class="removePhone" data-plabel="{{this}}"> - </button>
+						</div>
+						{{/each}}
+						<input type="text" class="validate newPhoneLabel">
+						<button type='button' class="addPhone"> + </button>
+					</div>
+					<div class="input-field col s8">
+						<label for="inputContrib">Contribution</label>
+						<input id="inputContrib" type="number" class="validate" value="{{contribution}}">
+					</div>
+					<div class="input-field col s8">
+						<label for="inputEarning">Gains</label>
+						<input id="inputEarning" type="number" class="validate" value="{{earnings}}">
+					</div>
+					<div class="input-field col s8">
+						<label for="inputOwner">Proprietaire</label>
+						{{#if isOwner}}
+							<input id="inputOwner" type="checkbox" class="validate" checked>
+						{{else}}
+							<input id="inputOwner" type="checkbox" class="validate">
+						{{/if}}
+					</div>
+					<button id="button_modal_add_customer" class="btn waves-effect waves-light" type="submit">Ajouter
+						<i class="material-icons right">send</i>
+					</button>
+				</div>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<button class=" modal-action modal-close waves-effect waves-green btn-flat">Close</button>
+		</div>
+	</div>
 </template>

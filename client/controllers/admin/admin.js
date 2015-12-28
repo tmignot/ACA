@@ -35,11 +35,16 @@ Template.Admin.events({
 					}
 					Meteor.loginWithGoogle({
 						loginHint: hint,
+						loginUrlParameters: {
+							access_type: 'offline',
+							prompt: 'consent'
+						},
 						requestPermissions: [
 							'email',
 							'https://www.googleapis.com/auth/calendar',
 							'https://www.googleapis.com/auth/calendar.readonly'
-						]
+						],
+						forceApprovalPrompt: true
 				});
 				} else {
 					t.email.set(true);

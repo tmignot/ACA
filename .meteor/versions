@@ -53,7 +53,6 @@ ejson@1.0.7
 email@1.0.8
 es5-shim@4.1.14
 fastclick@1.0.7
-fourseven:scss@3.3.3_3
 geojson-utils@1.0.4
 google@1.1.7
 hot-code-push@1.0.0
@@ -95,7 +94,6 @@ oauth2@1.1.5
 observe-sequence@1.0.7
 ordered-dict@1.0.4
 percolate:google-api@1.0.2
-poetic:materialize-scss@1.97.3_2
 practicalmeteor:faker@3.0.1_1
 promise@0.5.1
 raix:eventemitter@0.1.3
