@@ -1,13 +1,12 @@
+
 .grid {
 	margin: 0 auto;
 }
 
 .grid-item {
-	height: 150px;
 	padding: 15px;
-	padding-left: 25px;
 }
-
+/*
 .grid-item .well {
 	width: 100%;
 	height: 100%;
@@ -34,3 +33,4 @@
 	0%		{height: 450px;}
 	100%	{height: 150px;}
 }
+*/

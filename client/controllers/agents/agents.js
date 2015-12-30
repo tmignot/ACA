@@ -131,7 +131,7 @@ Template.Agents.helpers({
 
 Template.Agents.events({
 	'click button.addAgent': function(e,t) {
-		$('#addAgent').openModal();
+        Modal.show('addAgent');
 	},
 	'change #editPermForm input': function(e,t) {
 		Meteor.call('updateRoles', {
@@ -141,19 +141,19 @@ Template.Agents.events({
 		}, function(e,r) {
 			console.log(e,r);
 		});
+	},
+	'click .grid-item.usercard': function(e,t) {
+		if ($(e.currentTarget).hasClass('size-2')) {
+			$(e.currentTarget).removeClass('size-2');
+			$(e.currentTarget).addClass('size-1');
+		} else {
+			$(e.currentTarget).removeClass('size-1');
+			$(e.currentTarget).addClass('size-2');
+		}
+		Meteor.setTimeout(function() {
+			$('.grid').isotope('arrange');
+		}, 220);
 	}
-	// 'click .grid-item.usercard': function(e,t) {
-	// 	if ($(e.currentTarget).hasClass('size-2')) {
-	// 		$(e.currentTarget).removeClass('size-2');
-	// 		$(e.currentTarget).addClass('size-1');
-	// 	} else {
-	// 		$(e.currentTarget).removeClass('size-1');
-	// 		$(e.currentTarget).addClass('size-2');
-	// 	}
-	// 	Meteor.setTimeout(function() {
-	// 		$('.grid').isotope('arrange');
-	// 	}, 220);
-	// }
 });
 
 Template.addAgent.events({

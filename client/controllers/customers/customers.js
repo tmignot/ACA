@@ -1,8 +1,3 @@
-Template.Customers.onRendered(function(){
-	$('.sidebar-nav li').removeClass('active');
-	$('.sidebar-nav li.customers').addClass('active');
-});
-
 Template.Customers.onCreated(function(){
 	this.searchList = new ReactiveVar([]);
 	Template.instance().searchList.set(Customers.find({}));

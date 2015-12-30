@@ -1,15 +1,15 @@
 <template name="Customers">
 	<h1>customers</h1>
-<!-- <div id="dashboard_container">
 	<div class="row">
-		<div class="col s12">
+		<div class="col-sm-12">
 			<nav>
 				<div class="nav-wrapper">
 					<form>
 						<div class="input-field">
 							<input id="search" type="search" required>
-							<label for="search"><i class="material-icons">search</i></label>
-							<i class="material-icons">close</i>
+							<label for="search">
+                            </label>
+							<span class="glyphicon glyphicon-search"></span>
 						</div>
 					</form>
 				</div>
@@ -17,24 +17,18 @@
 		</div>
 	</div>
 	{{#each searchList}}
-		<div class="row">
-			<div class="col s12">
-				<div class="card">
-					<div class="card-content">
-						<span class="card-title">
-							<i class="material-icons">supervisor_account</i>
-							{{ name }}
-						</span>
-						<div class="row">
-							<p><i class="material-icons">phone</i>{{ phones }}</p>
-							<p><i class="material-icons">info</i>{{ contribution }}</p>
-							<p><i class="material-icons">store</i>{{ earnings }}</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+        <div class="row">
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <!-- <img src="..." alt="..."> -->
+                    <div class="caption">
+                        <h3>{{ name }}</h3>
+                        <p>{{ phones }}</p>
+                        <p>{{ contribution }}</p>
+                        <p>{{ earnings }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 	{{/each}}
-</div> -->
-
 </template>

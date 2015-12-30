@@ -1,13 +1,12 @@
 <template name="Agents">
-	<h1>agents</h1>
-<!-- <div id="dashboard_container">
 	<div class="row">
-		<div class="col s12">
+		<div class="col-sm-12">
 			<h6 class="left">Gestion des membres</h6>
 			<button class="btn btn-primary addAgent right">Ajouter</button>
 		</div>
 	</div>
-
+    <div id="addAgent" class="modal">
+	</div>
 	<div class="row">
 		<div id="morris-area-chart" class="grid">
 			{{#each agents}}
@@ -15,17 +14,14 @@
 			{{/each}}
 		</div>
 	</div>
-	<div id="addAgent" class="modal">
-		{{>addAgent}}
-	</div>
 	<div id="editPermission" class="modal">
 		<div class="modal-content">
-			<h4 class="modal-title">Permissions de {{editName}}</h4>
+			<h4 class="modal-title">Permissions de {{ editName }}</h4>
 			<div class="modal-body">
 				<form id="editPermForm" action="#">
 				{{#each keyOf roles}}
 					<div id="{{this}}_perm" class="row">
-						<h5 class="col s12 m6 l4">{{displayName this}}</h5>
+						<h5 class="col s12 m6 l4">{{ displayName this }}</h5>
 						{{#with roles this}}
 						<div class="col s12 m6 l8 checkboxes">
 							<div class="col s12 m6">
@@ -63,11 +59,24 @@
 	</div>
 	<div id="editUser" class="modal">
 	</div>
-</div> -->
 </template>
 
 <template name="Agent">
-<!-- 	<div class="grid-item usercard col s12 m6 l4">
+ 	<div class="grid-item usercard">
+        <div class="row">
+            <div class="col-xs-12 col-sm-4">
+                <img class="img-responsive" src="{{ picture }}">
+            </div>
+            <div class="col-xs-12 col-sm-8">
+                <div class="caption">
+                    <h3>{{ name }}</h3>
+                    <p>{{ username }}</p>
+                    <p>{{ email }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--
 		<div class="row">
 			<div class="card z-depth-2">
 				<div class="card-image z-depth-2">
@@ -94,39 +103,39 @@
 				</div>
 			</div>
 		</div>
-	</div> -->
+	</div>
+-->
 </template>
 
 <template name="addAgent">
-<!-- 
-	<div class="modal-content">
-
-		<h4 class="modal-title">Ajouter un membre à l'équipe</h4>
-
-		<div class="modal-body">
-			
-			<p class="text-info">
-				Entrez l'identifiant Google du nouveau membre,
-				ce dernier recevra un e-mail l'invitant à créer un compte
-				et à renseigner ses informations personnelles.
-			</p>
-			<form class="form-inline"> 
-				<div class="row">
-					<div class="input-field col s8">
-						<input id="inputUsername" type="text" class="validate">
-						<label for="inputUsername">Google ID</label>
-					</div>
-					<button id="button_modal_add_agent" class="btn waves-effect waves-light" type="submit">Ajouter
-						<i class="material-icons right">send</i>
-					</button>
-				</div>
-			</form>
-
-		</div>
-		<div class="modal-footer">
-			<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
-		</div>
-
-	</div>
- -->
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+		            <h4 class="modal-title">Ajouter un membre à l'équipe</h4>
+                </div>
+                <div class="modal-body">	
+                    <p class="text-info">
+                        Entrez l'identifiant Google du nouveau membre,
+                        ce dernier recevra un e-mail l'invitant à créer un compte
+                        et à renseigner ses informations personnelles.
+                    </p>
+                    <form class="form-inline"> 
+                        <div class="row">
+                            <div class="input-field col s8">
+                                <input id="inputUsername" type="text" class="validate">
+                                <label for="inputUsername">Google ID</label>
+                            </div>
+                            <button id="button_modal_add_agent" class="btn waves-effect waves-light" type="submit">Ajouter
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </form>
+                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
