@@ -1,17 +1,48 @@
 <template name='layoutDashboard'>
-    {{#if currentUser}}
-        {{> navbar_menu }}
-        <div id="wrapper" class="mtop-50">
-            {{> sidebar_property}}
-            <div id="page-content-wrapper">
-                <div class="page-content">
-                    <div class="container">
-                        {{> yield }}
-                    </div>            
-                </div>            
-            </div>            
-        </div>
-    {{else}}
-        {{>yield}}
-    {{/if}}
+<div class="brand">
+	ACA Immo
+	<span class="userbadge pull-right">
+		<img src="{{currentUser.username}}" class="img-circle">
+		{{currentUser.username}}
+	</span>
+</div>
+<div class="nav-side-menu">
+	<i class="fa fa-bars fa-3x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+	<div class="menu-list">
+		<ul id="menu-content" class="menu-content collapse out">
+			<li>
+				<a href="#"><span class="fa fa-dashboard"></span><br>Accueil</a>
+			</li>
+			<li>
+				<a href="#"><span class="fa fa-users"></span><br>Acquéreurs</a>
+			</li>
+			<li>
+				<a href="#"><span class="fa fa-bar-chart"></span><br>Estimations</a>
+			</li>  
+			<li>
+				<a href="#"><span class="fa fa-building-o"></span><br>Propriétés</a>
+			</li>
+			<li>
+				<a href="#"><span class="fa fa-user"></span><br>Membres</a>
+			</li>
+			<li>
+				<a href="#"><span class="fa fa-gears"></span><br>Options</a>
+			</li>
+		</ul>
+	</div>
+</div>
+
+{{#if currentUser}}
+<div class="wrapper container">
+	<div id="page-content-wrapper">
+		<div class="page-content">
+			<div class="container">
+				{{> yield }}
+			</div>            
+		</div>            
+	</div>            
+</div>
+{{else}}
+{{>yield}}
+{{/if}}
 </template>
