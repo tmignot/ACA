@@ -4,10 +4,14 @@ ServiceConfiguration.configurations.upsert({
 		$set: {
 			clientId: '701653599547-pd6dig6i6v685c471ihlfki387g337ug.apps.googleusercontent.com',
 			secret: 'zkMzVixrnlOYnwjNIyJ_nskG',
-			loginStyle: 'redirect',
+			loginStyle: 'redirect'
 		}
 	}
 );
+
+var gMaps = {
+	apiKey: 'AIzaSyDtIrx8xVrESPzpgwvR0j7qhIF9Go-SgCM'
+};
 
 var geo = new GeoCoder({
 	  geocoderProvider: "google",

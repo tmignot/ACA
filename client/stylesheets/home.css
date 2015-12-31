@@ -14,3 +14,31 @@
 	float: none;
 	margin: 50px auto;
 }
+
+#page-top {
+	padding-bottom: 0px;
+}
+
+#search {
+	margin-top: -280px;
+	padding-top: 280px;
+}
+
+#contact .contact-info {
+	color: black;
+	font-size: 1.2em;
+	padding-top: 40px;
+}
+
+.navbar a {
+	text-align: center;
+	width: 100%;
+	color: light-gray;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus
+{
+	background: inherit;
+	color: white;
+	text-decoration: underline overline;
+}

@@ -1,123 +1,411 @@
 <template name="Home">
-  <div id="homepage_container">
-    <div class="section no-pad-bot" id="index-banner">
-      <div class="container">
-        <br><br>
-        <div class="row center">
-          <img class="responsive-img" src="/logoagence.png">
-        </div>
-        <br><br>
-        <br><br>
-        <div class="row">
-          <form class="col s12">
-            <div class="row">
-              <div class="input-field col s2">
-                <select multiple>
-                  <option value="" disabled selected>Transaction</option>
-                  <option value="1">Ventes</option>
-                  <option value="2">Location</option>
-                </select>
-              </div>
-              <div class="input-field col s2">
-                <select multiple>
-                  <option value="" disabled selected>Proprietes</option>
-                  <option value="1">Maison</option>
-                  <option value="2">Appartement</option>
-                  <option value="2">Terrain</option>
-                </select>
-              </div>
-              <div class="input-field col s4">
-                <input id="search_input" type="text" class="validate">
-                <label for="search_input">Rechercher</label>
-              </div>
-              <div class="input-field col s2">
-                <input id="budget_input" type="text" class="validate">
-                <label for="budget_input">Budget</label>
-              </div>
-              <div class="input-field col s2">
-                <a class="waves-effect waves-light btn"><i class="material-icons">search</i></a>
-              </div>
-            </div>
-          </form>
-        </div>
-        <br><br>
+<nav class="navbar navbar-default navbar-fixed-top" style="background:{{mainColor}}">
+	<div class="container">
+		<div class="navbar-header page-scroll">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
 
-      </div>
-    </div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav navbar-right">
+				<li class="hidden">
+					<a href="#page-top"></a>
+				</li>
+				<li class="page-scroll col-md-3">
+					<a href="#search">Recherche</a>
+				</li>
+				<li class="page-scroll col-md-3">
+					<a href="#about">A Propos</a>
+				</li>
+				<li class="page-scroll col-md-3">
+					<a href="#contact">Contact</a>
+				</li>
+				<li class="page-scroll col-md-3">
+					<a href="#legal">Mentions</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
 
+<header style="background:{{bgColor}}">
+	<div id="page-top" class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<img class="img-responsive" src="{{logoUrl}}" alt="">
+			</div>
+		</div>
+	</div>
+	<div id="search" class="container">
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<h3>Recherchez un bien</h3>
+				{{> searchBar }}
+			</div>
+		</div>
+		<div class="row">
+			{{#each searchList}}
+				{{>PropertyCard}}
+			{{/each}}
+		</div>
+	</div>
+</header>
 
-    <div class="container">
-      <div class="section">
+<section class="success" id="about" style="background:{{bgColor}}">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<h2>A Propos</h2>
+				<hr style="background:{{mainColor}}">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-4 col-lg-offset-2">
+				<p>Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional LESS stylesheets for easy customization.</p>
+			</div>
+			<div class="col-lg-4">
+				<p>Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!</p>
+			</div>
+		</div>
+	</div>
+</section>
 
-        <div class="row">
-          <div class="col s12 m4">
-            <div class="icon-block">
-              <h2 class="center light-blue-text"><i class="material-icons">flash_on</i></h2>
-              <h5 class="center">Speeds up development</h5>
+<section id="contact">
+	<div class="row">
+		<div class="col-lg-12 text-center">
+			<h2 style="color:black;">
+				Contactez-nous<br>
+				<small style="color:{{mainColor}};">vous allez nous adorer !</small>
+			</h2>
+			<hr>
+		</div>
+		<div class="col-sm-12 col-md-7 text-center">
+			<img id="homeMap" src="{{map}}">
+		</div>
+		<div class="col-xs-12 col-md-5 contact-info">
+			<div class="col-xs-8 col-xs-offset-2 col-md-offset-0 col-md-12">
+				<div>
+					<i class="col-xs-2 glyphicon glyphicon-user" style="color:{{mainColor}}"></i>
+					<div class="col-xs-10">L'Agence Coubron</div>
+				</div>
+				<div>
+					<i class="col-xs-2 glyphicon glyphicon-map-marker" style="color:{{mainColor}}"></i>
+					<div class="col-xs-10">155 rue Jean-Jaurès 93470 Coubron</div>
+				</div>
+				<div>
+					<i class="col-xs-2 glyphicon glyphicon-phone" style="color:{{mainColor}}"></i>
+					<div class="col-xs-10">01.43.51.28.86</div>
+				</div>
+				<div>
+					<i class="col-xs-2 glyphicon glyphicon-envelope" style="color:{{mainColor}}"></i>
+					<div class="bold col-xs-10">agence@acaimmo.fr</div>
+				</div>
+				<hr>
+				<div>
+					<i class="col-xs-2 glyphicon glyphicon-calendar" style="color:{{mainColor}}"></i>
+					<div class="col-xs-10">Nos horaires:<br>
+						<table class="table">
+							<thead>
+								<tr><th>Jour</th><th>Matin</th><th>Après-midi</th></tr>
+							</thead>
+							<tbody>
+								<tr><td>L</td><td>9h-12h</td><td>13h30-18h30</td></tr>
+								<tr><td>M</td><td>9h-12h</td><td>13h30-18h30</td></tr>
+								<tr><td>M</td><td>9h-12h</td><td>13h30-18h30</td></tr>
+								<tr><td>J</td><td>9h-12h</td><td>13h30-18h30</td></tr>
+								<tr><td>V</td><td>9h-12h</td><td>13h30-18h30</td></tr>
+								<tr><td>S</td><td>9h-12h</td><td>Fermé</td></tr>
+								<tr><td>D</td><td>Fermé</td><td>Fermé</td></tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 
-              <p class="light">Nam mauris sapien, porttitor vel eleifend et, mollis commodo neque. Morbi accumsan, sem at consectetur lacinia, orci tellus elementum lacus, a scelerisque urna enim ac elit. Sed pellentesque dictum nunc, sed tempus augue ultrices vitae. Nam vitae ultrices mi. Fusce lobortis condimentum pulvinar. Donec tincidunt tellus vitae leo luctus egestas.</p>
-            </div>
-          </div>
+<footer id="legal" class="text-center">
+	<div class="footer-above" style="background:{{mainColor}}">
+		<div class="container">
+			<div class="row">
+				<div class="footer-col col-md-4">
+					<h3>Partenaires</h3>
+					<p>Consultez les annonces<br>
+						de toutes nos agences
+					</p>
+					<a href="#">Courtry</a>
+					<a href="#">Sucy</a>
+					<a href="#">Vaires</a>
+				</div>
+				<div class="footer-col col-md-4">
+					<h3>Around the Web</h3>
+					<ul class="list-inline">
+						<li>
+							<a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
+						</li>
+						<li>
+							<a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>
+						</li>
+						<li>
+							<a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
+						</li>
+						<li>
+							<a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
+						</li>
+					</ul>
+				</div>
+				<div class="footer-col col-md-4">
+					<h3>Mentions légales</h3>
+					<small>Garant : QBE FRANCE - 21 rue Balzac - 75406 Paris cedex 08 - 150 000 Euros<br>
+					N° de carte transaction et gestion : T06-0747<br>
+					RCS BOBIGNY 410 250 781</small>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer-below" style="background:{{darken mainColor}}">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					Copyright &copy; Upgrading.Agency 2015
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
 
-          <div class="col s12 m4">
-            <div class="icon-block">
-              <h2 class="center light-blue-text"><i class="material-icons">group</i></h2>
-              <h5 class="center">User Experience Focused</h5>
+<div class="scroll-top page-scroll visible-xs visible-sm">
+	<a class="btn btn-primary" style="border-color:{{darken mainColor}};background:{{mainColor}};" href="#page-top">
+		<i class="fa fa-chevron-up"></i>
+	</a>
+</div>
 
-              <p class="light">Sed pellentesque dictum nunc, sed tempus augue ultrices vitae. Nam vitae ultrices mi. Fusce lobortis condimentum pulvinar. Donec tincidunt tellus vitae leo luctus egestas. Vivamus sit amet eleifend sapien. Donec tempus quam molestie sapien rhoncus consectetur.</p>
-            </div>
-          </div>
+<div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-content">
+		<div class="close-modal" data-dismiss="modal">
+			<div class="lr">
+				<div class="rl">
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2">
+					<div class="modal-body">
+						<h2>Project Title</h2>
+						<hr class="star-primary">
+						<img src="img/portfolio/cabin.png" class="img-responsive img-centered" alt="">
+						<p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
+						<ul class="list-inline item-details">
+							<li>Client:
+								<strong><a href="http://startbootstrap.com">Start Bootstrap</a>
+								</strong>
+							</li>
+							<li>Date:
+								<strong><a href="http://startbootstrap.com">April 2014</a>
+								</strong>
+							</li>
+							<li>Service:
+								<strong><a href="http://startbootstrap.com">Web Development</a>
+								</strong>
+							</li>
+						</ul>
+						<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-content">
+		<div class="close-modal" data-dismiss="modal">
+			<div class="lr">
+				<div class="rl">
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2">
+					<div class="modal-body">
+						<h2>Project Title</h2>
+						<hr class="star-primary">
+						<img src="img/portfolio/cake.png" class="img-responsive img-centered" alt="">
+						<p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
+						<ul class="list-inline item-details">
+							<li>Client:
+								<strong><a href="http://startbootstrap.com">Start Bootstrap</a>
+								</strong>
+							</li>
+							<li>Date:
+								<strong><a href="http://startbootstrap.com">April 2014</a>
+								</strong>
+							</li>
+							<li>Service:
+								<strong><a href="http://startbootstrap.com">Web Development</a>
+								</strong>
+							</li>
+						</ul>
+						<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-content">
+		<div class="close-modal" data-dismiss="modal">
+			<div class="lr">
+				<div class="rl">
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2">
+					<div class="modal-body">
+						<h2>Project Title</h2>
+						<hr class="star-primary">
+						<img src="img/portfolio/circus.png" class="img-responsive img-centered" alt="">
+						<p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
+						<ul class="list-inline item-details">
+							<li>Client:
+								<strong><a href="http://startbootstrap.com">Start Bootstrap</a>
+								</strong>
+							</li>
+							<li>Date:
+								<strong><a href="http://startbootstrap.com">April 2014</a>
+								</strong>
+							</li>
+							<li>Service:
+								<strong><a href="http://startbootstrap.com">Web Development</a>
+								</strong>
+							</li>
+						</ul>
+						<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-content">
+		<div class="close-modal" data-dismiss="modal">
+			<div class="lr">
+				<div class="rl">
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2">
+					<div class="modal-body">
+						<h2>Project Title</h2>
+						<hr class="star-primary">
+						<img src="img/portfolio/game.png" class="img-responsive img-centered" alt="">
+						<p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
+						<ul class="list-inline item-details">
+							<li>Client:
+								<strong><a href="http://startbootstrap.com">Start Bootstrap</a>
+								</strong>
+							</li>
+							<li>Date:
+								<strong><a href="http://startbootstrap.com">April 2014</a>
+								</strong>
+							</li>
+							<li>Service:
+								<strong><a href="http://startbootstrap.com">Web Development</a>
+								</strong>
+							</li>
+						</ul>
+						<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-content">
+		<div class="close-modal" data-dismiss="modal">
+			<div class="lr">
+				<div class="rl">
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2">
+					<div class="modal-body">
+						<h2>Project Title</h2>
+						<hr class="star-primary">
+						<img src="img/portfolio/safe.png" class="img-responsive img-centered" alt="">
+						<p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
+						<ul class="list-inline item-details">
+							<li>Client:
+								<strong><a href="http://startbootstrap.com">Start Bootstrap</a>
+								</strong>
+							</li>
+							<li>Date:
+								<strong><a href="http://startbootstrap.com">April 2014</a>
+								</strong>
+							</li>
+							<li>Service:
+								<strong><a href="http://startbootstrap.com">Web Development</a>
+								</strong>
+							</li>
+						</ul>
+						<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-content">
+		<div class="close-modal" data-dismiss="modal">
+			<div class="lr">
+				<div class="rl">
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2">
+					<div class="modal-body">
+						<h2>Project Title</h2>
+						<hr class="star-primary">
+						<img src="img/portfolio/submarine.png" class="img-responsive img-centered" alt="">
+						<p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
+						<ul class="list-inline item-details">
+							<li>Client:
+								<strong><a href="http://startbootstrap.com">Start Bootstrap</a>
+								</strong>
+							</li>
+							<li>Date:
+								<strong><a href="http://startbootstrap.com">April 2014</a>
+								</strong>
+							</li>
+							<li>Service:
+								<strong><a href="http://startbootstrap.com">Web Development</a>
+								</strong>
+							</li>
+						</ul>
+						<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
-          <div class="col s12 m4">
-            <div class="icon-block">
-              <h2 class="center light-blue-text"><i class="material-icons">settings</i></h2>
-              <h5 class="center">Easy to work with</h5>
-
-              <p class="light">Nam mauris sapien, porttitor vel eleifend et, mollis commodo neque. Morbi accumsan, sem at consectetur lacinia, orci tellus elementum lacus, a scelerisque urna enim ac elit. Sed pellentesque dictum nunc, sed tempus augue ultrices vitae. Nam vitae ultrices mi. Fusce lobortis condimentum pulvinar. Donec tincidunt tellus vitae leo luctus egestas. Vivamus sit amet eleifend sapien. Donec tempus quam molestie sapien rhoncus consectetur.</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <br><br>
-
-    </div>
-
-    <footer class="page-footer deep-purple darken-2">
-      <div class="container">
-        <div class="row">
-          <div class="col l6 s12">
-            <h5 class="white-text">Company Bio</h5>
-            <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
-
-
-          </div>
-          <div class="col l3 s12">
-            <h5 class="white-text">Settings</h5>
-            <ul>
-              <li><a class="white-text" href="#!">Link 1</a></li>
-              <li><a class="white-text" href="#!">Link 2</a></li>
-              <li><a class="white-text" href="#!">Link 3</a></li>
-              <li><a class="white-text" href="#!">Link 4</a></li>
-            </ul>
-          </div>
-          <div class="col l3 s12">
-            <h5 class="white-text">Connect</h5>
-            <ul>
-              <li><a class="white-text" href="#!">Link 1</a></li>
-              <li><a class="white-text" href="#!">Link 2</a></li>
-              <li><a class="white-text" href="#!">Link 3</a></li>
-              <li><a class="white-text" href="#!">Link 4</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="footer-copyright">
-        <div class="container">
-          <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-        </div>
-      </div>
-    </footer>
-    
-  </div>
 </template>
