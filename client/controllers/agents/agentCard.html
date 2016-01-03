@@ -1,13 +1,13 @@
 <template name="AgentCard">
-	<div class="card z-depth-2 col-xs-12 col-sm-12 col-md-6 col-lg-4" data-uid="{{_id}}">
+	<div class="card col-xs-12 col-sm-12 col-md-6 col-lg-4" data-uid="{{_id}}">
 		<div class="bg-card">
-			<div class="card-image z-depth-2">
+			<div class="card-image">
 				<img class="bg-img center-block" src="{{ picture }}">
 			</div>
-			<div class="card-content z-depth-2">
-				<img class="ico-img img-circle responsive-img center-block z-depth-2" src="{{ picture }}">
+			<div class="card-content">
+				<img class="ico-img img-circle responsive-img center-block" src="{{ picture }}">
 				<div class="card-info">
-					<h3 class="card-title grey-text text-darken-4">{{ name }}<br>
+					<h3 class="card-title">{{ name }}<br>
 						<small>{{ username }}</small>
 					</h3>
 				</div>

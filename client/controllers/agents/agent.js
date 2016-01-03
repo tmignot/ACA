@@ -38,18 +38,6 @@ Template.Agent.helpers({
 			{name: 'update', hclass: iir(u, 'update', c) ? 'success' : 'danger'},
 			{name: 'remove', hclass: iir(u, 'remove', c) ? 'success' : 'danger'}
 		];
-	},
-	roles: function() {
-		var roles = Template.instance().data.roles;
-		var ret = []
-		_.each(_.keys(roles), function(collection) {
-			ret.push({name: collection, permissions: roles[collection]});
-		});
-		return ret;
-	},
-	hasPermission: function(p, c) {
-		var uid = Template.instance().data._id;
-		return Roles.userIsInRole(uid, p, c);
 	}
 });
 

@@ -1,12 +1,18 @@
 <template name="Estimations">
-	<h1>estimations</h1>
-<!-- <div id="dashboard_container">
-	
 	<div class="row">
-		<div class="col s12">
-			<h1 class="center">Gestion des estimations</h1>
+		<ol class="breadcrumb col-xs-10">
+			<li class="active">Estimations</li>
+		</ol>
+		<button class="btn btn-primary addEstimation pull-right">
+			<span class="hidden-xs">Ajouter</span>
+			<span class="glyphicon glyphicon-plus"></span>
+		</button>
+	</div>
+	<div class="row">
+		<div id="morris-area-chart" class="grid">
+			{{#each estimations}}
+			{{>estimationCard}}
+			{{/each}}
 		</div>
 	</div>
-
-</div> -->
 </template>

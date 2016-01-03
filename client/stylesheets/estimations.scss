@@ -1,0 +1,17 @@
+.add-estimation-form {
+	.radio-inline label::after {
+		content: '' !important;
+	}
+
+	.control-label.col-xs-6 {
+		padding: 0;
+	}
+
+	.input-grp {
+		margin-bottom: 10px;
+		div:not(.radio-inline) {
+			display: block;
+			margin: 0 auto;
+		}
+	}
+}

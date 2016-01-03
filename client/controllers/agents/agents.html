@@ -3,11 +3,10 @@
 		<ol class="breadcrumb col-xs-10">
 			<li class="active">Membres</li>
 		</ol>
-		<button class="btn btn-primary addAgent pull-right">Ajouter
+		<button class="btn btn-primary addAgent pull-right">
+			<span class="hidden-xs">Ajouter</span>
 			<span class="glyphicon glyphicon-plus"></span>
 		</button>
-	</div>
-	<div id="addAgent" class="modal">
 	</div>
 	<div class="row">
 		<div id="morris-area-chart" class="grid">
@@ -15,50 +14,5 @@
 			{{>AgentCard}}
 			{{/each}}
 		</div>
-	</div>
-	<div id="editPermission" class="modal">
-		<div class="modal-content">
-			<h4 class="modal-title">Permissions de {{ editName }}</h4>
-			<div class="modal-body">
-				<form id="editPermForm" action="#">
-					{{#each keyOf roles}}
-					<div id="{{this}}_perm" class="row">
-						<h5 class="col s12 m6 l4">{{ displayName this }}</h5>
-						{{#with roles this}}
-						<div class="col s12 m6 l8 checkboxes">
-							<div class="col s12 m6">
-								<input id="{{this.name}}Get" data-collection="{{this.name}}" data-method="get" type="checkbox" class="permGet" {{isChecked this.get}}/>
-								<label for="{{this.name}}Get">Get</label>
-							</div>
-							<div class="col s12 m6">
-								<input id="{{this.name}}List" data-collection="{{this.name}}" data-method="list" type="checkbox" class="permList" {{isChecked this.list}}/>
-								<label for="{{this.name}}List">List</label>
-							</div>
-							<div class="col s12 m6">
-								<input id="{{this.name}}Insert" data-collection="{{this.name}}" data-method="insert" type="checkbox" class="permInsert" {{isChecked this.insert}}/>
-								<label for="{{this.name}}Insert">Insert</label>
-							</div>
-							<div class="col s12 m6">
-								<input id="{{this.name}}Update" data-collection="{{this.name}}" data-method="update" type="checkbox" class="permUpdate" {{isChecked this.update}}/>
-								<label for="{{this.name}}Update">Update</label>
-							</div>
-							<div class="col s12 m6">
-								<input id="{{this.name}}Remove" data-collection="{{this.name}}" data-method="remove" type="checkbox" class="permRemove" {{isChecked this.remove}}/>
-								<label for="{{this.name}}Remove">Remove</label>
-							</div>
-						</div>
-						{{/with}}
-					</div>
-					{{/each}}
-				</form>
-			</div>
-			<div class="modal-footer">
-				<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
-			</div>
-		</div>
-	</div>
-	<div id="deleteUser" class="modal">
-	</div>
-	<div id="editUser" class="modal">
 	</div>
 </template>

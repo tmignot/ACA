@@ -1,11 +1,16 @@
 Template.Estimations.onRendered(function() {
-	$('.sidebar-nav li').removeClass('active');
-	$('.sidebar-nav li.estimations').addClass('active');
-	$(".autoform-form").removeClass('form-horizontal');
+	$('.nav-side-menu .active').removeClass('active');
+	$('.nav-side-menu .estimations-link').addClass('active');
 });
 
 Template.Estimations.helpers({
 	estimations: function() {
 		return Properties.find();
+	}
+});
+
+Template.Estimations.events({
+	'click button.addEstimation': function(e,t) {
+        Modal.show('addEstimation');
 	}
 });
