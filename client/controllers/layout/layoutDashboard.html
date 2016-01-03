@@ -1,48 +1,114 @@
 <template name='layoutDashboard'>
-<div class="brand">
-	ACA Immo
-	<span class="userbadge pull-right">
-		<img src="{{currentUser.username}}" class="img-circle">
-		{{currentUser.username}}
-	</span>
-</div>
-<div class="nav-side-menu">
-	<i class="fa fa-bars fa-3x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
-	<div class="menu-list">
-		<ul id="menu-content" class="menu-content collapse out">
-			<li>
-				<a href="#"><span class="fa fa-dashboard"></span><br>Accueil</a>
-			</li>
-			<li>
-				<a href="#"><span class="fa fa-users"></span><br>Acquéreurs</a>
-			</li>
-			<li>
-				<a href="#"><span class="fa fa-bar-chart"></span><br>Estimations</a>
-			</li>  
-			<li>
-				<a href="#"><span class="fa fa-building-o"></span><br>Propriétés</a>
-			</li>
-			<li>
-				<a href="#"><span class="fa fa-user"></span><br>Membres</a>
-			</li>
-			<li>
-				<a href="#"><span class="fa fa-gears"></span><br>Options</a>
-			</li>
-		</ul>
+	<div class="brand">
+		ACA Immo
+		<div class="dropdown pull-right hidden-xs">
+			<a href="#" class="dropdown-toggle" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				{{currentUser.username}}
+			</a>
+			<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="user-picture-container">
+							<img class="img-circle user-picture" src="{{picture}}"/>
+						</div>
+						<div class="user-info">
+							<h3>{{currentUser.username}}</h3>
+							<button class="center-block btn btn-info" type="button">Logout</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-</div>
+	<div class="nav-side-menu">
+		<i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+		<div class="menu-list">
+			<div id="menu-content" class="menu-content collapse out">
+				<ul class="hidden-xs">
+					<li class="dashboard-link">
+						<a href="#"><span class="fa fa-dashboard"></span><br>Accueil</a>
+					</li>
+					{{#if isInRole 'list' 'Customers'}}
+					<li class="customers-link">
+						<a href="#"><span class="fa fa-users"></span><br>Acquéreurs</a>
+					</li>
+					{{/if}}
+					{{#if isInRole 'list' 'Estimations'}}
+					<li class="estimations-link">
+						<a href="#"><span class="fa fa-bar-chart"></span><br>Estimations</a>
+					</li>  
+					{{/if}}
+					{{#if isInRole 'list' 'Properties'}}
+					<li class="properties-link">
+						<a href="#"><span class="fa fa-building-o"></span><br>Propriétés</a>
+					</li>
+					{{/if}}
+					{{#if isInRole 'list' 'Agents'}}
+					<li class="agents-link">
+						<a href="#"><span class="fa fa-user"></span><br>Membres</a>
+					</li>
+					{{/if}}
+					{{#if isInRole 'list' 'Editor'}}
+					<li class="editor-link">
+						<a href="#"><span class="fa fa-gears"></span><br>Options</a>
+					</li>
+					{{/if}}
+				</ul>
+				<div class="visible-xs container-fluid">
+					<div class="row smalls">
+						<div class="icon col-xs-4 dashboard-link">
+							<a href="#"><span class="fa fa-dashboard"></span><br>Accueil</a>
+						</div>
+						{{#if isInRole 'list' 'Customers'}}
+						<div class="icon col-xs-4 customers-link">
+							<a href="#"><span class="fa fa-users"></span><br>Acquéreurs</a>
+						</div>
+						{{/if}}
+						{{#if isInRole 'list' 'Estimations'}}
+						<div class="icon col-xs-4 estimations-link">
+							<a href="#"><span class="fa fa-bar-chart"></span><br>Estimations</a>
+						</div>
+						{{/if}}
+						{{#if isInRole 'list' 'Properties'}}
+						<div class="icon col-xs-4 properties-link">
+							<a href="#"><span class="fa fa-building-o"></span><br>Propriétés</a>
+						</div>
+						{{/if}}
+						{{#if isInRole 'list' 'Agents'}}
+						<div class="icon col-xs-4 agents-link">
+							<a href="#"><span class="fa fa-user"></span><br>Membres</a>
+						</div>
+						{{/if}}
+						{{#if isInRole 'list' 'Editor'}}
+						<div class="icon col-xs-4 editor-link">
+							<a href="#"><span class="fa fa-gears"></span><br>Options</a>
+						</div>
+						{{/if}}
+						<div class="col-xs-12 user-profile-container">
+							<div class="col-xs-4 user-picture-container">
+								<img class="img-circle user-picture" src="{{picture}}"/>
+							</div>
+							<div class="col-xs-8 user-info">
+								<h3>{{currentUser.username}}</h3>
+								<button class="btn btn-info" type="button">Logout</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-{{#if currentUser}}
-<div class="wrapper container">
-	<div id="page-content-wrapper">
-		<div class="page-content">
-			<div class="container">
+	{{#if currentUser}}
+	<div class="wrapper container">
+		<div id="page-content-wrapper">
+			<div class="visible-xs gap"></div>
+			<div class="page-content">
 				{{> yield }}
 			</div>            
 		</div>            
-	</div>            
-</div>
-{{else}}
-{{>yield}}
-{{/if}}
+	</div>
+	{{else}}
+	{{>yield}}
+	{{/if}}
 </template>

@@ -1,6 +1,6 @@
 Template.Dashboard.onRendered(function() {
 	$('.sidebar-nav li').removeClass('active');
-	$('.sidebar-nav li.dashboard').addClass('active');
+	$('.sidebar-nav .dashboard-link').addClass('active');
 	data = {
 		timeMin: moment().subtract(1, 'month').toISOString()
 	}
@@ -21,6 +21,7 @@ Template.Dashboard.onRendered(function() {
 						center: 'month,agendaWeek,agendaDay',
 						right: 'prev,today,next'
 					},
+					height: 'auto',
 					lang: 'fr',
 					events: _.map(r.result.items, function(item) {
 						return({

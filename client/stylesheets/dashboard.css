@@ -2,10 +2,11 @@
   font-family: verdana;
   font-weight: 200;
   background-color: #364252;
-  position: absolute;
+  position: fixed;
   width: 150px;
   height: 100%;
   color: #ffffff;
+	padding-top: 40px;
 }
 .brand {
   background-color: #2c3643;
@@ -14,6 +15,8 @@
   text-align: center;
 	width: 100%;
   color: #ffffff;
+	position: fixed;
+	z-index: 2;
 }
 
 .brand .userbadge {
@@ -28,6 +31,8 @@
 .nav-side-menu .toggle-btn {
   display: none;
 }
+
+.nav-side-menu .smalls div,
 .nav-side-menu ul,
 .nav-side-menu li {
   list-style: none;
@@ -35,6 +40,11 @@
   margin: 0px;
   cursor: pointer;
 	text-align: center;
+}
+
+.nav-side-menu .smalls div,
+.nav-side-menu li {
+	padding: 20px;
 }
 
 .nav-side-menu .fa {
@@ -63,6 +73,8 @@
   vertical-align: middle;
   float: right;
 }
+
+.nav-side-menu .smalls .active,
 .nav-side-menu ul .active,
 .nav-side-menu li .active {
   border-left: 3px solid #44b6ae;
@@ -93,29 +105,38 @@
   padding-right: 10px;
   vertical-align: middle;
 }
+
+.nav-side-menu .smalls div.icon,
 .nav-side-menu li {
-  padding-left: 0px;
-  border-left: 3px solid #364252;
   border-bottom: 1px solid #2c3643;
+  border-right: 1px solid #2c3643;
 }
+.nav-side-menu .container-fluid  .row.smalls .col-xs-12.user-profile-container {
+  border-top: 2px solid #2c3643;
+	margin-top: -1px;
+}
+
+.nav-side-menu .smalls div a,
 .nav-side-menu li a {
   text-decoration: none;
   color: #ffffff;
 	padding: 5px;
 }
+
 .nav-side-menu li a i {
   padding-left: 10px;
   width: 20px;
   padding-right: 20px;
 }
+.nav-side-menu .smalls div.icon:hover,
 .nav-side-menu li:hover {
   border-left: 3px solid #FFF;
   background-color: #5e7390;
-  -webkit-transition: all 1s ease;
-  -moz-transition: all 1s ease;
-  -o-transition: all 1s ease;
-  -ms-transition: all 1s ease;
-  transition: all 1s ease;
+  -webkit-transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
+  -ms-transition: all 0.1s linear;
+  transition: all 0.1s linear;
 }
 @media (max-width: 767px) {
   .nav-side-menu {
@@ -127,7 +148,7 @@
     cursor: pointer;
     position: absolute;
     right: 10px;
-    top: 10px;
+		top: -8px;
     z-index: 10 !important;
   }
   .brand {
@@ -143,8 +164,10 @@
   }
   
   .wrapper.container {
-        width: 1130px;
-        margin-left: 150px;
+		padding: 50px;
+		padding-left: 200px;
+		width: 100%;
+		text-align:justify;
   }
 }
 body {
@@ -153,7 +176,37 @@ body {
 }
 
 .container {
-
-text-align:justify;
 }
 
+.smalls div:not(.icon) {
+	padding: 0px;
+}
+
+.smalls div.col-xs-12 div.user-info {
+	padding: 40px 0px;
+}
+
+.user-picture {
+	padding: 30px;
+	width: 100%;
+}
+
+.brand .dropdown {
+	margin: 0 10px;
+
+}
+
+.brand .dropdown-menu {
+	width: 250px;
+	padding: 20px;
+	text-align: center;
+}
+
+.brand h3 {
+	color: gray;
+}
+
+.visible-xs.gap {
+	height: 20px;
+	width: 100%;
+}

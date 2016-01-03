@@ -17,6 +17,9 @@ Template.searchBar.events({
 	},
 	'onchange .query-input': function(e,t) {
 		console.log($(e.target).val());
+	},
+	'click .dropdown-menu': function(e,t) {
+		e.stopPropagation();
 	}
 });
 

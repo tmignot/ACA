@@ -1,0 +1,53 @@
+<template name="Agent">
+	<div class="row">
+		<ol class="breadcrumb col-xs-12">
+			<li><a href="/admin/agents">Membres</a></li>
+			<li class="active">{{username}}</li>
+		</ol>
+	</div>
+	<div class="agent-container shadowed row">
+		<div class="user-container col-xs-12">
+			<div class="user-picture-container col-xs-12">
+				<img src="{{picture}}" class="img-circle"/>
+			</div>
+			<div class="user-info-container col-xs-12">
+				<h3>{{name}}</h3>
+				<h4><small>{{username}}</small></h4>
+				<h6><small>{{email}}</small></h6>
+			</div>
+		</div>
+	</div>
+	<div class="shadowed-wrap col-xs-12">
+		<div class="roles-container shadowed">
+			<div class="panel-heading">
+				<h3 class="panel-title">Roles</h3>
+			</div>
+			<div class="panel-body table-responsive">
+				<table class="col-xs-12 col-md-6 agent-roles table">	
+					<tbody>
+						{{#each collections}}
+						<tr>
+							<td><strong>{{this}}</strong></td>
+							{{#each permissions this}}
+							<td class="text-{{this.hclass}}">{{this.name}}</td>
+							{{/each}}
+						</tr>
+						{{/each}}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class='pull-right button-container'>
+		{{#if isInRole 'update' 'Agents'}}
+		<button class='btn btn-default edit-btn' type='button'>Editer 
+			<span class='glyphicon glyphicon-edit'></span>
+		</button>
+		{{/if}}
+		{{#if isInRole 'remove' 'Agents'}}
+		<button class='btn btn-danger remove-btn' type='button'>Supprimer 
+			<span class='glyphicon glyphicon-trash'></span>
+		</button>
+		{{/if}}
+	</div>
+</template>

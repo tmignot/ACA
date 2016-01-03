@@ -1,0 +1,29 @@
+<template name="addAgent">
+	<div class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Ajouter un membre à l'équipe</h4>
+				</div>
+				<div class="modal-body">	
+					<p class="text-info">
+					Entrez l'identifiant Google du nouveau membre,
+					ce dernier recevra un e-mail l'invitant à créer un compte
+					et à renseigner ses informations personnelles.
+					</p>
+					<form class="form-inline center-block"> 
+						<div class="form-group">
+							<label for="inputUsername">Google ID</label>
+							<input id="inputUsername" type="text" class="form-control">
+						</div>
+						<button class="hidden-xs btn btn-primary" type="submit">Ajouter</button>
+						<button class="visible-xs center-block btn btn-primary" type="submit">Ajouter</button>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

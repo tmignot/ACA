@@ -1,4 +1,3 @@
-
 .grid {
 	margin: 0 auto;
 }
@@ -6,22 +5,26 @@
 .grid-item {
 	padding: 15px;
 }
-/*
-.grid-item .well {
-	width: 100%;
-	height: 100%;
-}
-
-.grid-item.size-2 {
-	animation: grow 0.2s both;
-}
-
-.grid-item.size-1 {
-	animation: shrink 0.2s both;
-}
 
 .grid-item.grid-footer {
 	width: 100%;
+}
+
+.grid-item .well {
+	overflow: hidden;
+}
+
+.grid-item img {
+	height: auto;
+}
+
+.grid-item .caption h3 {
+	font-size: 1em;
+	text-align: center;
+}
+
+.grid-item .caption p {
+	font-size: 1em;
 }
 
 @keyframes grow {
@@ -33,4 +36,111 @@
 	0%		{height: 450px;}
 	100%	{height: 150px;}
 }
-*/
+
+button.addAgent {
+}
+
+.breadcrumb li {
+	color: #364252;
+}
+
+.card-image .bg-img {
+	width: 200%;
+	display: block;
+	margin: -50%;
+	filter: blur(4px) saturate(0.5);
+	-webkit-filter: blur(4px) saturate(0.5);
+}
+
+.card {
+}
+
+.card-image {
+	overflow:hidden;
+	height: 150px;
+}
+
+.ico-img {
+	position: relative;
+	width: 100px;
+	top: -80px;
+	margin: 0 auto;
+}
+
+.card-info {
+	margin-top: -100px;
+	padding: 20px;
+	text-align: center;
+	color: gray;
+}
+
+.card-info span {
+	text-overflow: ellipsis;
+}
+
+.bg-card {
+	height: 300px;
+	box-shadow: lightgray 1px 1px 1px 1px;
+	margin: 10px;
+	cursor: pointer;
+}
+
+.agent-container {
+	margin: 30px 0;
+	padding: 50px 10px;
+	margin-top: 0;
+}
+
+.search-input, .add-button {
+	margin: 20px 0;
+}
+
+.shadowed {
+	box-shadow: lightgray 1px 1px 1px 1px;
+}
+
+.shadowed-wrap {
+	margin-bottom: 10px;
+}
+
+.agent-container h4,
+.agent-container h6 {
+	text-transform: initial;
+}
+
+.agent-container .user-picture-container {
+}
+
+.agent-container .user-picture-container img {
+	width: 100%;
+	max-width: 180px;
+	margin: 0 auto;
+	display: block;
+}
+
+.popover {
+	position: relative;
+	display: block;
+	margin: 20px;
+	max-width: none;
+}
+
+.user-container {
+	font-size: 0.9em;
+	text-align: center;
+}
+
+.user-container * {
+	font-size: 1.2em;
+}
+
+.roles-container {
+	box-shadow: lightgray 1px 1px 1px 1px;
+}
+.button-container {
+	margin: 20px;
+}
+
+.glyphicon-share-alt {
+	transform: scaleX(-1);
+}
