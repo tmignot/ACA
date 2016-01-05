@@ -11,6 +11,6 @@ Template.Agents.helpers({
 
 Template.Agents.events({
 	'click button.addAgent': function(e,t) {
-        Modal.show('addAgent');
+		Router.go('/admin/agents/add');
 	}
 });

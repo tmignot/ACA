@@ -144,3 +144,25 @@ button.addAgent {
 .glyphicon-share-alt {
 	transform: scaleX(-1);
 }
+
+.add-agent-container.shadowed {
+	padding: 20px;
+}
+
+.add-agent-container form {
+	display: block;
+	margin: 0 auto;
+	float: none;
+	text-align: center;
+}
+
+.add-agent-container form .form-group {
+	display: inline-block;
+	float: none;
+	margin: 10px;
+}
+
+.add-agent-container form .form-group label,
+.add-agent-container form .form-group input {
+	margin: 20px 10px;
+}

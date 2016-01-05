@@ -1,2 +1,70 @@
 <template name="estimationCard">
+	<div class="col-xs-12 col-md-6 col-lg-4 estimation-card" data-id="{{_id}}">
+		<div class="shadowed row">
+			<h4><small>ref:</small> {{reference}}</h4>
+			<div class="address col-xs-6 info">
+				<div class="col-xs-12 title">
+					<span class="glyphicon glyphicon-map-marker"></span>
+					<label> Adresse </label>
+				</div>
+				<div>
+					<span class="attribute">{{geocode}}</span>
+				</div>
+			</div>
+			<div class="info col-xs-6">
+				<div class="col-xs-12 title">
+					<i class="fa fa-money"></i>
+					<label> Transaction </label>
+				</div>
+				<div>
+					<label> Type </label>
+					<span class="attribute">{{transactionType}}</span>
+				</div>
+				<div>
+					<label> Prix </label>
+					<span class="attribute">{{price}}€</span>
+				</div>
+				<div>
+					<label> Commission </label>
+					<span class="attribute">{{commission}}€</span>
+				</div>
+			</div>
+			<div class="info col-xs-6">
+				<div class="col-xs-12 title">
+					<i class="fa fa-expand"></i>
+					<label> Surfaces </label>
+				</div>
+				<div>
+					<label> Totale </label>
+					<span class="attribute">{{totalSurface}}m²</span>
+				</div>
+				<div>
+					<label> Salon </label>
+					<span class="attribute">{{livingRoomSurface}}m²</span>
+				</div>
+				<div>
+					<label> Terrain </label>
+					<span class="attribute">{{terrainSurface}}m²</span>
+				</div>
+			</div>
+			<div class="info col-xs-6">
+				<div class="col-xs-12 title">
+					<i class="fa fa-home"></i>
+					<label> Pieces </label>
+				</div>
+				<div class="">
+					<label> Total </label>
+					<span class="attribute">{{roomNumber}}</span>
+				</div>
+				<div class="">
+					<label> Chambres </label>
+					<span class="attribute">{{bedroomNumber}}</span>
+				</div>
+				<div class="">
+					<label> Etages </label>
+					<span class="attribute">{{floorNumber}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>

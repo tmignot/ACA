@@ -11,6 +11,6 @@ Template.Estimations.helpers({
 
 Template.Estimations.events({
 	'click button.addEstimation': function(e,t) {
-        Modal.show('addEstimation');
+		Router.go('/admin/estimations/add');
 	}
 });

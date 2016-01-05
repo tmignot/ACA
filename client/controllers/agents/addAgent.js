@@ -1,3 +1,8 @@
+Template.addAgent.onRendered(function(){
+	$('.nav-side-menu .active').removeClass('active');
+	$('.nav-side-menu .agents-link').addClass('active');
+});
+
 Template.addAgent.events({
 	'submit form': function(e,t) {
 		e.preventDefault();
@@ -5,7 +10,10 @@ Template.addAgent.events({
 			if (err)
 				console.log(err);
 			else
-				$('#addAgent').closeModal();
+				Router.go('/admin/agents');
 		});
+	},
+	'click .cancel': function(e,t) {
+		Router.go('/admin/agents');
 	}
 });

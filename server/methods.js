@@ -72,14 +72,14 @@ Meteor.methods({
 		}
 		return false;
 	},
-	addMeetings: function(opt) {
-		console.log("meetings methods call");
-	},
-	addProperty: function(opt) {
-		console.log("property methods call");
-	},
-	addCustomers: function(opt) {
-		console.log("customers methods call")
+	geocode: function(addr) {
+		if (this.userId) {
+			var geo = new GeoCoder({
+				geocoderProvider: 'google',
+				httpAdapter: 'https',
+				apiKey: 'AIzaSyDtIrx8xVrESPzpgwvR0j7qhIF9Go-SgCM'
+			});
+			return geo.geocode(addr);
+		}
 	}
-
 });

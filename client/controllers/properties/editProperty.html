@@ -1,13 +1,17 @@
-<template name="addEstimation">
+<template name="editPropertie">
 	<div class="row">
 		<ol class="breadcrumb col-xs-12">
-			<li><a href="/admin/estimations">Estimations</a></li>
-			<li class="active">Ajouter</li>
+			<li><a href="/admin/properties">Proprietes</a></li>
+			<li><a href="/admin/properties/{{_id}}">{{reference}}</a></li>
+			<li class="active">Editer</li>
 		</ol>
 	</div>
+</template>
+
+<template name="editProperty">
 	<div class="add-estimation-container row">
 		<div class="heading-wrapper shadowed col-xs-12">
-			<h4>Ajouter une estimation</h4>
+			<h4>Editer une estimation</h4>
 		</div>
 	</div>
 	<div class="col-xs-12">

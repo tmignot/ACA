@@ -1,0 +1,185 @@
+<template name="Propertie">
+	<div class="row">
+		<ol class="breadcrumb col-xs-12">
+			<li><a href="/admin/properties">Proprietes</a></li>
+			<li class="active">{{reference}}</li>
+		</ol>
+	</div>
+	{{>Property this}}
+</template>
+
+<template name="Property">
+	<div class="property-container row">
+		<div class="heading-wrapper shadowed col-xs-12">
+			<h4>
+				<span class="attr-value">{{ propertyType }}</span><small> a </small>
+				{{#if $eq transactionType 'Vente'}}
+				<span class="attr-value">vendre</span>
+				{{else}}
+				<span class="attr-value">louer</span>
+				{{/if}}
+				<small> {{reference}} </small>
+			</h4>
+		</div>
+		<div class="col-xs-12 col-md-6">
+			<div class="informations-wrapper">
+				<div class="informations shadowed col-xs-12">
+					<h5><span class="glyphicon glyphicon-info-sign"></span>
+						Informations
+					</h5>
+					<div class="col-xs-12 year attribute">
+						<label class="">Annee de construction </label>
+						<span class="attr-value">
+							{{ year }}
+						</span>
+					</div>
+					<div class="col-xs-12 separator"></div>
+					<div class="col-xs-12 col-md-6 total-surface attribute">
+						<label class="">Surface totale </label>
+						<span class="attr-value">
+							{{ totalSurface }}m²
+						</span>
+					</div>
+					<div class="col-xs-12 col-md-6 living-room-surface attribute">
+						<label class="">Salon de </label>
+						<span class="attr-value">
+							{{ livingRoomSurface }}m²
+						</span>
+					</div>
+					<div class="col-xs-12 col-md-6 terrain-surface attribute">
+						<label class="">Terrain </label>
+						<span class="attr-value">
+						{{#if terrainSurface}}
+							{{ terrainSurface }}m²
+						{{else}}
+							Non
+						{{/if}}
+						</span>
+					</div>
+					<div class="col-xs-12 separator"></div>
+					<div class="col-xs-12 col-md-6 room-number attribute">
+						<label class="col-xs-8">Pieces</label>
+						<span class="attr-value col-xs-4">
+							{{ roomNumber }}
+						</span>
+					</div>
+					<div class="col-xs-12 col-md-6 bedroom-number attribute">
+						<label class="col-xs-8">Chambres</label>
+						<span class="attr-value col-xs-4">
+							{{ bedroomNumber  }}
+						</span>
+					</div>
+					<div class="col-xs-12 col-md-6 bathroom-number attribute">
+						<label class="col-xs-8">SDB</label>
+						<span class="attr-value col-xs-4">
+							{{ bathroomNumber }}
+						</span>
+					</div>
+					<div class="col-xs-12 col-md-6 closet-number attribute">
+						<label class="col-xs-8">Toilettes</label>
+						<span class="attr-value col-xs-4">
+							{{ closetNumber }}
+						</span>
+					</div>
+					<div class="col-xs-12 col-md-6 dependency-number attribute">
+						<label class="col-xs-8">Dependences</label>
+						<span class="attr-value col-xs-4">
+							{{ dependencyNumber }}
+						</span>
+					</div>
+					<div class="col-xs-12 col-md-6 garage attribute">
+						<label class="col-xs-8">Garage</label>
+						<span class="attr-value col-xs-4">
+							{{#if garage}} Oui {{else}} Non {{/if}}
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="address-wrapper">
+				<div class="address shadowed col-xs-12">
+					<h5><span class="glyphicon glyphicon-map-marker"></span>
+						Adresse
+					</h5>
+					<div class="col-xs-12 garage attribute">
+						<label class="col-xs-12">{{geocode}}</label>
+						<div class="col-xs-12 separator"></div>
+						<div class="map-wrapper">
+							<img id="map" src="{{map}}">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="energy-wrapper col-xs-12 col-md-6">
+			<div class="energy shadowed col-xs-12">
+				<h5><span class="fa fa-fire"></span>
+				Performances energetiques </h5>
+				<div class="col-xs-12 heating attribute">
+					<label class="col-xs-4">Chauffage</label>
+					<span class="attr-value col-xs-8">
+						{{ heating }}
+					</span>
+				</div>
+				<div class="col-xs-12 separator"></div>
+				<div class="col-xs-12 col-sm-6 col-md-12 col-lg-6 dpe attribute">
+					<label class="">DPE</label>
+					<span class="attr-value">
+						<div id="dpe"></div>
+					</span>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-12 col-lg-6 ges attribute">
+					<label class="">GES</label>
+					<span class="attr-value">
+						<div id="ges"></div>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="pricing-wrapper col-xs-12 col-md-6">
+			<div class="pricing shadowed col-xs-12">
+				<h5><span class="fa fa-eur"></span>
+				Couts et tarifs </h5>
+				<div class="col-xs-12 col-md-6 taxes attribute">
+					<label class="">Taxes</label>
+					<span class="attr-value">
+						{{ taxes }}€
+					</span>
+				</div>
+				<div class="col-xs-12 col-md-6 charges attribute">
+					<label class="">Charges</label>
+					<span class="attr-value">
+						{{ charges }}€
+					</span>
+				</div>
+				<div class="col-xs-12 col-md-6 commission attribute">
+					<label class="">Commission</label>
+					<span class="attr-value">
+						{{ commission }}€
+					</span>
+				</div>
+				<div class="col-xs-12 col-md-6 price attribute">
+					<label class="">Prix</label>
+					<span class="attr-value">
+						{{ price }}€
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="button-wrapper col-xs-12">
+			<div class="button center-block">
+				<div class='center-block'>
+					{{#if isInRole 'update' 'Estimations'}}
+					<button class='btn btn-default edit-btn' type='button'>Editer 
+						<span class='glyphicon glyphicon-edit'></span>
+					</button>
+					{{/if}}
+					{{#if isInRole 'remove' 'Estimations'}}
+					<button class='btn btn-danger remove-btn' type='button'>Supprimer 
+						<span class='glyphicon glyphicon-trash'></span>
+					</button>
+					{{/if}}
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

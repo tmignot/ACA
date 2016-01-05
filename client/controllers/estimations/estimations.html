@@ -1,12 +1,23 @@
 <template name="Estimations">
 	<div class="row">
-		<ol class="breadcrumb col-xs-10">
+		<ol class="breadcrumb col-xs-12 col-sm-6">
 			<li class="active">Estimations</li>
 		</ol>
-		<button class="btn btn-primary addEstimation pull-right">
-			<span class="hidden-xs">Ajouter</span>
-			<span class="glyphicon glyphicon-plus"></span>
-		</button>
+		<div class="col-xs-9 col-sm-5">
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Search...">
+				<span class="input-group-btn">
+					<button type="button" class="btn btn-default">
+						<span class="glyphicon glyphicon-search"></span>
+					</button>
+				</span>
+			</div>
+		</div>
+		<div class="col-xs-3 col-sm-1">
+			<button class="btn btn-primary addEstimation center-block">
+				Ajouter <span class="glyphicon glyphicon-plus"></span>
+			</button>
+		</div>
 	</div>
 	<div class="row">
 		<div id="morris-area-chart" class="grid">

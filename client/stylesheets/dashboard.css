@@ -16,7 +16,7 @@
 	width: 100%;
   color: #ffffff;
 	position: fixed;
-	z-index: 2;
+	z-index: 5;
 }
 
 .brand .userbadge {
