@@ -155,7 +155,6 @@
 	}
 
 	span {
-		font-size: medium;
 	}
 
 	.separator {
@@ -189,6 +188,14 @@
 .estimation-card {
 	padding: 10px;
 
+	.attr-cont {
+		padding: 0;
+
+		div {
+			padding: 0;
+		}
+	}
+
 	.shadowed {
 		margin-bottom: 10px;
 		margin: 0px;
@@ -206,11 +213,26 @@
 		text-overflow: ellipsis;
 		vertical-align: middle;
 		font-size: small;
+		padding: 0;
 	}
 
 	.info {
 		.title {
 			margin-top: 20px;
+			margin-bottom: 10px;
+			border-bottom: lightgray 1px solid;
 		}
 	}
+}
+
+.images {
+	.slick-prev::before, 
+	.slick-next::before {
+		color: gray;
+	}
+
+}
+
+.separator {
+	margin-bottom: 20px;
 }

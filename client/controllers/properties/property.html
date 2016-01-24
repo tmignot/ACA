@@ -19,8 +19,72 @@
 				<span class="attr-value">louer</span>
 				{{/if}}
 				<small> {{reference}} </small>
+				{{#if $eq estimation true}}
+				{{#if isInRole 'insert' 'Properties'}}
+				<button class='btn btn-success transfer-btn pull-right' type='button'>Valider l'estimation
+					<span class='fa fa-check'></span>
+				</button>
+				{{/if}}
+				{{/if}}
 			</h4>
 		</div>
+		{{#unless estimation}}
+		<div class="col-xs-12">
+			<div class="annonce-wrapper">
+				<div class="annonce shadowed col-xs-12">
+					<h5><span class="fa fa-bookmark"></span>
+						Annonce
+					</h5>
+					<div class="col-xs-12 col-lg-6">
+						<div class="attribute title">
+							<label class="">Titre</label>
+							<span class="attr-value">
+								{{ title }}
+							</span>
+						</div>
+						<div class="col-xs-12 separator"></div>
+						<div class="attribute description">
+							<label class="">Description </label>
+							<div class="attr-value">
+								{{ description }}
+							</div>
+						</div>
+						<div class="col-xs-12 separator"></div>
+						<div class="attribute exclusive">
+							<label class="">Exclusivite</label>
+							<span class="attr-value">
+								{{#if exclusive}} Oui {{else}} Non {{/if}}
+							</span>
+						</div>
+						<div class="attribute visible">
+							<label class="">Visible</label>
+							<span class="attr-value">
+								{{#if visible}} Oui {{else}} Non {{/if}}
+							</span>
+						</div>
+						<div class="col-xs-12 separator"></div>
+						<div class="attribute local-informations">
+							<label class="">Note privee</label>
+							<span class="attr-value">
+								{{ localInformations }}
+							</span>
+						</div>
+					</div>
+					<div class="col-xs-12 separator hidden-lg"></div>
+					<div class="col-xs-12 col-lg-6">
+						<div class="attribute images">
+							<label class="">Images</label>
+							<div id="carousel">
+								{{#each img}}
+									<div class="image"><img src="{{this}}" width="100%"/></div>
+								{{/each}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{/unless}}
 		<div class="col-xs-12 col-md-6">
 			<div class="informations-wrapper">
 				<div class="informations shadowed col-xs-12">
@@ -49,11 +113,11 @@
 					<div class="col-xs-12 col-md-6 terrain-surface attribute">
 						<label class="">Terrain </label>
 						<span class="attr-value">
-						{{#if terrainSurface}}
+							{{#if terrainSurface}}
 							{{ terrainSurface }}m²
-						{{else}}
+							{{else}}
 							Non
-						{{/if}}
+							{{/if}}
 						</span>
 					</div>
 					<div class="col-xs-12 separator"></div>
@@ -93,6 +157,12 @@
 							{{#if garage}} Oui {{else}} Non {{/if}}
 						</span>
 					</div>
+					<div class="col-xs-12 col-md-6 state attribute">
+						<label class="col-xs-8">Etat du bien</label>
+						<span class="attr-value col-xs-4">
+							{{state}}
+						</span>
+					</div>
 				</div>
 			</div>
 			<div class="address-wrapper">
@@ -101,7 +171,38 @@
 						Adresse
 					</h5>
 					<div class="col-xs-12 garage attribute">
-						<label class="col-xs-12">{{geocode}}</label>
+						<div>
+							<div class="col-xs-12 attr-cont">
+								<label class="col-xs-4">N° </label>
+								<div class="col-xs-8">
+									<span class="attribute">{{address.streetNumber}} {{address.numCompl}}</span>
+								</div>
+							</div>
+							<div class="col-xs-12 attr-cont">
+								<label class="col-xs-4">Voie </label>
+								<div class="col-xs-8">
+									<span class="attribute">{{address.streetName}}</span>
+								</div>
+							</div>
+							<div class="col-xs-12 attr-cont">
+								<label class="col-xs-4">Compl. </label>
+								<div class="col-xs-8">
+									<span class="attribute">{{address.complement}}</span>
+								</div>
+							</div>
+							<div class="col-xs-12 attr-cont">
+								<label class="col-xs-4">CP </label>
+								<div class="col-xs-8">
+									<span class="attribute">{{address.zipcode}}</span>
+								</div>
+							</div>
+							<div class="col-xs-12 attr-cont">
+								<label class="col-xs-4">Ville </label>
+								<div class="col-xs-8">
+									<span class="attribute">{{address.city}}</span>
+								</div>
+							</div>
+						</div>
 						<div class="col-xs-12 separator"></div>
 						<div class="map-wrapper">
 							<img id="map" src="{{map}}">
@@ -113,7 +214,7 @@
 		<div class="energy-wrapper col-xs-12 col-md-6">
 			<div class="energy shadowed col-xs-12">
 				<h5><span class="fa fa-fire"></span>
-				Performances energetiques </h5>
+					Performances energetiques </h5>
 				<div class="col-xs-12 heating attribute">
 					<label class="col-xs-4">Chauffage</label>
 					<span class="attr-value col-xs-8">
@@ -138,7 +239,7 @@
 		<div class="pricing-wrapper col-xs-12 col-md-6">
 			<div class="pricing shadowed col-xs-12">
 				<h5><span class="fa fa-eur"></span>
-				Couts et tarifs </h5>
+					Couts et tarifs </h5>
 				<div class="col-xs-12 col-md-6 taxes attribute">
 					<label class="">Taxes</label>
 					<span class="attr-value">

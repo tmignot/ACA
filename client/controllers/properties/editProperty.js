@@ -1,12 +1,12 @@
-Template.addEstimation.onCreated(function() {
+Template.editProperty.onCreated(function() {
 	var maps = {
 		path: 'https://maps.googleapis.com/maps/api/staticmap?',
 		params: {
-			center: '155 rue jean jeaures coubron',
+			center: this.data.geocode,
 			zoom: '17',
 			size: '600x250',
 			maptype: 'roadmap',
-			markers: 'color:red%7C48.9152408,2.5789193',
+			markers: 'color:red%7C'+this.data.address.latitude+','+this.data.address.longitude,
 			key: 'AIzaSyD4RgVp6VVGARHMw7snoozMIvUIaC198Ts'
 		}
 	};
@@ -17,11 +17,15 @@ Template.addEstimation.onCreated(function() {
 	this.map = new ReactiveVar(url);
 });
 
-Template.addEstimation.onRendered(function() {
+Template.editPropertie.onRendered(function(){
 	$('.nav-side-menu .active').removeClass('active');
-	$('.nav-side-menu .estimations-link').addClass('active');
+	$('.nav-side-menu .properties-link').addClass('active');
+});
+
+Template.editProperty.onRendered(function(){
 	Session.set('geocode', 0);
-	$('.property-year-container').datepicker({
+	console.log(this.data);
+	var date = $('.property-year-container').datepicker({
 		format: "yyyy",
 		startDate: "1900y",
 		endDate: "+0y",
@@ -31,27 +35,74 @@ Template.addEstimation.onRendered(function() {
 		language: "fr",
 		defaultViewDate: { year: 1970 }
 	});
-
 	this.dpeges = new DpeGes();
 	this.dpeges.dpe({
 		domId: 'dpe',
-		value: 1,
+		value: this.data.dpe,
 		shadow: true
 	});
 	this.dpeges.ges({
 		domId: 'ges',
-		value: 1,
+		value: this.data.ges,
 		shadow: true
 	});
+	$('input[name="transactionType"][value="'+this.data.transactionType+'"]').prop('checked', true);
+	$('input[name="garage"][value="'+this.data.garage+'"]').prop('checked', true);
+	$('#propertyType option[value="'+this.data.propertyType+'"]').prop('selected', true);
+	$('.address input').val(this.data.geocode);
+	$('.full-address .streetNumber input').val(this.data.address.streetNumber);
+	$('.full-address .num-compl option[value="'+this.data.address.numCompl+'"]').prop('selected', true);
+	$('.full-address .streetName input').val(this.data.address.streetName);
+	$('.full-address .complement input').val(this.data.address.complement);
+	$('.full-address .zipcode input').val(this.data.address.zipcode);
+	$('.full-address .city input').val(this.data.address.city);
+	$('.full-address .country input').val(this.data.address.country);
+	$('.living-surface input').val(this.data.livingRoomSurface);
+	$('.total-surface input').val(this.data.totalSurface);
+	$('.terrain-surface input').val(this.data.terrainSurface);
+	$('.property-floors input').val(this.data.floorNumber);
+	$('.property-rooms input').val(this.data.roomNumber);
+	$('.property-bedrooms input').val(this.data.bedroomNumber);
+	$('.property-bathrooms input').val(this.data.bathroomNumber);
+	$('.property-closet input').val(this.data.closetNumber);
+	$('.property-dependency input').val(this.data.dependencyNumber);
+	$('.state input').val(this.data.state);
+	$('.heating input').val(this.data.heating);
+	$('.dpe input').val(this.data.dpe);
+	$('.ges input').val(this.data.ges);
+	$('.taxes input').val(this.data.taxes);
+	$('.charges input').val(this.data.charges);
+	$('.commission input').val(this.data.commission);
+	$('.price input').val(this.data.price);
+	$('.property-year-container').datepicker('update', new Date(this.data.year));
 });
 
-Template.addEstimation.helpers({
+Template.editProperty.helpers({
 	map: function() {
 		return Template.instance().map.get();
+	},
+	img: function() {
+		return Images.find({_id: {$in: Template.instance().data.images}})
 	}
 });
 
-Template.addEstimation.events({
+Template.editProperty.events({
+	'click .search': function(e,t) {
+		$('.images input').click();
+	},
+	'click .upload': function(e,t) {
+		var file = $('#file').get(0).files[0];
+		Images.insert(file, function(e,r) {
+			if (r) {
+				Properties.update({_id: Properties.findOne()._id}, {
+					$push: {images: r._id}
+				});
+			}
+		});
+	},	
+	'change input': function(e,t) {
+		$('.filename').html(_.last(e.currentTarget.value.split('\\')));
+	},
 	'change .dpe input': function(e,t) {
 		t.dpeges.dpe({
 			domId: 'dpe',
@@ -140,8 +191,9 @@ Template.addEstimation.events({
 					geocode += ' ' + address[k];
 			}
 		});
+		console.log(address, geocode);
 		var data = {
-			reference: ShortId.generate(),
+			reference: t.data.reference,
 			transactionType: $('.transaction-type input[value="Vente"]').is(':checked') ? 'Vente' : 'Location',
 			propertyType: $('.property-type option[selected]').val(),
 			geocode: geocode,
@@ -171,11 +223,11 @@ Template.addEstimation.events({
 		}
 		var ctx = PropertySchema.newContext();
 		if (ctx.validate(data)) {
-			Properties.insert(data, function(e, r) {
+			Properties.update({_id: t.data._id}, {$set: data}, function(e, r) {
 				if (e) 
 					console.log(e);
 				else
-					Router.go('/admin/estimations/'+r);
+					Router.go('/admin/estimations/'+t.data._id);
 			});
 		}	else {
 			$('.add-estimation-form input.to-check').parent().removeClass('has-error');
@@ -191,4 +243,3 @@ Template.addEstimation.events({
 		}
 	}
 });
-

@@ -1,0 +1,9 @@
+<template name='carousel'>
+<div id="carousel">
+	{{>UI.contentBlock}}
+</div>
+</template>
+
+<template name='carouselImage'>
+	<div><img class="carousel-image" src='{{src}}' width="{{width}}" onload='loaded(this)' /></div>
+</template>
