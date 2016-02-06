@@ -1,65 +1,157 @@
 <template name="searchBar">
-	<div id="searchBar" class="">
-		<div class="input-grp col-xs-12" role="group">
-			<div class="col-xs-2 item-bar">
-				<div class='input-grp-btn'>
-					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories
-						<span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu">
-						<li>
-							<div class="checkbox">
-								<input type="checkbox" id="cbVentes" checked>
-								<label for="cbVentes">Ventes</label>
-							</div>
-						</li>
-						<li>
-							<div class="checkbox">
-								<input type="checkbox" id="cbLocations" checked>
-								<label for="cbLocations">Locations</label>
-							</div>
-						</li>
-						<li role="separator" class="divider"></li>
-						<li>
-							<div class="checkbox">
-								<input type="checkbox" id="cbMaisons" checked>
-								<label for="cbMaisons">Maisons</label>
-							</div>
-						</li>
-						<li>
-							<div class="checkbox">
-								<input type="checkbox" id="cbAppartements" checked>
-								<label for="cbAppartements">Appartements</label>
-							</div>
-						</li>
-						<li>
-							<div class="checkbox">
-								<input type="checkbox" id="cbTerrain" checked>
-								<label for="cbTerrain">Terrain</label>
-							</div>
-						</li>
-						<li>
-							<div class="checkbox">
-								<input type="checkbox" id="cbAutres" checked>
-								<label for="cbAutres">Autres</label>
-							</div>
-						</li>
-					</ul>
-				</div><!-- /btn-group -->
+<div id="searchBar" class="">
+	<div class="input-grp col-xs-12" role="group">
+		<div class="col-xs-2 item-bar">
+			<div class='input-grp-btn'>
+				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li>
+						<div class="checkbox">
+							<input type="checkbox" id="cbVentes" checked>
+							<label for="cbVentes">Ventes</label>
+						</div>
+					</li>
+					<li>
+						<div class="checkbox">
+							<input type="checkbox" id="cbLocations" checked>
+							<label for="cbLocations">Locations</label>
+						</div>
+					</li>
+					<li role="separator" class="divider"></li>
+					<li>
+						<div class="checkbox">
+							<input type="checkbox" id="cbMaisons" checked>
+							<label for="cbMaisons">Maisons</label>
+						</div>
+					</li>
+					<li>
+						<div class="checkbox">
+							<input type="checkbox" id="cbAppartements" checked>
+							<label for="cbAppartements">Appartements</label>
+						</div>
+					</li>
+					<li>
+						<div class="checkbox">
+							<input type="checkbox" id="cbTerrain" checked>
+							<label for="cbTerrain">Terrain</label>
+						</div>
+					</li>
+					<li>
+						<div class="checkbox">
+							<input type="checkbox" id="cbAutres" checked>
+							<label for="cbAutres">Autres</label>
+						</div>
+					</li>
+				</ul>
+			</div><!-- /btn-group -->
+		</div>
+		<div class="col-xs-7 item-bar dropdown">
+			<input type="text" class="form-control query-input typeahead" placeholder="Ville, CP, Description, ..." autocomplete='false' spellcheck='false' data-sets='pop'/>
+			<div class="pull-right filters">
+				<ul class="list-inline filter-list">
+					{{#each filters}}
+					<li class="list-group-item-danger">{{value}} <i class="glyphicon glyphicon-remove" data-filterkey='{{key}}' data-filtervalue='{{value}}'></i></li>
+					{{/each}}
+				</ul>
 			</div>
-			<div class="col-xs-7 item-bar">
-				<input type="text" class="form-control query-input" placeholder="Ville, CP, Description, ..." />
-			</div>
-			<div class="col-xs-2 item-bar">
-				<input type="number" class="form-control" placeholder="Budget">
-			</div>
-			<div class="col-xs-1 item-bar">
-				<div class="input-grp-btn">
-					<button class="btn btn-danger" type="button">
-						<span class="glyphicon glyphicon-search"></span>
-					</button>
-				</div>
+		</div>
+		<div class="col-xs-2 item-bar">
+			<input type="number" class="form-control" placeholder="Budget">
+		</div>
+		<div class="col-xs-1 item-bar">
+			<div class="input-grp-btn">
+				<button class="btn btn-danger" type="button">
+					<span class="glyphicon glyphicon-search"></span>
+				</button>
 			</div>
 		</div>
 	</div>
+</div>
+<div class="results">
+	{{#if $.Session.equals 'showResults' true}}
+	{{> properties results=results}}
+	{{/if}}
+</div>
+</template>
+
+<template name="pop">
+	<span class="poptype">{{type}}:</span>
+	<label class="popval">{{value}}</label>
+</template>
+
+<template name="properties">
+	{{> pagesNav }}
+	{{#if $.Session.equals 'searched' true}}
+		<div class="page-container">
+			{{> pages }}
+		</div>
+	{{/if}}
+	{{> pagesNav }}
+</template>
+
+<template name="annonceCard">
+<div class="col-xs-12 property-card" data-id="{{_id}}">
+	<div class="shadowed row">
+		<div class="col-xs-12 col-sm-12 col-lg-6">
+			<div class="annonce col-xs-12 info">
+				<div class="col-xs-12 title">
+					<h4> {{title}} </h4>
+				</div>
+				<div class="attr-cont col-xs-12">
+					<span class="attribute col-xs-12">{{description}}</span>
+				</div>
+			</div>						
+			<div class="address col-xs-12 info">
+				<table class="table table-condensed">
+					<tbody>
+						<tr>
+							<td class="align-right">
+								<i class="glyphicon glyphicon-map-marker"></i>
+							</td>
+							<td>
+								<span class="attribute">{{address.city}}</span>
+								<span class="attribute">{{address.zipcode}}</span>
+							</td> 
+							<td class="align-right">
+								<i class="fa fa-expand"></i>
+							</td>
+							<td>
+								<span class="attribute">{{totalSurface}}m²</span>
+							</td>
+						</tr>
+						<tr>
+							<td class="align-right">
+								<i class="fa fa-home"></i>
+							</td>
+							<td>
+								<span class="attribute">{{roomNumber}} pieces,</span>
+								<span class="attribute">{{bedroomNumber}} chambres</span>
+							</td>
+							<td class="align-right">
+								<i class="fa fa-money"></i>
+							</td>
+							<td>
+								<span class="attribute">{{transactionType}}</span>, 
+								<span class="attribute">{{price}}€</span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-lg-6">
+			<div class="info col-xs-12">
+				{{#carousel id=_id}}
+					{{#each img}}
+						{{#if isUploaded}}
+							{{>carouselImage src=this.url width='100%'}}
+						{{/if}}
+					{{/each}}
+				{{/carousel}}
+			</div>
+		</div>
+	</div>
+</div>
 </template>

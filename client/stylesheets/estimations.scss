@@ -185,8 +185,10 @@
 	}
 }
 
+.property-card,
 .estimation-card {
 	padding: 10px;
+	cursor: pointer;
 
 	.attr-cont {
 		padding: 0;

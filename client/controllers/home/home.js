@@ -12,7 +12,7 @@ Template.Home.helpers({
 			}
 		};
 		var url = maps.path;
-		_.each(_.pairs(maps.params), function(pair) {
+		_.each(_.toPairs(maps.params), function(pair) {
 			url = url + '&' + pair[0] + '=' + pair[1];
 		});
 		console.log(url);
@@ -20,6 +20,12 @@ Template.Home.helpers({
 	},
 	darken: function(color) {
 		return LightenDarkenColor(color, -20);
+	},
+	prop: function(id) {
+		return Properties.findOne({_id: id});
+	},
+	currentProperty: function() {
+		return Session.get('currentProperty');
 	}
 });
 

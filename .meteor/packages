@@ -29,7 +29,6 @@ cfs:filesystem
 multiply:iron-router-progress
 underscorestring:underscore.string
 accounts-google
-accounts-ui
 service-configuration
 isotope:isotope
 alanning:roles
@@ -38,8 +37,6 @@ percolate:google-api
 raix:handlebar-helpers
 ryanswapp:datetime-picker
 rzymek:fullcalendar
-practicalmeteor:faker
-alethes:lodash
 twbs:bootstrap
 peppelg:bootstrap-3-modal
 mrt:jquery-easing
@@ -53,3 +50,7 @@ random
 dburles:google-maps
 udondan:slick
 gwendall:ui-hooks
+sergeyt:typeahead
+erasaur:meteor-lodash
+alethes:pages
+natestrauser:animate-css

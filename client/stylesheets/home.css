@@ -42,3 +42,15 @@
 	color: white;
 	text-decoration: underline overline;
 }
+
+.results label {
+	color: white;
+}
+
+.results .property-card .carousel {
+	margin: 25% 0;
+}
+
+.property-card table tbody tr td {
+	border: none;
+}

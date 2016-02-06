@@ -35,5 +35,8 @@ Template.layoutDashboard.events({
 'click .editor-link':	function(e,t) {
 	e.preventDefault();
 	Router.go('/admin/editor');
+},
+'click .user-info button': function(e,t) {
+	Meteor.logout();
 }
 });

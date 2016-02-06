@@ -25,7 +25,7 @@ Template.Property.onCreated(function(){
 				}
 			};
 			var url = maps.path;
-			_.each(_.pairs(maps.params), function(pair) {
+			_.each(_.toPairs(maps.params), function(pair) {
 				url = url + '&' + pair[0] + '=' + pair[1];
 			});
 			self.gmap.set(url);	

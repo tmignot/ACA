@@ -61,3 +61,28 @@ html, body
   }
 }
 
+.pagination li a,
+.pagination .li a:focus,
+.pagination .active a,
+.pagination .active a:hover,
+.pagination .active a:focus,
+.pagination .disabled a{
+	background-color: black;
+	margin: 2px;
+}
+
+.pagination .disabled a{
+	border-color: gray;
+	color: gray;
+}
+
+.pagination li a {
+	color: white;
+}
+
+.modal,
+.modal .modal-content,
+.modal .property-container {
+	background: black;
+	color: white;
+}

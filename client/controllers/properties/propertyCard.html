@@ -1,0 +1,106 @@
+<template name="propertyCard">
+<div class="col-xs-12 property-card" data-id="{{_id}}">
+	<div class="shadowed row">
+		<h4>{{title}}</h4>
+		<div class="col-xs-12 col-sm-12 col-lg-6">
+			<div class="annonce col-xs-12 info">
+				<div class="col-xs-12 title">
+					<span class="glyphicon glyphicon-info-sign"></span>
+					<label> Annonce </label>
+				</div>
+				<div class="attr-cont col-xs-12">
+					<label class="col-xs-4"> Titre </label>
+					<span class="attribute col-xs-8">{{title}}</span>
+				</div>
+				<div class="attr-cont col-xs-12">
+					<label class="col-xs-12"> Description </label>
+					<span class="attribute col-xs-12">{{description}}</span>
+				</div>
+			</div>						
+			<div class="address col-xs-6 info">
+				<div class="col-xs-12 title">
+					<span class="glyphicon glyphicon-map-marker"></span>
+					<label> Adresse </label>
+				</div>
+				<div>
+					<div class="col-xs-12 attr-cont">
+						<label class="col-xs-4">CP </label>
+						<div class="col-xs-8">
+							<span class="attribute">{{address.zipcode}}</span>
+						</div>
+					</div>
+					<div class="col-xs-12 attr-cont">
+						<label class="col-xs-4">Ville </label>
+						<div class="col-xs-8">
+							<span class="attribute">{{address.city}}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="info col-xs-6">
+				<div class="col-xs-12 title">
+					<i class="fa fa-money"></i>
+					<label> Transaction </label>
+				</div>
+				<div class="col-xs-12 attr-cont">
+					<label class="col-xs-4"> Type </label>
+					<div class="col-xs-8">
+						<span class="attribute">{{transactionType}}</span>
+					</div>
+				</div>
+				<div class="col-xs-12 attr-cont">
+					<label class="col-xs-4"> Prix </label>
+					<div class="col-xs-8">
+						<span class="attribute">{{price}}€</span>
+					</div>
+				</div>
+			</div>
+			<div class="info col-xs-6">
+				<div class="col-xs-12 title">
+					<i class="fa fa-expand"></i>
+					<label> Surfaces </label>
+				</div>
+				<div class="col-xs-12 attr-cont">
+					<label class="col-xs-4"> Totale </label>
+					<div class="col-xs-8">
+						<span class="attribute">{{totalSurface}}m²</span>
+					</div>
+				</div>
+				<div class="col-xs-12 attr-cont">
+					<label class="col-xs-4"> Terrain </label>
+					<div class="col-xs-8">
+						<span class="attribute">{{terrainSurface}}m²</span>
+					</div>
+				</div>
+			</div>
+			<div class="info col-xs-6">
+				<div class="col-xs-12 title">
+					<i class="fa fa-home"></i>
+					<label> Pieces </label>
+				</div>
+				<div class="col-xs-12">
+					<label class="col-xs-4"> Total </label>
+					<div class="col-xs-8">
+						<span class="attribute">{{roomNumber}}</span>
+					</div>
+				</div>
+				<div class="col-xs-12">
+					<label class="col-xs-4"> Chambres </label>
+					<div class="col-xs-8">
+						<span class="attribute">{{bedroomNumber}}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-lg-6">
+			<div class="info col-xs-12">
+				<div class="col-xs-12 title">
+					<i class="glyphicon glyphicon-picture"></i>
+					<label> Photo </label>
+				</div>
+				<img class="attribute col-xs-12 img img-responsive" src="{{img}}"/>
+			</div>
+		</div>
+	</div>
+</div>
+</template>

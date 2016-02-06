@@ -1,245 +1,29 @@
 <template name="Properties">
-	<h1>property</h1>
-<!-- 	<div id="dashboard_container_side">
-		<div class="row">
-			<div class="col s12">
-				<ul class="tabs">
-					<li class="tab col s6"><a class="active" href="#listProperty">Liste des proprietes</a></li>
-					<li class="tab col s6"><a href="#addProperty">Ajouter une propriete</a></li>
-				</ul>
-			</div>
-			<div id="listProperty" class="col s12">
-				{{>listProperty}}				
-			</div>
-			<div id="addProperty" class="col s12">
-				{{> addProperty}}
+	<div class="row">
+		<ol class="breadcrumb col-xs-12 col-sm-6">
+			<li class="active">Properties</li>
+		</ol>
+		<div class="col-xs-9 col-sm-5">
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Search...">
+				<span class="input-group-btn">
+					<button type="button" class="btn btn-default">
+						<span class="glyphicon glyphicon-search"></span>
+					</button>
+				</span>
 			</div>
 		</div>
-	</div> -->
-</template>
-<template name="PropertyCard">
-</template>
-<template name="PropertyFull">
-</template>
-<template name="PropertyForm">
-</template>
-<template name="listProperty">
-<!-- 	<div class="row">
-		<div class="col s12">
-			<nav>
-				<div class="nav-wrapper">
-					<form>
-						<div class="input-field">
-							<input id="search" type="search" required>
-							<label for="search"><i class="material-icons">search</i></label>
-							<i class="material-icons">close</i>
-						</div>
-					</form>
-				</div>
-			</nav>		
+		<div class="col-xs-3 col-sm-1">
+			<button class="btn btn-primary addProperty center-block">
+				Ajouter <span class="glyphicon glyphicon-plus"></span>
+			</button>
 		</div>
 	</div>
-	{{#each searchList}}
-		<div class="row">
-			<div class="col s12">
-				<div class="card">
-					<div class="card-content">
-						<span class="card-title">
-							<i class="material-icons">store</i>
-							{{ title }}
-						</span>
-						<div class="row">
-							{{ description }}
-						</div>
-
-					</div>
-				</div>
-			</div>
+	<div class="row">
+		<div id="morris-area-chart" class="grid">
+			{{#each properties}}
+			{{>propertyCard}}
+			{{/each}}
 		</div>
-	{{/each}} -->
-</template>
-
-<template name="addProperty">
-<!-- 	<div class="row">
-		<div class="col s12 m12">
-			<div class="card">
-				<div class="card-content white-text">
-					<span class="card-title">Add property</span>
-					<div class="card-content">
-						<div class="container">
-							<div class="row">
-								<form id="add_property_form" class="col s12">
-									<div class="row">
-										<div class="input-field col s3">
-											<input id="inputRef_prop" type="text" class="browser-default validate">
-											<label for="inputRef_prop">Reference</label>
-										</div>
-										<div class="input-field col s2 offset-s3">
-											<input type="checkbox" class="filled-in" id="inputExclu_prop"/>
-											<label for="filled-in-box">Exclu</label>
-										</div>
-										<div class="input-field col s2">
-											<input type="checkbox" class="filled-in" id="inputEsti_prop"/>
-											<label for="inputEsti_prop">Estimation</label>
-										</div>											
-										<div class="input-field col s2">
-											<input type="checkbox" class="filled-in" id="inputVisible_prop"/>
-											<label for="inputVisible_prop">Visible</label>
-										</div>
-									</div>
-									<div class="row">
-										<div id="inputTrans_prop" class="input-field col s4">
-											<select>
-												<option value="" disabled selected>Transaction type</option>
-												<option value="1">Vente</option>
-												<option value="2">Location</option>
-											</select>
-										</div>
-										<div id="inputProp_prop" class="input-field col s4">
-											<select multiple>
-												<option value="" disabled selected>Property type</option>
-												<option value="1">Maison</option>
-												<option value="2">Appartement</option>
-												<option value="3">Terrain</option>
-												<option value="4">Fond de commerce</option>
-												<option value="5">Loft</option>
-												<option value="6">Immeuble</option>
-												<option value="7">Box et Parking</option>
-												<option value="8">Local commercial</option>
-												<option value="9">Viager</option>
-											</select>
-										</div>
-										<div class="input-field col s2 offset-s2">
-											<input id="inputYear_prop" type="text" class="validate">
-											<label for="inputYear_prop">Year</label>
-										</div>
-									</div>
-									<div class="row">
-										<div class="input-field col s6">
-											<input id="inputAdress_prop" type="text" class="validate">
-											<label for="inputAdress_prop">Adresse</label>
-										</div>
-										<div class="input-field col s2 offset-s4">
-											<input id="inputPrice_prop" type="text" class="validate">
-											<label for="inputPrice_prop">Price</label>
-										</div>
-									</div>
-									<div class="row">
-										<div class="input-field col s2">
-											<input id="inputRoom_prop" type="text" class="validate">
-											<label for="inputRoom_prop">Room number</label>
-										</div>
-										<div class="input-field col s2">
-											<input id="inputBed_prop" type="text" class="validate">
-											<label for="inputBed_prop">Bedroom number</label>
-										</div>
-										<div class="input-field col s2">
-											<input id="inputBath_prop" type="text" class="validate">
-											<label for="inputBath_prop">Bathroom number</label>
-										</div>
-										<div class="input-field col s2">
-											<input id="inputCloset_prop" type="text" class="validate">
-											<label for="inputCloset_prop">Closet number</label>
-										</div>
-									</div>
-									<div class="row">
-										<div class="input-field col s2">
-											<input id="inputLiving_prop" type="text" class="validate">
-											<label for="inputLiving_prop">Living surface</label>
-										</div>
-										<div class="input-field col s2">
-											<input id="inputTotal_prop" type="text" class="validate">
-											<label for="inputTotal_prop">Total surface</label>
-										</div>
-										<div class="input-field col s2">
-											<input id="inputState_prop" type="text" class="validate">
-											<label for="inputState_prop">State</label>
-										</div>
-										<div class="input-field col s2">
-											<input id="inputConfig_prop" type="text" class="validate">
-											<label for="inputConfig_prop">Configuration</label>
-										</div>
-										<div class="input-field col s2">
-											<input id="inputFloor_prop" type="text" class="validate">
-											<label for="inputFloor_prop">Floor number</label>
-										</div>
-										<div class="input-field col s3">
-											<input id="inputHeating_prop" type="text" class="validate">
-											<label for="inputHeating_prop">Heating</label>
-										</div>
-									</div>
-									<div class="row">
-										<div class="input-field col s3">
-											<input id="inputTerrain_prop" type="text" class="validate">
-											<label for="inputTerrain_prop">Terrain surface</label>
-										</div>
-										<div class="input-field col s3">
-											<input id="inputDep_prop" type="text" class="validate">
-											<label for="inputDep_prop">Dependency number</label>
-										</div>
-										<div class="input-field col s2">
-											<input id="inputGarage_prop" type="text" class="validate">
-											<label for="inputGarage_prop">Garage</label>
-										</div>
-										<div class="input-field col s2">
-											<input id="inputDpe_prop" type="text" class="validate">
-											<label for="inputDpe_prop">DPE</label>
-										</div>
-										<div class="input-field col s2">
-											<input id="inputGes_prop" type="text" class="validate">
-											<label for="inputGes_prop">GES</label>
-										</div>
-									</div>
-									<div class="row">
-										<div class="input-field col s3">
-											<input id="inputTaxes_prop" type="text" class="validate">
-											<label for="inputTaxes_prop">Taxes</label>
-										</div>
-										<div class="input-field col s3">
-											<input id="inputCharges_prop" type="text" class="validate">
-											<label for="inputCharges_prop">Charges</label>
-										</div>
-										<div class="input-field col s3">
-											<input id="inputTitle_prop" type="text" class="validate">
-											<label for="inputTitle_prop">Title</label>
-										</div>
-										<div class="input-field col s3">
-											<input id="inputDesc_prop" type="text" class="validate">
-											<label for="inputDesc_prop">Description</label>
-										</div>
-
-									</div>
-									<div class="row">
-										<div class="input-field col s3">
-											<input id="inputLocalInf_prop" type="text" class="validate">
-											<label for="inputLocalInf_prop">Local Informations</label>
-										</div>
-										<div class="input-field col s3">
-											<input id="inputComision_prop" type="text" class="validate">
-											<label for="inputComision_prop">Comission</label>
-										</div>
-										<div class="input-field col s3">
-											<input id="inputHistory_prop" type="text" class="validate">
-											<label for="inputHistory_prop">History</label>
-										</div>
-									</div>
-									<div class="row">
-										<div class="input-field col s3">
-											<input id="inputEstimation_prop" type="text" class="validate">
-											<label for="inputEstimation_prop">Estimation</label>
-										</div>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="card-action">
-					<button id="btn_addProperty" class="btn waves-effect waves-light" type="submit">Submit
-						<i class="material-icons right">send</i>
-					</button>
-				</div>
-			</div>
-		</div>
-	</div> -->
+	</div>
 </template>

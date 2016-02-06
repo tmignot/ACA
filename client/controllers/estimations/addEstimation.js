@@ -11,7 +11,7 @@ Template.addEstimation.onCreated(function() {
 		}
 	};
 	var url = maps.path;
-	_.each(_.pairs(maps.params), function(pair) {
+	_.each(_.toPairs(maps.params), function(pair) {
 		url = url + '&' + pair[0] + '=' + pair[1];
 	});
 	this.map = new ReactiveVar(url);
@@ -96,7 +96,7 @@ Template.addEstimation.events({
 							}
 						};
 						var url = maps.path;
-						_.each(_.pairs(maps.params), function(pair) {
+						_.each(_.toPairs(maps.params), function(pair) {
 							url = url + '&' + pair[0] + '=' + pair[1];
 						});
 						t.map.set(url);

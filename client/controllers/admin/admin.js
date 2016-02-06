@@ -39,7 +39,8 @@ Template.Admin.events({
 							'email',
 							'https://www.googleapis.com/auth/calendar',
 							'https://www.googleapis.com/auth/calendar.readonly'
-						]
+						],
+						forceApprovalPrompt: true
 					});
 				} else {
 					t.email.set(true);

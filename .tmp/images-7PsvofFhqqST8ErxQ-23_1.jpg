@@ -1,0 +1,135 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title translate="none">Webmail - OVH</title>
+<link rel="alternate" hreflang="cs-CZ" href="https://ssl0.ovh.net/cz/">
+<link rel="alternate" hreflang="en" href="https://ssl0.ovh.net/en/">
+<link rel="alternate" hreflang="de-DE" href="https://ssl0.ovh.net/de/">
+<link rel="alternate" hreflang="en-IE" href="https://ssl0.ovh.net/ie/">
+<link rel="alternate" hreflang="es-ES" href="https://ssl0.ovh.net/es/">
+<link rel="alternate" hreflang="fi-FI" href="https://ssl0.ovh.net/fi/">
+<link rel="alternate" hreflang="fr-FR" href="https://ssl0.ovh.net/fr/">
+<link rel="alternate" hreflang="it-IT" href="https://ssl0.ovh.net/it/">
+<link rel="alternate" hreflang="lt-LT" href="https://ssl0.ovh.net/lt/">
+<link rel="alternate" hreflang="nl-NL" href="https://ssl0.ovh.net/nl/">
+<link rel="alternate" hreflang="pl-PL" href="https://ssl0.ovh.net/pl/">
+<link rel="alternate" hreflang="pt-PT" href="https://ssl0.ovh.net/pt/">
+<meta http-equiv="description" name="description" content="Accédez à vos e-mails depuis n’importe quel appareil, 24h/24 et 7 jours/7, et en toute sécurité grâce au SSL. Roundcube, Hostedemail, Exchange">
+<meta name="google-site-verification" content="E9HiCHoCz4vM3qwVk-40MpqFARFc0HnNAb2EqX8lz98">
+<script language="javascript" type="text/javascript" src="js/mootools-site-all.js"></script><link rel="icon" href="images/favicon.ico" type="image/gif" translate="none">
+<link type="text/css" rel="stylesheet" href="css/style.css" translate="none">
+<link type="text/css" rel="stylesheet" href="css/fonts.css" translate="none">
+</head>
+<body>
+<script id="webmailsManagerJS" type="text/javascript" src="js/webmails-manager-1.0.0.min.js"></script><div id="header"><div class="wrapper">
+<a href="https://www.ovh.com/fr/" class="main_logo" target="_blank"><img src="./images/logo.png" qtlid_src="284477"></a><div class="support" style="position: relative;" qtlid="29352;29352">
+<a href="https://www.ovh.com/manager/" target="_blank" qtlid="68351" qtlid_href="284997">Espace Client</a> |
+                    <a href="javascript:void(0);" class="selected" id="display-popup" qtlid="284490" qtlid_href="2697">
+                        Webmail <span class="inline-arrow"></span></a> |
+                    <a href="https://www.ovh.com/fr/support/" target="_blank" qtlid="10186" qtlid_href="285010">Support</a><div id="webmail-popup" style="display: none;">
+<span class="arrow"></span><ul class="accounts" style="display: none;" translate="none">
+                             
+                        </ul>
+<div class="links">
+<a href="index.xml" qtlid="284516" qtlid_href="43207">Se connecter à un compte e-mail</a><a href="outils.xml" qtlid="284542">Accéder aux outils mails</a>
+</div>
+</div>
+<div id="overflow" style="display: none;"></div>
+</div>
+<br>
+</div></div>
+<script type="text/javascript">
+            window.addEvent('domready', function() {
+                var span = $$('#display-popup span');
+                $$('#display-popup').addEvent('click', function() {
+                    var display = $$('#webmail-popup').getStyle('display');
+                    if(display == 'block') {
+                        span.addClass('open');
+                    }
+                });
+                $$('#overflow').addEvent('click', function() {
+                    span.removeClass('open');
+                });
+            });
+        </script><div id="main">
+<script id="webmailsManagerJS" type="text/javascript" src="js/webmails-manager-1.0.0.min.js"></script><style>
+            button:disabled {
+                opacity: 0.5 !important;
+            }
+            .red {
+                color: red;
+            }
+            input[type=email].error {
+                border: 1px solid red !important;
+            }
+        </style>
+<div class="full" style="background-color: #FFF;"><div class="wrapper">
+<div class="section1 webmails">
+<h1 qtlid="284802">Se connecter au Webmail</h1>
+<div class="box shadow">
+<img src="images/secured.jpg" class="secured-connexion" qtlid_src="284815"><p style="color: #303030; font-size: 18px; line-height: 24px; font-weight: 200; text-align: left;" qtlid="284841"><span style="color: #303030; font-size: 18px; font-weight: 600;" qtlid="284828">Saisissez votre adresse e-mail</span> pour être redirigé vers la page de connexion de votre Webmail
+                        </p>
+<br><form name="form" class="connect" id="emailForm">
+<input id="emailAddr" type="email" name="email" value="" required="required"><div id="emailError" class="red" style="display: none;" translate="none">
+                                 
+                            </div>
+<br><label qtlid="284854"><input id="emailMemorize" type="checkbox" name="memorize" value=""> Mémoriser cette adresse e-mail
+                            </label><br><br><button id="emailValidation" class="btn" qtlid="284867">Accéder à la page de connexion</button><br><br>
+</form>
+</div>
+</div>
+<br><br>
+</div></div>
+<div class="full" style="background-color: #F1F1F1; border-top: solid 1px #E1E1E1; border-bottom: solid 1px #E1E1E1;"><div class="wrapper">
+<div class="section1 webmails">
+<h2 qtlid="285088">Les Webmails proposés par OVH</h2>
+<br><br><div class="section4" qtlid="284659">
+<a href="/roundcube/" target="_blank" qtlid_href="284646"><span class="block roundcube"></span></a><hr>
+                        Le Webmail lié à l'offre d'hébergement web
+                        <div class="full center">
+<a href="http://www.ovh.com/fr/hebergement-web/guides/" title="Voir le guide" target="_blank" class="guide" qtlid_href="285101" qtlid_title="284685"></a><a href="/roundcube/" target="_blank" class="plus" qtlid_href="284646"></a>
+</div>
+</div>
+<div class="section4" qtlid="285127" ovhInclude="fr">
+<a href="https://ssl0.ovh.net/fr/he/" target="_blank" qtlid_href="285114"><span class="block hosted"></span></a><hr>
+                        Le Webmail lié à l'offre ADSL OVH
+                        <div class="full center"><a href="https://ssl0.ovh.net/fr/he/" target="_blank" class="plus" qtlid_href="285114"></a></div>
+</div>
+<div class="section4" qtlid="284737">
+<a href="https://ex.mail.ovh.net" target="_blank" qtlid_href="284724"><span class="block exchange13"></span></a><hr>
+                        Le Webmail lié à l'offre Exchange 2013
+                        <div class="full center">
+<a href="http://www.ovh.com/fr/emails/hosted-exchange-2013/guides/" title="Voir le guide" target="_blank" class="guide" qtlid_href="285140" qtlid_title="284685"></a><a href="https://ex.mail.ovh.net" target="_blank" class="plus" qtlid_href="284724"></a>
+</div>
+</div>
+<div class="section4" qtlid="284776">
+<a href="./owa/" target="_blnak" qtlid_href="284763"><span class="block exchange10"></span></a><hr>
+                        Le Webmail lié à l'offre Exchange 2010
+                        <div class="full center">
+<a href="http://guides.ovh.com/ExchangeConfigOutlook" target="_blank" title="Voir le guide" class="guide" qtlid_href="285153" qtlid_title="284685" ovhInclude="fr"></a><a href="./owa/" target="_blank" class="plus" qtlid_href="284763"></a>
+</div>
+</div>
+<br>
+</div>
+<br><div id="footer_mail" class="section1"><div class="flags" translate="none">
+<a class="cz" href="/cz/"></a><a class="de" href="/de/"></a><a class="couk" href="/en/"></a><a class="ie" href="/ie/"></a><a class="es" href="/es/"></a><a class="fi" href="/fi/"></a><a class="fr" href="/fr/"></a><a class="it" href="/it/"></a><a class="lt" href="/lt/"></a><a class="nl" href="/nl/"></a><a class="pl" href="/pl/"></a><a class="pt" href="/pt/"></a>
+</div></div>
+<br><br>
+</div></div>
+<div class="full" style="padding: 100px 0;"><div class="wrapper">
+<div class="section1 seo">
+<h3 qtlid="297885">Accédez au Webmail OVH depuis tous vos appareils...</h3>
+<br><p qtlid="297898">
+                        Vous avez besoin d'accéder à vos e-mails où que vous soyez 24h / 24 et 7 jours / 7 ? Le Webmail OVH est pour vous ! Rapide, il vous permet de recevoir, d'envoyer et de gérer vos e-mails depuis n’importe quel appareil connecté à Internet (PC, mobile, tablette...)
+                    </p>
+<br><br><br><br><h3 qtlid="297911">...En toute sécurité</h3>
+<br><p qtlid="297924">
+                        Le webmail d’OVH fait appel au chiffrement HTTPS grâce au protocole SSL. Très utile si vous utilisez un accès wifi public, personne ne pourra lire vos emails : vos données sont totalement sécurisées et chiffrées !
+                    </p>
+</div>
+<br>
+</div></div>
+</div>
+</body>
+</html>

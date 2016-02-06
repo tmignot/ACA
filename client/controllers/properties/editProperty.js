@@ -11,7 +11,7 @@ Template.editProperty.onCreated(function() {
 		}
 	};
 	var url = maps.path;
-	_.each(_.pairs(maps.params), function(pair) {
+	_.each(_.toPairs(maps.params), function(pair) {
 		url = url + '&' + pair[0] + '=' + pair[1];
 	});
 	this.map = new ReactiveVar(url);
@@ -24,7 +24,6 @@ Template.editPropertie.onRendered(function(){
 
 Template.editProperty.onRendered(function(){
 	Session.set('geocode', 0);
-	console.log(this.data);
 	var date = $('.property-year-container').datepicker({
 		format: "yyyy",
 		startDate: "1900y",
@@ -75,6 +74,13 @@ Template.editProperty.onRendered(function(){
 	$('.commission input').val(this.data.commission);
 	$('.price input').val(this.data.price);
 	$('.property-year-container').datepicker('update', new Date(this.data.year));
+	if (this.data.estimation == false) {
+		$('.title input').val(this.data.title);
+		$('.description textarea').val(this.data.description);
+		$('.localInformations textarea').val(this.data.localInformations);
+		$('input[name="visible"][value="'+this.data.visible+'"]').prop('checked', true);
+		$('input[name="exclusive"][value="'+this.data.exclusive+'"]').prop('checked', true);
+	}
 });
 
 Template.editProperty.helpers({
@@ -82,7 +88,7 @@ Template.editProperty.helpers({
 		return Template.instance().map.get();
 	},
 	img: function() {
-		return Images.find({_id: {$in: Template.instance().data.images}})
+		return Images.find({_id: {$in: Template.instance().data.images||[]}})
 	}
 });
 
@@ -100,7 +106,7 @@ Template.editProperty.events({
 			}
 		});
 	},	
-	'change input': function(e,t) {
+	'change .images input': function(e,t) {
 		$('.filename').html(_.last(e.currentTarget.value.split('\\')));
 	},
 	'change .dpe input': function(e,t) {
@@ -125,7 +131,6 @@ Template.editProperty.events({
 			if (Session.get('geocode') == 0) {
 				Meteor.call('geocode', addr, function(e,r) {
 					if (r && r.length) {
-						console.log(r[0]);
 						_.each([
 							'streetNumber',
 							'streetName',
@@ -147,7 +152,7 @@ Template.editProperty.events({
 							}
 						};
 						var url = maps.path;
-						_.each(_.pairs(maps.params), function(pair) {
+						_.each(_.toPairs(maps.params), function(pair) {
 							url = url + '&' + pair[0] + '=' + pair[1];
 						});
 						t.map.set(url);
@@ -184,14 +189,12 @@ Template.editProperty.events({
 		var geocode = '';
 		_.each(_.keys(address), function(k) {
 			if (address[k] != '' && k != 'complement') {
-				console.log(k, address[k])
 				if (geocode == '')
 					geocode = address[k];
 				else
 					geocode += ' ' + address[k];
 			}
 		});
-		console.log(address, geocode);
 		var data = {
 			reference: t.data.reference,
 			transactionType: $('.transaction-type input[value="Vente"]').is(':checked') ? 'Vente' : 'Location',
@@ -219,15 +222,24 @@ Template.editProperty.events({
 			commission: parseFloat($('.commission input').val()),
 			exclusive: true,
 			visible: false,
-			estimation: true
+			estimation: t.data.estimation
+		}
+		if (t.data.estimation == false) {
+			data.title = $('.title input').val();
+			data.description = $('.description textarea').val();
+			data.localInformations = $('.localInformations textarea').val();
+			data.visible = $('input[name="visible"][value="true"]').is(':checked');
+			data.exclusive = $('input[name="exclusive"][value="true"]').is(':checked');
 		}
 		var ctx = PropertySchema.newContext();
 		if (ctx.validate(data)) {
 			Properties.update({_id: t.data._id}, {$set: data}, function(e, r) {
 				if (e) 
 					console.log(e);
-				else
+				else if (t.data.estimation)
 					Router.go('/admin/estimations/'+t.data._id);
+				else
+					Router.go('/admin/properties/'+t.data._id);
 			});
 		}	else {
 			$('.add-estimation-form input.to-check').parent().removeClass('has-error');
