@@ -2,3 +2,4 @@
 mup.json
 .meteor/local
 .*.swo
+.tmp
