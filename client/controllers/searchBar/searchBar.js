@@ -12,8 +12,6 @@ Template.searchBar.onCreated(function() {
 				value: i.address.city
 			}});
 	Session.set('pop', {query:[],filters:_.flatten([this.cities, this.zipcodes])});
-	Session.set('filters', []);
-	Session.set('showResults', false);
 });
 
 
@@ -22,7 +20,9 @@ Template.searchBar.helpers({
 		return Template.instance().results.get();
 	},
 	filters: function() {
-		return Session.get('filters');
+		return _.filter(Session.get('filters'), function(f) {
+			return _.includes(['address.city', 'address.zipcode'], f.key);
+		});
 	},
 	pop: function() {
 		var pop = Session.get('pop');;
@@ -52,29 +52,57 @@ Template.searchBar.helpers({
 	},
 	popOptions: function() {
 		return Template.instance().popOptions.get();
+	},
+	transactionTypes: function() {
+		return _.uniq(_.map(Properties.find({},{
+				fields: { transactionType: 1}
+			}).fetch(), function(p) {
+				return p.transactionType;
+			}));
+	},
+	propertyTypes: function() {
+		return _.uniq(_.map(Properties.find({},{
+				fields: {	propertyType: 1	}
+			}).fetch(), function(p) {
+				return p.propertyType;
+			}));
+	},
+	isChecked: function(type, val) {
+		var s = Session.get('filters');
+		if (! _.find(s, {key: type}))
+			return 'checked';
+		return (_.find(s, {key: type, value: val}) ? 'checked' : '');
 	}
 });
 
 Template.searchBar.events({
-	'click button': function(e,t) {
+	'click button.btn-danger': function(e,t) {
 		filters = {};
 		_.each(Session.get('filters'),function(f) {
-			if (filters[f.key]) {
-				if (_.isObject(filters[f.key]) && filters[f.key]['$in'])
-					filters[f.key]['$in'].push(f.value);
-				else {
-					var cur = filters[f.key];
-					filters[f.key] = {$in: [cur, f.value]};
-				}
-			} else {
-				filters[f.key] = f.value;
-			}
+			if (filters[f.key] && filters[f.key]['$in']) {
+				filters[f.key]['$in'].push(f.value);
+			} else
+				filters[f.key] = {$in: [f.value]};
 		});
-		console.log(filters);
+		$('.dropdown-menu input').each(function(i,j) {
+			var key = $(j).data('filter-key'),
+					val = $(j).data('filter-val');
+			if (filters[key] == undefined)
+				filters[key] = {$in: []};
+			if ($(j).is(':checked') && !_.includes(filters[key].$in, val))
+				filters[key].$in.push(val);
+			else if (!$(j).is(':checked') && _.includes(filters[key].$in, val))
+				filters[key].$in.splice(filters[key].$in.indexOf(val), 1);
+		});
+		var budget = $('#budgetInput').val();
+		if (budget != '')
+			filters.price = {$lt: budget * 1.2};
+		if ($('.tt-input').val() != '')
+			filters.description = $('.tt-input').val();
 		filters.visible = true;
 		filters.estimation = false;
-		Pages.set({filters: filters});
-		Session.set('showResults', true);
+		console.log(filters);
+		Router.go('Home', {}, {query: 'search=true&page=1&filters='+encodeURIComponent(JSON.stringify(filters))});
 	},
 	'keyup .query-input': function(e,t) {
 		if (e.keyCode == 13) {
@@ -83,6 +111,10 @@ Template.searchBar.events({
 			else
 				t.find('.item-bar .btn-danger').click();
 		}
+	},
+	'keyup #budgetInput': function(e,t) {
+		if (e.keyCode == 13)
+			t.find('.item-bar .btn-danger').click();
 	},
 	'typeahead:select .typeahead': function(e,t) {
 		Session.set('typeahead', true);
@@ -109,53 +141,18 @@ Template.searchBar.events({
 		filters.splice(index, 1);
 		Session.set('filters', filters);
 	},
-	'click .property-card': function(e,t) {
-		Session.set('currentProperty', $(e.currentTarget).data('id'));
-		$('.modal').modal();
+	'click .property-card .annonce': function(e,t) {
+		var query = ['page='+Pages.sess('currentPage'),
+								'_id='+$(e.currentTarget).data('id'),
+								'filters='+Session.get('filters')];
+		Router.go('Home', {}, {query: _.join(query, '&')});
 	}
 });
 
 Template.searchBar.onRendered(function(){
-$("button.btn-danger").css("background", Template.parentData(1).mainColor);
-$("button.btn-danger").css("border-color", Template.parentData(1).mainColor);
-	$("#transaction-type").multiselect(
-		{
-			enableClickableOptGroups: true,
-			allSelectedText: "Toutes",
-			nonSelectedText: "Options",
-			buttonContainer: "<div class='button-container btn-group col-xs-3 col-md-2 first-select' role='group' />",
-			buttonClass: "col-xs-12 btn btn-default"
-		}
-	);
+	$("button.btn-danger").css("background", Template.parentData(1).mainColor);
+	$("button.btn-danger").css("border-color", Template.parentData(1).mainColor);
 	Meteor.typeahead.inject();
-});
-
-Template._pagesNav.onRendered(function() {
-	$('.pagination .active a').css('color', Template.parentData(2).mainColor);
-	$('.pagination .active a').css('border-color', Template.parentData(2).mainColor);
-	Session.set('searched', true);
-});
-
-Template._pagesNav.events({
-	'click a': function(e,t) {
-		var color = Template.parentData(2).mainColor;
-		$('pagination li a').css('background-color', 'black');
-		$('.pagination .active a').css('color', 'white');
-		$('.pagination .active a').css('border-color', 'white');
-		$('html, body').animate({
-				scrollTop:$('.results').offset().top
-		}, 'fast');
-		Meteor.setTimeout(function(){
-			$('.pagination .active a').css('color', color);
-			$('.pagination .active a').css('border-color', color);
-	}, 100);
-	},
-	'click li:not(.disabled) a': function(e,t) {
-		Session.set('searched', false);
-	}
-});
-
-Template._pagesPage.onDestroyed(function() {
 });
 
 Template.annonceCard.onRendered(function(){
@@ -185,5 +182,20 @@ Template.properties.uihooks({
 				Session.set('searched', true);
 			}, 500);
 		}
+	}
+});
+
+Template.pageNavig.helpers({
+	navigationNeighbors: function() {
+		return Pages.paginationNeighbors();
+	}
+});
+
+Template.pageNavig.events({
+	'click li:not(.disabled .active) a': function(e,t) {
+		var p = Router.current().params;
+		p.query.page = $(e.currentTarget).data('to-page');
+		console.log($.param(p.query));
+		Router.go('Home', {}, {query: $.param(p.query)});
 	}
 });

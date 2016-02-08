@@ -80,6 +80,11 @@ html, body
 	color: white;
 }
 
+.pagination li.active a {
+	color: rgb(102, 45, 145);
+	border-color: rgb(102, 45, 145);
+}
+
 .modal,
 .modal .modal-content,
 .modal .property-container {

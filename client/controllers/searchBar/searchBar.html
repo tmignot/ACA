@@ -7,43 +7,23 @@
 					<span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu">
+					{{#each transactionTypes}}
 					<li>
 						<div class="checkbox">
-							<input type="checkbox" id="cbVentes" checked>
-							<label for="cbVentes">Ventes</label>
+							<input type="checkbox" id="cb{{this}}" data-filter-key='transactionType' data-filter-val='{{this}}' {{isChecked 'transactionType' this}}>
+							<label for="cb{{this}}">{{this}}</label>
 						</div>
 					</li>
-					<li>
-						<div class="checkbox">
-							<input type="checkbox" id="cbLocations" checked>
-							<label for="cbLocations">Locations</label>
-						</div>
-					</li>
+					{{/each}}
 					<li role="separator" class="divider"></li>
+					{{#each propertyTypes}}
 					<li>
 						<div class="checkbox">
-							<input type="checkbox" id="cbMaisons" checked>
-							<label for="cbMaisons">Maisons</label>
+							<input type="checkbox" id="cb{{this}}" data-filter-key='propertyType' data-filter-val='{{this}}' {{isChecked 'propertyType' this}}>
+							<label for="cb{{this}}">{{this}}</label>
 						</div>
 					</li>
-					<li>
-						<div class="checkbox">
-							<input type="checkbox" id="cbAppartements" checked>
-							<label for="cbAppartements">Appartements</label>
-						</div>
-					</li>
-					<li>
-						<div class="checkbox">
-							<input type="checkbox" id="cbTerrain" checked>
-							<label for="cbTerrain">Terrain</label>
-						</div>
-					</li>
-					<li>
-						<div class="checkbox">
-							<input type="checkbox" id="cbAutres" checked>
-							<label for="cbAutres">Autres</label>
-						</div>
-					</li>
+					{{/each}}
 				</ul>
 			</div><!-- /btn-group -->
 		</div>
@@ -58,7 +38,7 @@
 			</div>
 		</div>
 		<div class="col-xs-2 item-bar">
-			<input type="number" class="form-control" placeholder="Budget">
+			<input min=0 step=100 type="number" class="form-control" id='budgetInput' placeholder="Budget">
 		</div>
 		<div class="col-xs-1 item-bar">
 			<div class="input-grp-btn">
@@ -82,20 +62,32 @@
 </template>
 
 <template name="properties">
-	{{> pagesNav }}
 	{{#if $.Session.equals 'searched' true}}
 		<div class="page-container">
+			{{> pageNavig}}
 			{{> pages }}
+			{{> pageNavig}}
 		</div>
 	{{/if}}
-	{{> pagesNav }}
+</template>
+
+<template name='pageNavig'>
+	<div style="text-align:center" data-pages="{{name}}" class="pagination-cont">
+		<ul class="pagination">
+			{{#each navigationNeighbors}}
+			<li class="{{active}} {{disabled}}">
+				<a href="{{link}}" data-to-page='{{n}}'>{{p}}</a>
+			</li>
+			{{/each}}
+		</ul>
+	</div>
 </template>
 
 <template name="annonceCard">
-<div class="col-xs-12 property-card" data-id="{{_id}}">
+<div class="col-xs-12 property-card" >
 	<div class="shadowed row">
 		<div class="col-xs-12 col-sm-12 col-lg-6">
-			<div class="annonce col-xs-12 info">
+			<div class="annonce col-xs-12 info" data-id="{{_id}}">
 				<div class="col-xs-12 title">
 					<h4> {{title}} </h4>
 				</div>
