@@ -1,5 +1,6 @@
 Template.searchBar.onCreated(function() {
 	this.results = new ReactiveVar([]);
+	this.resultsl = new ReactiveVar(false);
 	var p = Properties.find({}, {fields: {title: 1, description: 1, 'address.zipcode': 1, 'address.city': 1}}).fetch();
 	this.zipcodes = _.map(p, function(i) {
 			return {
@@ -16,9 +17,6 @@ Template.searchBar.onCreated(function() {
 
 
 Template.searchBar.helpers({
-	results: function() {
-		return Template.instance().results.get();
-	},
 	filters: function() {
 		return _.filter(Session.get('filters'), function(f) {
 			return _.includes(['address.city', 'address.zipcode'], f.key);
@@ -47,8 +45,8 @@ Template.searchBar.helpers({
 	parentData: function() {
 		return Template.parentData(1);
 	},
-	results: function() {
-		return Template.instance().results.get();
+	hlength: function() {
+		return Properties.find(Pages.get('filters')).count();
 	},
 	popOptions: function() {
 		return Template.instance().popOptions.get();
@@ -67,6 +65,9 @@ Template.searchBar.helpers({
 				return p.propertyType;
 			}));
 	},
+	property: function() {
+		return Properties.findOne({_id: Session.get('propertyID')});
+	},
 	isChecked: function(type, val) {
 		var s = Session.get('filters');
 		if (! _.find(s, {key: type}))
@@ -75,34 +76,40 @@ Template.searchBar.helpers({
 	}
 });
 
+var createFilters = function() {
+	filters = {};
+	_.each(Session.get('filters'),function(f) {
+		if (filters[f.key] && filters[f.key]['$in']) {
+			filters[f.key]['$in'].push(f.value);
+		} else
+			filters[f.key] = {$in: [f.value]};
+	});
+	$('.dropdown-menu input').each(function(i,j) {
+		var key = $(j).data('filter-key'),
+				val = $(j).data('filter-val');
+		if (filters[key] == undefined)
+			filters[key] = {$in: []};
+		if ($(j).is(':checked') && !_.includes(filters[key].$in, val))
+			filters[key].$in.push(val);
+		else if (!$(j).is(':checked') && _.includes(filters[key].$in, val))
+			filters[key].$in.splice(filters[key].$in.indexOf(val), 1);
+	});
+	var budget = $('#budgetInput').val();
+	if (budget != '')
+		filters.price = {$lt: budget * 1.2};
+	if ($('.tt-input').val() != '')
+		filters.description = $('.tt-input').val();
+	filters.visible = true;
+	filters.estimation = false;
+	return filters;
+};
+
 Template.searchBar.events({
 	'click button.btn-danger': function(e,t) {
-		filters = {};
-		_.each(Session.get('filters'),function(f) {
-			if (filters[f.key] && filters[f.key]['$in']) {
-				filters[f.key]['$in'].push(f.value);
-			} else
-				filters[f.key] = {$in: [f.value]};
-		});
-		$('.dropdown-menu input').each(function(i,j) {
-			var key = $(j).data('filter-key'),
-					val = $(j).data('filter-val');
-			if (filters[key] == undefined)
-				filters[key] = {$in: []};
-			if ($(j).is(':checked') && !_.includes(filters[key].$in, val))
-				filters[key].$in.push(val);
-			else if (!$(j).is(':checked') && _.includes(filters[key].$in, val))
-				filters[key].$in.splice(filters[key].$in.indexOf(val), 1);
-		});
-		var budget = $('#budgetInput').val();
-		if (budget != '')
-			filters.price = {$lt: budget * 1.2};
-		if ($('.tt-input').val() != '')
-			filters.description = $('.tt-input').val();
-		filters.visible = true;
-		filters.estimation = false;
-		console.log(filters);
-		Router.go('Home', {}, {query: 'search=true&page=1&filters='+encodeURIComponent(JSON.stringify(filters))});
+		$('html, body').animate({
+				scrollTop:$('.dummy').offset().top
+		}, 400);
+		Router.go('Home', {}, {query: 'search=true&page=1&filters='+encodeURIComponent(JSON.stringify(createFilters()))});
 	},
 	'keyup .query-input': function(e,t) {
 		if (e.keyCode == 13) {
@@ -142,16 +149,15 @@ Template.searchBar.events({
 		Session.set('filters', filters);
 	},
 	'click .property-card .annonce': function(e,t) {
-		var query = ['page='+Pages.sess('currentPage'),
+		var query = ['search=true',
+								'page='+Pages.sess('currentPage'),
 								'_id='+$(e.currentTarget).data('id'),
-								'filters='+Session.get('filters')];
+								'filters='+encodeURIComponent(JSON.stringify(createFilters()))]
 		Router.go('Home', {}, {query: _.join(query, '&')});
 	}
 });
 
 Template.searchBar.onRendered(function(){
-	$("button.btn-danger").css("background", Template.parentData(1).mainColor);
-	$("button.btn-danger").css("border-color", Template.parentData(1).mainColor);
 	Meteor.typeahead.inject();
 });
 
@@ -195,7 +201,9 @@ Template.pageNavig.events({
 	'click li:not(.disabled .active) a': function(e,t) {
 		var p = Router.current().params;
 		p.query.page = $(e.currentTarget).data('to-page');
-		console.log($.param(p.query));
 		Router.go('Home', {}, {query: $.param(p.query)});
+		$('html, body').animate({
+				scrollTop:$('.results').offset().top
+		}, 400);
 	}
 });

@@ -74,11 +74,11 @@
 					<div class="col-xs-12 col-lg-6">
 						<div class="attribute images">
 							<label class="">Images</label>
-							<div id="carousel">
+							{{#carousel id=_id}}
 								{{#each img}}
-									<div class="image"><img src="{{this}}" width="100%"/></div>
+									{{>carouselImage src=this width='100%'}}
 								{{/each}}
-							</div>
+							{{/carousel}}
 						</div>
 					</div>
 				</div>

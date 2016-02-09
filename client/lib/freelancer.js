@@ -17,7 +17,6 @@ $(function() {
 
 // Floating label headings for the contact form
 $(function() {
-	console.log('autorun');
     $("body").on("input propertychange", ".floating-label-form-group", function(e) {
         $(this).toggleClass("floating-label-form-group-with-value", !! $(e.target).val());
     }).on("focus", ".floating-label-form-group", function() {
@@ -34,6 +33,5 @@ $('body').scrollspy({
 
 // Closes the Responsive Menu on Menu Item Click
 $('.navbar-collapse ul li a').click(function() {
-		console.log('click');
     $('.navbar-toggle').click();
 });

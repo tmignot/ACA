@@ -15,7 +15,6 @@ Template.Home.helpers({
 		_.each(_.toPairs(maps.params), function(pair) {
 			url = url + '&' + pair[0] + '=' + pair[1];
 		});
-		console.log(url);
 		return url;
 	},
 	darken: function(color) {
@@ -32,5 +31,8 @@ Template.Home.helpers({
 Template.Home.events({
 	'click .navbar-collapse ul li a': function() {
 		$('.navbar-toggle:visible').click();
+	},
+	'click .logo': function() {
+		Router.go('Home', {}, {});
 	}
 });

@@ -1,0 +1,154 @@
+<template name="PropertyClient">
+	<div class="property-container row">
+		<div class="heading-wrapper shadowed col-xs-12">
+			<h4>
+				<span class="attr-value">{{ propertyType }}</span><small> a </small>
+				{{#if $eq transactionType 'Vente'}}
+				<span class="attr-value">vendre</span>
+				{{else}}
+				<span class="attr-value">louer</span>
+				{{/if}}
+				<small> {{reference}} </small>
+				{{address.city}} ({{address.zipcode}})
+			</h4>
+		</div>
+		<div class="col-xs-12">
+			<div class="annonce-wrapper">
+				<div class="annonce shadowed col-xs-12">
+					<h5>
+						{{ title }}
+					</h5>
+					<div class="col-xs-12 col-lg-6">
+						<div class="col-xs-12 separator"></div>
+						<div class="attribute description">
+							<div class="attr-value">
+								{{ description }}
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 separator hidden-lg"></div>
+					<div class="col-xs-12 col-lg-6">
+						<div class="attribute images">
+							<label class="">Images</label>
+							{{#carousel id=_id}}
+								{{#each img}}
+									{{>carouselImage src=this.url width='100%'}}
+								{{/each}}
+							{{/carousel}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6">
+			<div class="informations-wrapper">
+				<div class="informations shadowed col-xs-12">
+					<h5><span class="glyphicon glyphicon-info-sign"></span>
+						Informations
+					</h5>
+					<div class="col-xs-12 col-md-6">
+						{{#if year}}
+					<div class="col-xs-12 year attribute">
+						<span class="attr-value">
+							Construction de {{ year }}
+						</span>
+					</div>
+					{{/if}}
+					<div class="col-xs-12 total-surface attribute">
+						<span class="attr-value">
+							Surface totale: {{ totalSurface }}m²
+						</span>
+					</div>
+					<div class="col-xs-12 living-room-surface attribute">
+						<span class="attr-value">
+							Salon de {{ livingRoomSurface }}m²
+						</span>
+					</div>
+					{{#if terrainSurface}}
+					<div class="col-xs-12 terrain-surface attribute">
+						<span class="attr-value">
+							avec un terrain de {{ terrainSurface }}m²
+						</span>
+					</div>
+					{{/if}}
+				<div class="col-xs-12 separator"></div>
+						<span class='attr-value col-xs-12'>
+							Chauffage: {{ heating }}
+						</span>
+					</div>
+					<div class="col-xs-12  col-md-6 room-number attribute">
+						<span class="attr-value col-xs-12">
+							{{ roomNumber }} pieces,
+						</span>
+						<span class="attr-value col-xs-12">
+							{{ bedroomNumber  }} chambres,
+						</span>
+						<span class="attr-value col-xs-12">
+							{{ bathroomNumber }} SDB,
+						</span>
+						<span class="attr-value col-xs-12">
+							{{ closetNumber }} WC,
+						</span>
+					{{#if $gt dependencyNumber 0}}
+						<span class="attr-value col-xs-12">
+							{{ dependencyNumber }} dependances,
+						</span>
+					{{/if}}
+					{{#if garage}}
+						<span class="attr-value col-xs-12">
+							 Garage
+						</span>
+					{{/if}}
+					</div>
+				<div class="col-xs-12 separator"></div>
+					<div class="col-xs-12 col-md-6 taxes attribute">
+						<span class="attr-value">
+							Taxes: {{ taxes }}€
+						</span>
+					</div>
+					<div class="col-xs-12 col-md-6 charges attribute">
+						<span class="attr-value">
+							Charges: {{ charges }}€
+						</span>
+					</div>
+					<div class="col-xs-12 col-md-6 commission attribute">
+						<span class="attr-value">
+							Commission: {{ commission }}€
+						</span>
+					</div>
+					<div class="col-xs-12 col-md-6 price attribute">
+						<span class="attr-value">
+							Prix: {{ price }}€
+						</span>
+					</div>
+				<div class="col-xs-12 separator"></div>
+					<div class="col-xs-12 state attribute">
+						<span class="attr-value col-xs-12">
+							{{state}}
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="energy-wrapper col-xs-12 col-md-6">
+			<div class="energy shadowed col-xs-12">
+				<h5><span class="fa fa-fire"></span>
+					Performances energetiques </h5>
+				<div class="col-xs-12 separator"></div>
+				<div class="col-xs-12 col-sm-6 col-md-12 col-lg-6 dpe attribute">
+					<label class="">DPE</label>
+					<span class="attr-value">
+						<div id="dpe"></div>
+					</span>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-12 col-lg-6 ges attribute">
+					<label class="">GES</label>
+					<span class="attr-value">
+						<div id="ges"></div>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+

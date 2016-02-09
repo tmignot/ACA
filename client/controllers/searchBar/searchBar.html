@@ -1,4 +1,6 @@
 <template name="searchBar">
+{{#unless $.Session.get 'propertyID'}}
+<h3>Recherchez un bien</h3>
 <div id="searchBar" class="">
 	<div class="input-grp col-xs-12" role="group">
 		<div class="col-xs-2 item-bar">
@@ -49,11 +51,21 @@
 		</div>
 	</div>
 </div>
-<div class="results">
+{{/unless}}
+<div class='dummy'></div>
 	{{#if $.Session.equals 'showResults' true}}
-	{{> properties results=results}}
+		{{#if $.Session.get 'propertyID'}}
+			{{>PropertyClient property}}
+		{{else}}
+			<div class="results">
+			{{#if hlength}}
+				{{> properties}}
+			{{else}}
+				<h3 class='text-danger'><small>No results</small></h3>
+			{{/if}}
+			</div>
+		{{/if}}
 	{{/if}}
-</div>
 </template>
 
 <template name="pop">

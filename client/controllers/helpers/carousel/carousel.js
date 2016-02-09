@@ -1,12 +1,23 @@
 updateSlick = function(container) {
-	$(' .carousel[data-carousel-id="'+container+'"]').unslick();
-	$(' .carousel[data-carousel-id="'+container+'"]').slick({
-		dots: true,
-		centerMode: true,
-		slidesToShow: 1,
-		adaptiveHeight: true,
-		centerMode: true
-	});
+	if (!container) {
+		$('#carousel').unslick();
+		$('#carousel').slick({
+			dots: true,
+			centerMode: true,
+			slidesToShow: 1,
+			adaptiveHeight: true,
+			centerMode: true
+		});
+	} else {
+		$(' .carousel[data-carousel-id="'+container+'"]').unslick();
+		$(' .carousel[data-carousel-id="'+container+'"]').slick({
+			dots: true,
+			centerMode: true,
+			slidesToShow: 1,
+			adaptiveHeight: true,
+			centerMode: true
+		});
+	}
 };
 
 imgs = [];

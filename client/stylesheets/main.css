@@ -91,3 +91,7 @@ html, body
 	background: black;
 	color: white;
 }
+
+.logo {
+	cursor: pointer;
+}
