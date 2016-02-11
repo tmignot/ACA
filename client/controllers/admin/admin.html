@@ -1,34 +1,38 @@
 <template name="Admin">
   <div id="admin_container">
-    <div class="section no-pad-bot" id="index-banner">
       <div class="container">
-        <br><br>
-        <br><br>
-        <br><br>
-        <div class="row center">
-        	<h3>Connexion Dashboard</h3>
-        </div>
-        <div class="row">
-          <form class="col s12">
+        <div class="row center-block shadowed">
+					<div class="col-xs-12">
+						<h3>Connexion Dashboard</h3>
+					</div>
+          <form class="col-xs-12 col-md-6 col-md-offset-3">
             <div class="row">
-              <div class="input-field col s12">
-                <input id="inputEmail" type="text" class="validate">
+              <div class="input-group col-xs-12">
                 <label for="inputEmail">Username</label>
+                <input id="inputEmail" type="text" class="validate form-control">
               </div>
-		        {{#if email }}
-                    <div class="input-field col s12">
-                        <input id="inputPassword" type="password" class="validate" autofocus>
-                        <label for="inputPassword">Password</label>
-                    </div>
-		        {{/if}}
-		        <button class="btn waves-effect waves-light" type="submit" name="action">Sign in
-		            <i class="material-icons right">send</i>
-				</button>
+							{{#if email }}
+							{{>passwordInputField}}
+							{{else}}
+							<div class='input-group col-xs-12'>
+								<button class="btn btn-danger col-xs-10 col-xs-offset-1" type="submit" name="action">Sign in with Google
+									<i class="glyphicon glyphicon-send"></i>
+								</button>
+							</div>
+							{{/if}}
             </div>
           </form>
         </div>
-        <br><br>
       </div>
-    </div>
   </div>
+</template>
+
+<template name='passwordInputField'>
+	<div class="input-group col-xs-12">
+		<label for="inputPassword">Password</label>
+		<input id="inputPassword" type="password" class="validate form-control" autofocus>
+	</div>
+	<button class="btn btn-primary col-xs-10 col-xs-offset-1" type="submit" name="action">Sign in as Admin
+		<i class="glyphicon glyphicon-send"></i>
+	</button>
 </template>

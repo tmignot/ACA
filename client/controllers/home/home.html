@@ -46,11 +46,6 @@
 				{{> searchBar }}
 			</div>
 		</div>
-		<div class="row">
-			{{#each searchList}}
-				{{>PropertyCard}}
-			{{/each}}
-		</div>
 	</div>
 </header>
 
@@ -182,28 +177,5 @@
 	<a class="btn btn-primary" style="border-color:{{darken mainColor}};background:{{mainColor}};" href="#page-top">
 		<i class="fa fa-chevron-up"></i>
 	</a>
-</div>
-
-<div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-content">
-		<div class="close-modal" data-dismiss="modal">
-			<div class="lr">
-				<div class="rl">
-				</div>
-			</div>
-		</div>
-		<div class="container">
-			<div class="row">
-				<div class="">
-					<div class="modal-body">
-						{{#with currentProperty}}
-						{{>Property prop this}}
-						{{/with}}
-						<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 </div>
 </template>

@@ -11,246 +11,246 @@
 		</div>
 	</div>
 	<div class="col-xs-12">
-	<div class="add-estimation-container shadowed row">
-		<form class="form-horizontal center-block add-estimation-form"> 
-			<div class="col-xs-12">
-				<div class="col-xs-12 col-sm-6 input-grp transaction-type">
-					<label for="transactionType" class="control-label">Type de transaction</label>
+		<div class="add-estimation-container shadowed row">
+			<form class="form-horizontal center-block add-estimation-form"> 
+				<div class="col-xs-12">
+					<div class="col-xs-12 col-sm-6 input-grp transaction-type">
+						<label for="transactionType" class="control-label">Type de transaction</label>
+						<div class="col-xs-12">
+							<div class="radio radio-inline">
+								<input type="radio" name="transactionType" id="radioSell" value="Vente" checked>
+								<label for="radioSell">	Vente </label>
+							</div>
+							<div class="radio radio-inline">
+								<input type="radio" name="transactionType" id="radioRent" value="Location">
+								<label for="radioRent"> Location </label>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6 input-grp property-type">
+						<label for="propertyType" class="control-label">Type de propriete</label>
+						<select class="form-control" id="propertyType">
+							<option value="Maison" selected>Maison</option>
+							<option value="Appartement">Appartement</option>
+							<option value="Terrain">Terrain</option>
+							<option value="Fond de commerce">Fond de commerce</option>
+							<option value="Viager">Viager</option>
+							<option value="Loft">Loft</option>
+							<option value="Immeuble">Immeuble</option>
+							<option value="Local commercial">Local commercial</option>
+							<option value="Box et Parking">Box et Parking</option>
+						</select>
+					</div>
+					<div class="col-xs-12 col-sm-6 input-grp address has-feedback">
+						<label for="address" class="control-label">Adresse</label>
+						<input type="text" class="input form-control" aria-describedby="inputAddressStatus">
+							<div id="map" class="col-xs-12">
+								<img src="{{map}}">
+							</div>
+						{{#unless $.Session.equals 'geocode' 0}}
+							<span class="spinner spinner-bounce-bottom form-control-feedback" aria-hidden="true"></span>
+							<span id="inputAddressStatus" class="sr-only">(warning)</span>
+						{{/unless}}
+					</div>
+					<div class="col-xs-12 col-sm-6 map">
+						<div class="full-address">
+							<label class="control-label col-xs-6 col-sm-3">Num</label>
+							<div class="input col-xs-8 col-sm-6 streetNumber">
+								<input type="text" class="form-control" placeholder="Num">
+							</div>
+							<div class="input col-xs-4 col-sm-3">
+								<select class="form-control num-compl">
+									<option value="" selected></option>
+									<option value="Bis">Bis</option>
+									<option value="Ter">Ter</option>
+									<option value="Quater">Quater</option>
+									<option value="A">A</option>
+									<option value="B">B</option>
+									<option value="C">C</option>
+									<option value="D">D</option>
+								</select>
+							</div>
+							<label class="control-label col-xs-6 col-sm-3">Voie</label>
+							<div class="input col-xs-12 col-sm-9 streetName">
+								<input type="text" class="form-control" placeholder="Libelle">
+							</div>
+							<label class="control-label col-xs-6 col-sm-3">Complement</label>
+							<div class="input col-xs-12 col-sm-9 complement">
+								<input type="text" class="form-control" placeholder="Lieu dit, Batiment,..">
+							</div>
+							<label class="control-label col-xs-6 col-sm-3">CP</label>
+							<div class="input col-xs-12 col-sm-9 zipcode">
+								<input type="text" class="form-control" placeholder="CP">
+							</div>
+							<label class="control-label col-xs-6 col-sm-3">Ville</label>
+							<div class="input col-xs-12 col-sm-9 city">
+								<input type="text" class="form-control" placeholder="Ville">
+							</div>
+							<label class="control-label col-xs-6 col-sm-3">Pays</label>
+							<div class="input col-xs-12 col-sm-9 country">
+								<input type="text" class="form-control" placeholder="Pays">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<div class="col-xs-12 input-grp living-surface">
+						<label for="livingSurface" class="control-label col-xs-6"> 
+							Surface du salon
+						</label>
+						<div class="col-xs-6">
+							<input type="number" class="form-control to-check" data-input="livingRoomSurface">
+						</div>
+					</div>
+					<div class="col-xs-12 input-grp total-surface">
+						<label for="totalSurface" class="control-label col-xs-6"> 
+							Surface totale
+						</label>
+						<div class="col-xs-6">
+							<input type="number" class="form-control to-check" data-input="totalSurface">
+						</div>
+					</div>
+					<div class="col-xs-12 input-grp terrain-surface">
+						<label for="terrainSurface" class="control-label col-xs-6">
+							Surface du terrain
+						</label>
+						<div class="col-xs-6">
+							<input type="number" class="form-control to-check" data-input="terrainSurface">
+						</div>
+					</div>
+					<div class="col-xs-12 input-grp property-floors">
+						<label for="floorNumber" class="control-label col-xs-6"> 
+							Etages
+						</label>
+						<div class="col-xs-6">
+							<input type="number" class="form-control to-check" data-input="floorNumber">
+						</div>
+					</div>
+					<div class="col-xs-12 input-grp property-rooms">
+						<label for="roomNumber" class="control-label col-xs-6"> 
+							Pieces
+						</label>
+						<div class="col-xs-6">
+							<input type="number" class="form-control to-check" data-input="roomNumber">
+						</div>
+					</div>
+					<div class="col-xs-12 input-grp property-bedrooms">
+						<label for="bedroomNumber" class="control-label col-xs-6"> 
+							Chambres
+						</label>
+						<div class="col-xs-6">
+							<input type="number" class="form-control to-check" data-input="bedroomNumber">
+						</div>
+					</div>
+					<div class="col-xs-12 input-grp property-bathrooms">
+						<label for="bathroomNumber" class="control-label col-xs-6">
+							SDB
+						</label>
+						<div class="col-xs-6">
+							<input type="number" class="form-control to-check" data-input="bathroomNumber">
+						</div>
+					</div>
+					<div class="col-xs-12 input-grp property-closet">
+						<label for="closetNumber" class="control-label col-xs-6"> 
+							WC
+						</label>
+						<div class="col-xs-6">
+							<input type="number" class="form-control to-check" data-input="closetNumber">
+						</div>
+					</div>
+					<div class="col-xs-12 input-grp property-dependency">
+						<label for="dependencyNumber" class="control-label col-xs-6">
+							Depencences
+						</label>
+						<div class="col-xs-6">
+							<input type="number" class="form-control to-check" data-input="dependencyNumber">
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<div class="input-grp property-year">
+						<label for="propertyYear" class="control-label col-xs-12">Annee de construction</label>
+						<div class="property-year-container" data-input='year'>
+						</div>
+					</div>
+				</div>
+				<div class="input-grp col-xs-12 col-sm-6 garage">
+					<label for="transactionType" class="col-xs-12 control-label">Garage</label>
 					<div class="col-xs-12">
 						<div class="radio radio-inline">
-							<input type="radio" name="transactionType" id="radioSell" value="Vente" checked>
-							<label for="radioSell">	Vente </label>
+							<input type="radio" name="garage" id="radioGarageNo" value="false" checked>
+							<label for="radioSell">	Non </label>
 						</div>
 						<div class="radio radio-inline">
-							<input type="radio" name="transactionType" id="radioRent" value="Location">
-							<label for="radioRent"> Location </label>
+							<input type="radio" name="garage" id="radioGarageYes" value="true">
+							<label for="radioGarageYes"> Oui </label>
 						</div>
 					</div>
 				</div>
-				<div class="col-xs-12 col-sm-6 input-grp property-type">
-					<label for="propertyType" class="control-label">Type de propriete</label>
-					<select class="form-control" id="propertyType">
-						<option value="Maison" selected>Maison</option>
-						<option value="Appartement">Appartement</option>
-						<option value="Terrain">Terrain</option>
-						<option value="Fond de commerce">Fond de commerce</option>
-						<option value="Viager">Viager</option>
-						<option value="Loft">Loft</option>
-						<option value="Immeuble">Immeuble</option>
-						<option value="Local commercial">Local commercial</option>
-						<option value="Box et Parking">Box et Parking</option>
-					</select>
-				</div>
-				<div class="col-xs-12 col-sm-6 input-grp address has-feedback">
-					<label for="address" class="control-label">Adresse</label>
-					<input type="text" class="input form-control" aria-describedby="inputAddressStatus">
-						<div id="map" class="col-xs-12">
-							<img src="{{map}}">
-						</div>
-					{{#unless $.Session.equals 'geocode' 0}}
-						<span class="spinner spinner-bounce-bottom form-control-feedback" aria-hidden="true"></span>
-						<span id="inputAddressStatus" class="sr-only">(warning)</span>
-					{{/unless}}
-				</div>
-				<div class="col-xs-12 col-sm-6 map">
-					<div class="full-address">
-						<label class="control-label col-xs-6 col-sm-3">Num</label>
-						<div class="input col-xs-8 col-sm-6 streetNumber">
-							<input type="text" class="form-control" placeholder="Num">
-						</div>
-						<div class="input col-xs-4 col-sm-3">
-							<select class="form-control num-compl">
-								<option value="" selected></option>
-								<option value="Bis">Bis</option>
-								<option value="Ter">Ter</option>
-								<option value="Quater">Quater</option>
-								<option value="A">A</option>
-								<option value="B">B</option>
-								<option value="C">C</option>
-								<option value="D">D</option>
-							</select>
-						</div>
-						<label class="control-label col-xs-6 col-sm-3">Voie</label>
-						<div class="input col-xs-12 col-sm-9 streetName">
-							<input type="text" class="form-control" placeholder="Libelle">
-						</div>
-						<label class="control-label col-xs-6 col-sm-3">Complement</label>
-						<div class="input col-xs-12 col-sm-9 complement">
-							<input type="text" class="form-control" placeholder="Lieu dit, Batiment,..">
-						</div>
-						<label class="control-label col-xs-6 col-sm-3">CP</label>
-						<div class="input col-xs-12 col-sm-9 zipcode">
-							<input type="text" class="form-control" placeholder="CP">
-						</div>
-						<label class="control-label col-xs-6 col-sm-3">Ville</label>
-						<div class="input col-xs-12 col-sm-9 city">
-							<input type="text" class="form-control" placeholder="Ville">
-						</div>
-						<label class="control-label col-xs-6 col-sm-3">Pays</label>
-						<div class="input col-xs-12 col-sm-9 country">
-							<input type="text" class="form-control" placeholder="Pays">
-						</div>
+				<div class="input-grp col-xs-12 col-sm-6">
+					<div class="col-xs-12 state">
+						<label for="state" class="control-label">Etat du bien</label>
+						<input type="text" class="form-control">
+					</div>
+					<div class="col-xs-12 heating">
+						<label for="heating" class="control-label">Chauffage</label>
+						<input type="text" class="form-control">
 					</div>
 				</div>
-			</div>
-			<div class="col-xs-12 col-sm-6">
-				<div class="col-xs-12 input-grp living-surface">
-					<label for="livingSurface" class="control-label col-xs-6"> 
-						Surface du salon
-					</label>
-					<div class="col-xs-6">
-						<input type="number" class="form-control to-check" data-input="livingRoomSurface">
-					</div>
-				</div>
-				<div class="col-xs-12 input-grp total-surface">
-					<label for="totalSurface" class="control-label col-xs-6"> 
-						Surface totale
-					</label>
-					<div class="col-xs-6">
-						<input type="number" class="form-control to-check" data-input="totalSurface">
-					</div>
-				</div>
-				<div class="col-xs-12 input-grp terrain-surface">
-					<label for="terrainSurface" class="control-label col-xs-6">
-						Surface du terrain
-					</label>
-					<div class="col-xs-6">
-						<input type="number" class="form-control to-check" data-input="terrainSurface">
-					</div>
-				</div>
-				<div class="col-xs-12 input-grp property-floors">
-					<label for="floorNumber" class="control-label col-xs-6"> 
-						Etages
-					</label>
-					<div class="col-xs-6">
-						<input type="number" class="form-control to-check" data-input="floorNumber">
-					</div>
-				</div>
-				<div class="col-xs-12 input-grp property-rooms">
-					<label for="roomNumber" class="control-label col-xs-6"> 
-						Pieces
-					</label>
-					<div class="col-xs-6">
-						<input type="number" class="form-control to-check" data-input="roomNumber">
-					</div>
-				</div>
-				<div class="col-xs-12 input-grp property-bedrooms">
-					<label for="bedroomNumber" class="control-label col-xs-6"> 
-						Chambres
-					</label>
-					<div class="col-xs-6">
-						<input type="number" class="form-control to-check" data-input="bedroomNumber">
-					</div>
-				</div>
-				<div class="col-xs-12 input-grp property-bathrooms">
-					<label for="bathroomNumber" class="control-label col-xs-6">
-						SDB
-					</label>
-					<div class="col-xs-6">
-						<input type="number" class="form-control to-check" data-input="bathroomNumber">
-					</div>
-				</div>
-				<div class="col-xs-12 input-grp property-closet">
-					<label for="closetNumber" class="control-label col-xs-6"> 
-						WC
-					</label>
-					<div class="col-xs-6">
-						<input type="number" class="form-control to-check" data-input="closetNumber">
-					</div>
-				</div>
-				<div class="col-xs-12 input-grp property-dependency">
-					<label for="dependencyNumber" class="control-label col-xs-6">
-						Depencences
-					</label>
-					<div class="col-xs-6">
-						<input type="number" class="form-control to-check" data-input="dependencyNumber">
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-12 col-sm-6">
-				<div class="input-grp property-year">
-					<label for="propertyYear" class="control-label col-xs-12">Annee de construction</label>
-					<div class="property-year-container" data-input='year'>
-					</div>
-				</div>
-			</div>
-			<div class="input-grp col-xs-12 col-sm-6 garage">
-				<label for="transactionType" class="col-xs-12 control-label">Garage</label>
 				<div class="col-xs-12">
-					<div class="radio radio-inline">
-						<input type="radio" name="garage" id="radioGarageNo" value="false" checked>
-						<label for="radioSell">	Non </label>
+					<div class="col-xs-12 col-sm-6 dpe">
+						<label for="dpeInput" class="control-label col-xs-6">DPE</label>
+						<div class="col-xs-6">
+							<input type="number" class="form-control to-check" value="1" data-input="dpe">
+						</div>
+						<div id="dpe" class="graph"></div>
 					</div>
-					<div class="radio radio-inline">
-						<input type="radio" name="garage" id="radioGarageYes" value="true">
-						<label for="radioGarageYes"> Oui </label>
-					</div>
-				</div>
-			</div>
-			<div class="input-grp col-xs-12 col-sm-6">
-				<div class="col-xs-12 state">
-					<label for="state" class="control-label">Etat du bien</label>
-					<input type="text" class="form-control">
-				</div>
-				<div class="col-xs-12 heating">
-					<label for="heating" class="control-label">Chauffage</label>
-					<input type="text" class="form-control">
-				</div>
-			</div>
-			<div class="col-xs-12">
-				<div class="col-xs-12 col-sm-6 dpe">
-					<label for="dpeInput" class="control-label col-xs-6">DPE</label>
-					<div class="col-xs-6">
-						<input type="number" class="form-control to-check" value="1" data-input="dpe">
-					</div>
-					<div id="dpe" class="graph"></div>
-				</div>
-				<div class="col-xs-12 col-sm-6 ges">
-					<label for="gesInput" class="control-label col-xs-6">GES</label>
-					<div class="col-xs-6">
-						<input type="number" class="form-control to-check" value="1" data-input="ges">
-					</div>
-					<div id="ges" class="graph"></div>
-				</div>
-			</div>
-			<div class="col-xs-12">
-				<div class="col-xs-12 col-sm-6 input-grp taxes">
-					<label for="taxes" class="control-label col-xs-6">
-						Taxes
-					</label>
-					<div class="col-xs-6">
-						<input type="number" class="form-control to-check" data-input="taxes">
+					<div class="col-xs-12 col-sm-6 ges">
+						<label for="gesInput" class="control-label col-xs-6">GES</label>
+						<div class="col-xs-6">
+							<input type="number" class="form-control to-check" value="1" data-input="ges">
+						</div>
+						<div id="ges" class="graph"></div>
 					</div>
 				</div>
-				<div class="col-xs-12 col-sm-6 input-grp charges">
-					<label for="charges" class="control-label col-xs-6">
-						Charges
-					</label>
-					<div class="col-xs-6">
-						<input type="number" class="form-control to-check" data-input="charges">
+				<div class="col-xs-12">
+					<div class="col-xs-12 col-sm-6 input-grp taxes">
+						<label for="taxes" class="control-label col-xs-6">
+							Taxes
+						</label>
+						<div class="col-xs-6">
+							<input type="number" class="form-control to-check" data-input="taxes">
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6 input-grp charges">
+						<label for="charges" class="control-label col-xs-6">
+							Charges
+						</label>
+						<div class="col-xs-6">
+							<input type="number" class="form-control to-check" data-input="charges">
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="col-xs-12">
-				<div class="col-xs-12 col-sm-6 input-grp commission">
-					<label for="commission" class="control-label col-xs-6">Commission</label>
-					<div class="col-xs-6">
-						<input type="number" class="form-control to-check" data-input="commission">
+				<div class="col-xs-12">
+					<div class="col-xs-12 col-sm-6 input-grp commission">
+						<label for="commission" class="control-label col-xs-6">Commission</label>
+						<div class="col-xs-6">
+							<input type="number" class="form-control to-check" data-input="commission">
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6 input-grp price">
+						<label for="price" class="control-label col-xs-6">Prix</label>
+						<div class="col-xs-6">
+							<input type="number" class="form-control to-check" data-input='price'>
+						</div>
 					</div>
 				</div>
-				<div class="col-xs-12 col-sm-6 input-grp price">
-					<label for="price" class="control-label col-xs-6">Prix</label>
-					<div class="col-xs-6">
-						<input type="number" class="form-control to-check" data-input='price'>
-					</div>
+				<div class="col-xs-12 submit-container">
+					<button class="center-block btn btn-primary" type="submit">
+						Ajouter
+					</button>
 				</div>
-			</div>
-			<div class="col-xs-12 submit-container">
-				<button class="center-block btn btn-primary" type="submit">
-					Ajouter
-				</button>
-			</div>
-		</form>
-	</div>
+			</form>
+		</div>
 	</div>
 </template>

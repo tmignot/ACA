@@ -200,7 +200,7 @@ margin: 0 10px;
 }
 
 .tt-input:focus, 
-.form-control:focus {
+#searchBar .form-control:focus {
 	border-color: rgb(102, 45, 145);
 	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(102, 45, 145, 0.5);
 }

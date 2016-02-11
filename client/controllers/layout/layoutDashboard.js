@@ -14,7 +14,7 @@ Template.layoutDashboard.helpers({
 Template.layoutDashboard.events({
 'click .dashboard-link':	function(e,t) { 
 	e.preventDefault();
-	Router.go('/admin/dashboard');
+	Router.go('/admin');
 },
 'click .customers-link':	function(e,t) {
 	e.preventDefault();

@@ -46,7 +46,7 @@ Template.searchBar.helpers({
 		return Template.parentData(1);
 	},
 	hlength: function() {
-		return Properties.find(Pages.get('filters')).count();
+		return Properties.find(PropertyClientPages.get('filters')).count();
 	},
 	popOptions: function() {
 		return Template.instance().popOptions.get();
@@ -150,7 +150,7 @@ Template.searchBar.events({
 	},
 	'click .property-card .annonce': function(e,t) {
 		var query = ['search=true',
-								'page='+Pages.sess('currentPage'),
+								'page='+PropertyClientPages.sess('currentPage'),
 								'_id='+$(e.currentTarget).data('id'),
 								'filters='+encodeURIComponent(JSON.stringify(createFilters()))]
 		Router.go('Home', {}, {query: _.join(query, '&')});
@@ -193,7 +193,7 @@ Template.properties.uihooks({
 
 Template.pageNavig.helpers({
 	navigationNeighbors: function() {
-		return Pages.paginationNeighbors();
+		return PropertyClientPages.paginationNeighbors();
 	}
 });
 

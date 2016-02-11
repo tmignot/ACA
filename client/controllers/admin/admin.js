@@ -53,7 +53,22 @@ Template.Admin.events({
 			);
 		}
 	},
+	'focus #inputEmail': function(e,t) {
+		t.email.set(false);
+	},
 	'click .logout-button': function(e,t) {
 		Meteor.logout();
+	}
+});
+
+Template.passwordInputField.onRendered(function() {
+	this.find('#inputPassword').focus();
+});
+
+Template.passwordInputField.events({
+	'keyup #inputPassword': function(e,t) {
+		if (e.keyCode == 27 || (e.keyCode == 8 && t.old_length == 0))
+			$('#inputEmail').focus();
+		t.old_length = e.currentTarget.value.length;
 	}
 });

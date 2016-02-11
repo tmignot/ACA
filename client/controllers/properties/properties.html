@@ -21,9 +21,18 @@
 	</div>
 	<div class="row">
 		<div id="morris-area-chart" class="grid">
-			{{#each properties}}
-			{{>propertyCard}}
-			{{/each}}
+			{{>PropertyPages}}
 		</div>
 	</div>
+</template>
+
+<template name="PropertyPages">
+	{{#if noItems}}
+	<div class='alert alert-danger'>
+		Aucune propriete trouvee
+	</div>
+	{{/if}}
+	{{>pagesNav}}
+	{{>pages}}
+	{{>pagesNav}}
 </template>

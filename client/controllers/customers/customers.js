@@ -1,22 +1,40 @@
 Template.Customers.onCreated(function(){
-	this.searchList = new ReactiveVar([]);
-	Template.instance().searchList.set(Customers.find({}));
+});
+
+Template.Customers.onRendered(function(){
+	$('.nav-side-menu .active').removeClass('active');
+	$('.nav-side-menu .customers-link').addClass('active');
 });
 
 Template.Customers.helpers({
-	searchList: function(){
-		return Template.instance().searchList.get();
-	}
 });
 
 Template.Customers.events({
-	'keyup #search': function(e, t){
-		if ($(e.target).val() != '') {
-			query = new RegExp($(e.target).val(), 'i');
-			list = Customers.find({ name: query }).fetch();
-		} else {
-			list = Customers.find({});
+	'click .addCustomer': function() { Router.go('/admin/customers/add'); }
+});
+
+Template.CustomerCard.onCreated(function(){
+});
+
+Template.CustomerCard.helpers({
+	phone: function() {
+		var c = Template.instance().data;
+		if (c && c.phones && c.phones[0])
+			return c.phones[0];
+	},
+	translateType: function() {
+		switch (Template.instance().data.type) {
+			case 'rent': return 'Locataire';
+			case 'sell': return 'Vendeur/Bailleur';
+			case 'search': return 'Acheteur';
+			default: return '';
 		}
-		t.searchList.set(list);
 	}
 });
+
+Template.CustomerCard.events({
+	'click': function(e,t) {
+		Router.go('/admin/customers/'+t.data._id);
+	}
+});
+

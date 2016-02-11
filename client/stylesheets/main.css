@@ -61,26 +61,26 @@ html, body
   }
 }
 
-.pagination li a,
-.pagination .li a:focus,
-.pagination .active a,
-.pagination .active a:hover,
-.pagination .active a:focus,
-.pagination .disabled a{
+.results .pagination li a,
+.results .pagination .li a:focus,
+.results .pagination .active a,
+.results .pagination .active a:hover,
+.results .pagination .active a:focus,
+.results .pagination .disabled a{
 	background-color: black;
 	margin: 2px;
 }
 
-.pagination .disabled a{
+.results .pagination .disabled a{
 	border-color: gray;
 	color: gray;
 }
 
-.pagination li a {
+.results .pagination li a {
 	color: white;
 }
 
-.pagination li.active a {
+.results .pagination li.active a {
 	color: rgb(102, 45, 145);
 	border-color: rgb(102, 45, 145);
 }

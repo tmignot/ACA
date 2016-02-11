@@ -21,9 +21,18 @@
 	</div>
 	<div class="row">
 		<div id="morris-area-chart" class="grid">
-			{{#each agents}}
-			{{>AgentCard}}
-			{{/each}}
+			{{>AgentsPages}}
 		</div>
 	</div>
+</template>
+
+<template name='AgentsPages'>
+	{{#if noItems}}
+	<div class='alert alert-danger'>
+		Aucun membre trouve
+	</div>
+	{{/if}}
+	{{>pagesNav}}
+	{{>pages}}
+	{{>pagesNav}}
 </template>

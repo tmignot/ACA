@@ -1,9 +1,14 @@
 Template.propertyCard.helpers({
 	img: function() {
-		if (Template.instance().data.images)
-			return Images.findOne({_id: Template.instance().data.images[0]}).url()
-		else
-			return ['/no_photo.png'];
+		if (Template.instance().data.images) {
+			var img_id = Template.instance().data.images[0];
+			if (img_id) {
+				var img = Images.findOne({_id: img_id});
+				if (img)
+					return img.url()
+			}
+		}
+		return '/no_photo.png';
 	}
 });
 
