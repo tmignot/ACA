@@ -1,7 +1,30 @@
 <template name="Dashboard">
-	<div class="col-xs-12 col-lg-6">
+	<div class="shadowed row col-xs-12">
+		<div class='col-xs-12 inner'>
+			<h3>Dashboard <small> - Welcome, {{currentUser.username}}</small></h3>
+		</div>
 	</div>
 	<div class="col-xs-12 col-lg-6">
-		<div id="calendar"></div>
+		<h4> Aujourd'hui </h4>
+		{{#each meetings}}
+		<div class='dash-meeting shadowed col-xs-12'>
+			<div class='col-xs-12 inner'>
+				<label>Rendez-vous avec</label>
+				<h4>
+					<small> {{customerGender this.customer}}</small> 
+					{{customerName this.customer}}
+				</h4>
+				<span class="badge pull-right">{{relativeTime this.from}}</span>
+				<div class='col-xs-12'>
+					{{description}}
+				</div>
+			</div>
+			<div class='bot {{type this.customer}}-bot col-xs-12'>
+			</div>
+		</div>
+		{{/each}}
+	</div>
+	<div class="col-xs-12 col-lg-6">
+		<div id="calendar" class='col-xs-12'></div>
 	</div>
 </template>
