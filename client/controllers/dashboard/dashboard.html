@@ -6,23 +6,29 @@
 	</div>
 	<div class="col-xs-12 col-lg-6">
 		<h4> Aujourd'hui </h4>
-		{{#each meetings}}
-		<div class='dash-meeting shadowed col-xs-12'>
-			<div class='col-xs-12 inner'>
-				<label>Rendez-vous avec</label>
-				<h4>
-					<small> {{customerGender this.customer}}</small> 
-					{{customerName this.customer}}
-				</h4>
-				<span class="badge pull-right">{{relativeTime this.from}}</span>
-				<div class='col-xs-12'>
-					{{description}}
+		{{#if meetings}}
+			{{#each meetings}}
+			<div class='dash-meeting shadowed col-xs-12'>
+				<div class='col-xs-12 inner'>
+					<label>Rendez-vous avec</label>
+					<h4>
+						<small> {{customerGender this.customer}}</small> 
+						{{customerName this.customer}}
+					</h4>
+					<span class="badge pull-right">{{relativeTime this.from}}</span>
+					<div class='col-xs-12'>
+						{{description}}
+					</div>
+				</div>
+				<div class='bot {{type this.customer}}-bot col-xs-12'>
 				</div>
 			</div>
-			<div class='bot {{type this.customer}}-bot col-xs-12'>
+			{{/each}}
+		{{else}}
+			<div class='alert alert-warning'>
+				<small>Pas de rendez-vous</small>
 			</div>
-		</div>
-		{{/each}}
+		{{/if}}
 	</div>
 	<div class="col-xs-12 col-lg-6">
 		<div id="calendar" class='col-xs-12'></div>

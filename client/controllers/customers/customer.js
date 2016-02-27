@@ -10,22 +10,28 @@ Template.Customer.onRendered(function() {
 
 Template.Customer.helpers({
 	translateType: function() {
-		switch (Template.instance().data.type) {
-			case 'rent': return 'Locataire';
-			case 'sell': return 'Vendeur/Bailleur';
-			case 'search': return 'Acheteur';
-			default: return '';
+		if (Template.instance().data) {
+			switch (Template.instance().data.type) {
+				case 'rent': return 'Locataire';
+				case 'sell': return 'Vendeur/Bailleur';
+				case 'search': return 'Acheteur';
+				default: return '';
+			}
 		}
 	},
 	meetings: function() {
-		var meetings = Meetings.find({customer: Template.instance().data._id}, {limit: 10});
-		if (meetings.count())
-			return meetings;
+		if (Template.instance().data) {
+			var meetings = Meetings.find({customer: Template.instance().data._id}, {limit: 10});
+			if (meetings.count())
+				return meetings;
+		}
 	},
 	documents: function() {
-		var docs = Template.instance().data.documents;
-		if (docs && docs.length)
-			return Documents.find({_id: {$in: docs}});
+		if (Template.instance().data) {
+			var docs = Template.instance().data.documents;
+			if (docs && docs.length)
+				return Documents.find({_id: {$in: docs}});
+		}
 	},
 	agentName: function(id) {
 		var agent = Agents.findOne({_id: id});
@@ -37,9 +43,11 @@ Template.Customer.helpers({
 			return moment(date).format('DD/MM/YYYY HH[h]mm');
 	},
 	properties: function() {
-		var properties = Template.instance().data.properties;
-		if (properties && properties.length)
-			return Properties.find({reference: {$in: properties}});
+		if (Template.instance().data) {
+			var properties = Template.instance().data.properties;
+			if (properties && properties.length)
+				return Properties.find({reference: {$in: properties}});
+		}
 	},
 	fileClass: function(type) {
 		switch(type) {
@@ -132,5 +140,25 @@ Template.Customer.events({
 				Customers.update({_id: t.data._id}, {$pull: {documents: id}});
 			}
 		});
+	},
+	'click .edit-btn': function(e,t) {
+		Router.go('/admin/customers/edit/'+t.data._id);
+	},
+	'click .remove-btn': function(e,t) {
+		if (Roles.userIsInRole(Meteor.user()._id, 'remove', 'Customers')) {
+			var c = t.data;
+			_.each(c.documents, function(d) {
+				Documents.remove({_id: d}, function(e,r) {
+					if (e)
+						throw e
+				});
+			});
+			Customers.remove(t.data._id, function(e,r) {
+				if (!e)
+					Router.go('/admin/customers');
+				else
+					throw e
+			});
+		}
 	}
 });

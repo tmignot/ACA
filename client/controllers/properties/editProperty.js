@@ -59,6 +59,7 @@ Template.editProperty.onRendered(function(){
 	$('.living-surface input').val(this.data.livingRoomSurface);
 	$('.total-surface input').val(this.data.totalSurface);
 	$('.terrain-surface input').val(this.data.terrainSurface);
+	$('.property-configuration input').val(this.data.configuration);
 	$('.property-floors input').val(this.data.floorNumber);
 	$('.property-rooms input').val(this.data.roomNumber);
 	$('.property-bedrooms input').val(this.data.bedroomNumber);
@@ -203,6 +204,7 @@ Template.editProperty.events({
 			address: address,
 			year: parseInt($('.property-year-container span.year.active').html()),
 			price: parseFloat($('.price input').val()),
+			configuration: $('.property-configuration input').val(),
 			roomNumber: parseInt($('.property-rooms input').val()),
 			bedroomNumber: parseInt($('.property-bedrooms input').val()),
 			bathroomNumber: parseInt($('.property-bathrooms input').val()),

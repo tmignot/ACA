@@ -97,7 +97,8 @@ Template.Dashboard.helpers({
 		var tomorow = new Date(moment(new Date()).add(1,'day').format('dddd DD MMMM YYYY'));
 		moment.locale('fr');
 		var m = Meetings.find({from: {$gte: today, $lte: tomorow}}, {sort: {from: 1}});
-		return m;
+		if (m.count())
+			return m;
 	},
 	relativeTime: function(from) {
 		return moment(from).fromNow();

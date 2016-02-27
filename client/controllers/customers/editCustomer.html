@@ -1,0 +1,140 @@
+<template name="editCustomer">
+	<div class="row">
+		<ol class="breadcrumb col-xs-12">
+			<li><a href="/admin/customers">Clients</a></li>
+			<li><a href="/admin/customers/{{_id}}">{{_id}}</a></li>
+			<li class="active">Editer</li>
+		</ol>
+	</div>
+	<div class="add-customer-container row">
+		<div class="heading-wrapper shadowed col-xs-12">
+			<h4>Editer un client</h4>
+		</div>
+	</div>
+	<div class="col-xs-12">
+		<div class="add-customer-container shadowed row">
+			<form class="form-horizontal center-block add-customer-form"> 
+				<div class='col-xs-12'>
+					<div class="col-xs-12 col-md-6 input-grp">
+						<div class="customer-type">
+							<label for="customer-type" class="control-label">Type de client</label>
+							<select class="form-control" id="customer-type">
+								<option value="search" {{isSelected 'type' 'search'}}>Acheteur</option>
+								<option value="sell" {{isSelected 'type' 'sell'}}>Vendeur/Bailleur</option>
+								<option value="rent" {{isSelected 'type' 'rent'}}>Locataire</option>
+							</select>
+						</div>
+						<div class="customer-name">
+							<label class="control-label">Nom du client</label>
+							<div class="input-group">
+								<div class='input-group-btn'>
+									<select class="form-control gender">
+										<option value="male" {{isSelected 'gender' 'male'}}>Mr</option>
+										<option value="female" {{isSelected 'gender' 'female'}}>Mme</option>
+									</select>
+								</div>
+								<input type="text" class="form-control" placeholder="Nom, Prenom" value='{{name}}'>
+							</div>
+						</div>
+						<div class="customer-email">
+							<label class="control-label">Email</label>
+							<div class="input">
+								<input type="email" class="form-control" placeholder="example@host.com" value='{{email}}'>
+							</div>
+						</div>
+						<div class="customer-phones">
+							<label class="control-label">Numeros de telephone</label>
+							<div class="input">
+								{{#each phonesInputs}}
+								<div class='phone-container col-xs-12 attr-input' data-which-phone='{{n}}'>
+									<div class="col-xs-12 col-md-6">
+										<input type="text" class="form-control" placeholder="Domicile" value="{{label}}">
+									</div>
+									<div class="col-xs-12 col-md-6">
+										<input type="phone" class="form-control" placeholder="0123456789" value="{{number}}">
+									</div>
+								</div>
+								{{/each}}
+								<div class='col-xs-12'>
+									<div class="add-remove-phone btn-group pull-right">
+										<button type="button" class="remove btn btn-default">
+											<i class='glyphicon glyphicon-minus'></i>
+										</button>
+										<button type="button" class="add btn btn-default">
+											<i class='glyphicon glyphicon-plus'></i>
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="customer-earnings form-group">
+							<label class="control-label">Gains</label>
+							<div class="input input-group">
+								<input type="number" step=100 min=0 class="form-control" aria-describedby='earnings-addon' placeholder="2000" value='{{earnings}}'>
+								<span id='earnings-addon' class='input-group-addon'>€</span>
+							</div>
+						</div>
+						<div class="customer-contribution form-group">
+							<label class="control-label">Apport</label>
+							<div class="input input-group">
+								<input type="number" step=100 min=0  class="form-control" aria-describedby='contribution-addon' placeholder="2000" value='{{contribution}}'>
+								<span id='contribution-addon' class='input-group-addon'>€</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-md-6">
+						<div class="full-addres">
+							<label class="control-label">Adresse</label>
+							<div class="full-addres col-xs-12">
+								<div class='col-xs-12'>
+									<label class="control-label attr-input">Num</label>
+									<div class="input-group streetNumber">
+										<input type="text" class="form-control" placeholder="Num" value='{{address.streetNumber}}'>
+										<div class='input-group-btn'>
+										<select class="form-control num-compl">
+											<option value="" {{isSelected 'numCompl' ''}}></option>
+											<option value="Bis" {{isSelected 'numCompl' 'Bis'}}>Bis</option>
+											<option value="Ter" {{isSelected 'numCompl' 'Ter'}}>Ter</option>
+											<option value="Quater" {{isSelected 'numCompl' 'Quater'}}>Quater</option>
+											<option value="A" {{isSelected 'numCompl' 'A'}}>A</option>
+											<option value="B" {{isSelected 'numCompl' 'B'}}>B</option>
+											<option value="C" {{isSelected 'numCompl' 'C'}}>C</option>
+											<option value="D" {{isSelected 'numCompl' 'D'}}>D</option>
+										</select>
+										</div>
+									</div>
+								</div>
+								<div class="input streetName col-xs-12">
+									<label class="control-label">Voie</label>
+									<input type="text" class="form-control" placeholder="Libelle" value='{{address.streetName}}'>
+								</div>
+								<div class="input col-xs-12 complement">
+									<label class="control-label">Complement</label>
+									<input type="text" class="form-control" placeholder="Lieu dit, Batiment,.." value='{{address.complement}}'>
+								</div>
+								<div class="input col-xs-12 zipcode">
+									<label class="control-label">CP</label>
+									<input type="text" class="form-control" placeholder="CP" value='{{address.zipcode}}'>
+								</div>
+								<div class="input col-xs-12 city">
+									<label class="control-label">Ville</label>
+									<input type="text" class="form-control" placeholder="Ville" value='{{address.city}}'>
+								</div>
+								<div class="input col-xs-12 country">
+									<label class="control-label">Pays</label>
+									<input type="text" class="form-control" placeholder="Pays" value='{{address.country}}'>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class='submit col-xs-12'>
+						<button type='submit' class='btn btn-primary center-block'>
+							Enregistrer
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</template>
+

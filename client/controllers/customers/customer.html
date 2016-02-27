@@ -284,5 +284,21 @@
 				</div>
 			</div>
 		</div>
+		<div class="button-wrapper col-xs-12">
+			<div class="button center-block">
+				<div class='center-block'>
+					{{#if isInRole 'update' 'Customers'}}
+					<button class='btn btn-default edit-btn' type='button'>Editer 
+						<span class='glyphicon glyphicon-edit'></span>
+					</button>
+					{{/if}}
+					{{#if isInRole 'remove' 'Customers'}}
+					<button class='btn btn-danger remove-btn' type='button'>Supprimer 
+						<span class='glyphicon glyphicon-trash'></span>
+					</button>
+					{{/if}}
+				</div>
+			</div>
+		</div>
 	</div>
 </template>

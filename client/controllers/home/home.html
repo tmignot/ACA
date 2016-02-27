@@ -53,16 +53,16 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12 text-center">
-				<h2>A Propos</h2>
+				<h2>{{{blocks.section1_title.value}}}</h2>
 				<hr style="background:{{mainColor}}">
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-4 col-lg-offset-2">
-				<p>Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional LESS stylesheets for easy customization.</p>
+				<p>{{{blocks.section1_left_text.value}}}</p>
 			</div>
 			<div class="col-lg-4">
-				<p>Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!</p>
+				<p>{{{blocks.section1_right_text.value}}}</p>
 			</div>
 		</div>
 	</div>
@@ -72,8 +72,8 @@
 	<div class="row">
 		<div class="col-lg-12 text-center">
 			<h2 style="color:black;">
-				Contactez-nous<br>
-				<small style="color:{{mainColor}};">vous allez nous adorer !</small>
+				{{{blocks.section2_title.value}}}<br>
+				<small style="color:{{mainColor}};">{{blocks.section2_text.value}}</small>
 			</h2>
 			<hr>
 		</div>
@@ -84,36 +84,64 @@
 			<div class="col-xs-8 col-xs-offset-2 col-md-offset-0 col-md-12">
 				<div>
 					<i class="col-xs-2 glyphicon glyphicon-user" style="color:{{mainColor}}"></i>
-					<div class="col-xs-10">L'Agence Coubron</div>
+					<div class="col-xs-10">{{blocks.agency_name.value}}</div>
 				</div>
 				<div>
 					<i class="col-xs-2 glyphicon glyphicon-map-marker" style="color:{{mainColor}}"></i>
-					<div class="col-xs-10">155 rue Jean-Jaurès 93470 Coubron</div>
+					<div class="col-xs-10">{{blocks.agency_address.value}}</div>
 				</div>
 				<div>
 					<i class="col-xs-2 glyphicon glyphicon-phone" style="color:{{mainColor}}"></i>
-					<div class="col-xs-10">01.43.51.28.86</div>
+					<div class="col-xs-10">{{blocks.agency_phone.value}}</div>
 				</div>
 				<div>
 					<i class="col-xs-2 glyphicon glyphicon-envelope" style="color:{{mainColor}}"></i>
-					<div class="bold col-xs-10">agence@acaimmo.fr</div>
+					<div class="bold col-xs-10">{{blocks.agency_email.value}}</div>
 				</div>
 				<hr>
 				<div>
 					<i class="col-xs-2 glyphicon glyphicon-calendar" style="color:{{mainColor}}"></i>
-					<div class="col-xs-10">Nos horaires:<br>
+					<div class="col-xs-10">{{blocks.agency_timetable_label.value}}:<br>
 						<table class="table">
 							<thead>
 								<tr><th>Jour</th><th>Matin</th><th>Après-midi</th></tr>
 							</thead>
 							<tbody>
-								<tr><td>L</td><td>9h-12h</td><td>13h30-18h30</td></tr>
-								<tr><td>M</td><td>9h-12h</td><td>13h30-18h30</td></tr>
-								<tr><td>M</td><td>9h-12h</td><td>13h30-18h30</td></tr>
-								<tr><td>J</td><td>9h-12h</td><td>13h30-18h30</td></tr>
-								<tr><td>V</td><td>9h-12h</td><td>13h30-18h30</td></tr>
-								<tr><td>S</td><td>9h-12h</td><td>Fermé</td></tr>
-								<tr><td>D</td><td>Fermé</td><td>Fermé</td></tr>
+								<tr>
+									<td>L</td>
+									<td>{{blocks.agency_timetable.monday.morning}}</td>
+									<td>{{blocks.agency_timetable.monday.evening}}</td>
+								</tr>
+								<tr>
+									<td>M</td>
+									<td>{{blocks.agency_timetable.tuesday.morning}}</td>
+									<td>{{blocks.agency_timetable.tuesday.evening}}</td>
+								</tr>
+								<tr>
+									<td>M</td>
+									<td>{{blocks.agency_timetable.wednesday.morning}}</td>
+									<td>{{blocks.agency_timetable.wednesday.evening}}</td>
+								</tr>
+								<tr>
+									<td>J</td>
+									<td>{{blocks.agency_timetable.thursday.morning}}</td>
+									<td>{{blocks.agency_timetable.thursday.evening}}</td>
+								</tr>
+								<tr>
+									<td>V</td>
+									<td>{{blocks.agency_timetable.friday.morning}}</td>
+									<td>{{blocks.agency_timetable.friday.evening}}</td>
+								</tr>
+								<tr>
+									<td>S</td>
+									<td>{{blocks.agency_timetable.saturday.morning}}</td>
+									<td>{{blocks.agency_timetable.saturday.evening}}</td>
+								</tr>
+								<tr>
+									<td>D</td>
+									<td>{{blocks.agency_timetable.sunday.morning}}</td>
+									<td>{{blocks.agency_timetable.sunday.evening}}</td>
+								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -128,16 +156,12 @@
 		<div class="container">
 			<div class="row">
 				<div class="footer-col col-md-4">
-					<h3>Partenaires</h3>
-					<p>Consultez les annonces<br>
-						de toutes nos agences
-					</p>
-					<a href="#">Courtry</a>
-					<a href="#">Sucy</a>
-					<a href="#">Vaires</a>
+					<h3>{{{blocks.footer_left_title.value}}}</h3>
+					<p>{{{blocks.footer_left_text.value}}}</p>
+					{{{blocks.footer_left_text2.value}}}
 				</div>
 				<div class="footer-col col-md-4">
-					<h3>Retrouvez-nous</h3>
+					<h3>{{{blocks.footer_middle_title.value}}}</h3>
 					<ul class="list-inline">
 						<li>
 							<a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
@@ -154,10 +178,8 @@
 					</ul>
 				</div>
 				<div class="footer-col col-md-4">
-					<h3>Mentions légales</h3>
-					<small>Garant : QBE FRANCE - 21 rue Balzac - 75406 Paris cedex 08 - 150 000 Euros<br>
-					N° de carte transaction et gestion : T06-0747<br>
-					RCS BOBIGNY 410 250 781</small>
+					<h3>{{{blocks.footer_right_title.value}}}</h3>
+					<small>{{{blocks.footer_right_text.value}}}</small>
 				</div>
 			</div>
 		</div>

@@ -1,3 +1,108 @@
 <template name="Editor">
-	<h1>editor</h1>
+	<ol class="breadcrumb col-xs-12">
+		<li class="active">Editeur</li>
+	</ol>
+	<div class='col-xs-12'>
+		<form>
+		{{#each blockKeys}}
+			{{#if $eq key 'agency_timetable'}}
+			{{else}}
+			<div class='input-div col-xs-12 col-md-6 col-lg-4 {{key}}'>
+				<label class='control-label'>{{label}}</label>
+				<input class='form-control block-input' data-key='{{key}}' data-label='{{label}}' value='{{value}}'>
+			</div>
+			{{/if}}
+		{{/each}}
+		{{>timetable_input blocks.agency_timetable}}
+		<div class='col-xs-12'>
+			<button type='submit' class='btn btn-primary'>Valider</button>
+		</div>
+		</form>
+	</div>
+</template>
+
+<template name='timetable_input'>
+	<div class='col-xs-12 agency_timetable'>
+		<table class='table'>
+			<tbody>
+			<tr>
+				<td><label>Lundi</label></td>
+				<td>
+					<label>Matin</label>
+					<input class='form-control' data-day='monday' data-time='morning' value='{{monday.morning}}'>
+				</td>
+				<td>
+					<label>Apres-midi</label>
+					<input class='form-control' data-day='monday' data-time='evening' value='{{monday.evening}}'>
+				</td>
+			</tr>
+			<tr>
+				<td><label>Mardi</label></td>
+				<td>
+					<label>Matin</label>
+					<input class='form-control' data-day='tuesday' data-time='morning' value='{{tuesday.morning}}'>
+				</td>
+				<td>
+					<label>Apres-midi</label>
+					<input class='form-control' data-day='tuesday' data-time='evening' value='{{tuesday.evening}}'>
+				</td>
+			</tr>
+			<tr>
+				<td><label>Mercredi</label></td>
+				<td>
+					<label>Matin</label>
+					<input class='form-control' data-day='wednesday' data-time='morning' value='{{wednesday.morning}}'>
+				</td>
+				<td>
+					<label>Apres-midi</label>
+					<input class='form-control' data-day='wednesday' data-time='evening' value='{{wednesday.evening}}'>
+				</td>
+			</tr>
+			<tr>
+				<td><label>Jeudi</label></td>
+				<td>
+					<label>Matin</label>
+					<input class='form-control' data-day='thursday' data-time='morning' value='{{thursday.morning}}'>
+				</td>
+				<td>
+					<label>Apres-midi</label>
+					<input class='form-control' data-day='thursday' data-time='evening' value='{{thursday.evening}}'>
+				</td>
+			</tr>
+			<tr>
+				<td><label>Vendredi</label></td>
+				<td>
+					<label>Matin</label>
+					<input class='form-control' data-day='friday' data-time='morning' value='{{friday.morning}}'>
+				</td>
+				<td>
+					<label>Apres-midi</label>
+					<input class='form-control' data-day='friday' data-time='evening' value='{{friday.evening}}'>
+				</td>
+			</tr>
+			<tr>
+				<td><label>Samedi</label></td>
+				<td>
+					<label>Matin</label>
+					<input class='form-control' data-day='saturday' data-time='morning' value='{{saturday.morning}}'>
+				</td>
+				<td>
+					<label>Apres-midi</label>
+					<input class='form-control' data-day='saturday' data-time='evening' value='{{saturday.evening}}'>
+				</td>
+			</tr>
+			<tr>
+				<td><label>Dimanche</label></td>
+				<td>
+					<label>Matin</label>
+					<input class='form-control' data-day='sunday' data-time='morning' value='{{sunday.morning}}'>
+				</td>
+				<td>
+					<label>Apres-midi</label>
+					<input class='form-control' data-day='sunday' data-time='evening' value='{{sunday.evening}}'>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
 </template>

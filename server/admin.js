@@ -5,8 +5,8 @@ Accounts.urls.enrollAccount = function (token) {
 Meteor.startup(function(){
 	if (Meteor.users.find().count() == 0) {
 		var users = {
-			username: "test",
-			password: "test"
+			username: "Administrator",
+			password: "p4554C41mM0"
 		};
 
 		var uid = Accounts.createUser(users);

@@ -72,9 +72,6 @@ Template.Property.helpers({
 });
 
 Template.Property.events({
-	'click .edit-btn': function(e,t) {
-		Router.go('/admin/'+t.type+'/edit/'+t.data._id);
-	},
 	'click .transfer-btn': function(e,t) {
 		if (t.type == 'estimations' &&
 				Roles.userIsInRole(Meteor.user()._id, 'insert', 'Properties'))
@@ -83,10 +80,18 @@ Template.Property.events({
 			Router.go('/admin/properties/'+t.data._id);
 		}
 	},
+	'click .edit-btn': function(e,t) {
+		Router.go('/admin/'+t.type+'/edit/'+t.data._id);
+	},
 	'click .remove-btn': function(e,t) {
-		if (Roles.userIsInRole(Meteor.user()._id, 'remove', 'Estimations')) {
-			console.log("removing");
-//			Router.go('/admin/estimations');
+		if (t.data.estimation) {
+			if (Roles.userIsInRole(Meteor.user()._id, 'remove', 'Estimations'))
+				Properties.remove({_id: t.data._id});
+		} else {
+			if (Roles.userIsInRole(Meteor.user()._id, 'remove', 'Properties')) {
+				Properties.update({_id: t.data._id}, {$set: {estimation: true}});
+				Router.go('/admin/estimations/' + t.data._id);
+			}
 		}
 	}
 });

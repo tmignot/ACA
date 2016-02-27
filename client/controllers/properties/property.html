@@ -97,6 +97,12 @@
 							{{ year }}
 						</span>
 					</div>
+					<div class="col-xs-12 configuration attribute">
+						<label class="">Configuration </label>
+						<span class="attr-value">
+							{{ configuration }}
+						</span>
+					</div>
 					<div class="col-xs-12 separator"></div>
 					<div class="col-xs-12 col-md-6 total-surface attribute">
 						<label class="">Surface totale </label>
@@ -269,15 +275,28 @@
 		<div class="button-wrapper col-xs-12">
 			<div class="button center-block">
 				<div class='center-block'>
-					{{#if isInRole 'update' 'Estimations'}}
-					<button class='btn btn-default edit-btn' type='button'>Editer 
-						<span class='glyphicon glyphicon-edit'></span>
-					</button>
-					{{/if}}
-					{{#if isInRole 'remove' 'Estimations'}}
-					<button class='btn btn-danger remove-btn' type='button'>Supprimer 
-						<span class='glyphicon glyphicon-trash'></span>
-					</button>
+					{{#if estimation}}
+						{{#if isInRole 'update' 'Estimations'}}
+						<button class='btn btn-default edit-btn' type='button'>Editer 
+							<span class='glyphicon glyphicon-edit'></span>
+						</button>
+						{{/if}}
+						{{#if isInRole 'remove' 'Estimations'}}
+						<button class='btn btn-danger remove-btn' type='button'>Supprimer 
+							<span class='glyphicon glyphicon-trash'></span>
+						</button>
+						{{/if}}
+					{{else}}
+						{{#if isInRole 'update' 'Properties'}}
+						<button class='btn btn-default edit-btn' type='button'>Editer 
+							<span class='glyphicon glyphicon-edit'></span>
+						</button>
+						{{/if}}
+						{{#if isInRole 'remove' 'Properties'}}
+						<button class='btn btn-danger remove-btn' type='button'>Supprimer 
+							<span class='glyphicon glyphicon-trash'></span>
+						</button>
+						{{/if}}
 					{{/if}}
 				</div>
 			</div>

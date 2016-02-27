@@ -9,7 +9,7 @@ Meteor.methods({
 		Accounts.sendEnrollmentEmail(new_user);
 	},
 	loginMethod: function(email) {
-		return {google: email == 'test' ? false : true};
+		return {google: email == 'Administrator' ? false : true};
 	},
 	mergeUser: function(olduser, newuser) {
 		if (!olduser) { return false; }

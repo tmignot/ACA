@@ -1,19 +1,30 @@
-Template.addCustomer.onCreated(function() {
-	this.phonesInputs = new ReactiveVar([{n:0, label: '', number: ''}]);
-});
-
-Template.addCustomer.onRendered(function(){
+Template.editCustomer.onRendered(function(){
 	$('.nav-side-menu .active').removeClass('active');
 	$('.nav-side-menu .customers-link').addClass('active');
 });
 
-Template.addCustomer.helpers({
+Template.editCustomer.onCreated(function(){
+	var phones = [];
+	_.each(this.data.phones, function(p, i) {
+		phones.push({n: i, label: p.label, number: p.number});
+	});
+	if (phones.length < 1)
+		phones.push({n:0, label: '', number: ''});
+	this.phonesInputs = new ReactiveVar(phones);
+});
+
+Template.editCustomer.helpers({
 	phonesInputs: function() {
 		return Template.instance().phonesInputs.get();
+	},
+	isSelected: function(t, v) {
+		var d = Template.instance().data;
+		if (d[t] == v)
+			return 'selected'
 	}
 });
 
-Template.addCustomer.events({
+Template.editCustomer.events({
 	'click .add.btn': function(e,t) {
 		var phones = t.phonesInputs.get();
 		phones.push({m: phones.length, label: '', number: ''});
@@ -61,19 +72,20 @@ Template.addCustomer.events({
 		};
 		var new_customer = {};
 		_.each(_.toPairs(data), function(p) {
+			console.log(p);
 			if (p[1] && p[1] != '')
 				new_customer[p[0]] = p[1];
 		});
-		console.log(new_customer);
+		console.log(data);
 		var ctx = CustomerSchema.newContext();
 		$('.add-customer-container div').removeClass('has-error');
-		if (!ctx.validate(new_customer)) {
+		if (!ctx.validate(data)) {
 			_.each(ctx.invalidKeys(), function(k) {
 				$('.customer-'+k.name).addClass('has-error');
 			});
 		} else {
-			var c = Customers.insert(new_customer);
-			Router.go('/admin/customers/'+c);
+			Customers.update({_id: t.data._id}, {$set: data});
+			Router.go('/admin/customers/'+t.data._id);
 		}
 	}
 });
