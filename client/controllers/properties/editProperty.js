@@ -60,14 +60,14 @@ Template.editProperty.onRendered(function(){
 	$('.total-surface input').val(this.data.totalSurface);
 	$('.terrain-surface input').val(this.data.terrainSurface);
 	$('.property-configuration input').val(this.data.configuration);
-	$('.property-floors input').val(this.data.floorNumber);
-	$('.property-rooms input').val(this.data.roomNumber);
-	$('.property-bedrooms input').val(this.data.bedroomNumber);
-	$('.property-bathrooms input').val(this.data.bathroomNumber);
-	$('.property-closet input').val(this.data.closetNumber);
-	$('.property-dependency input').val(this.data.dependencyNumber);
-	$('.state input').val(this.data.state);
-	$('.heating input').val(this.data.heating);
+	$('.property-floors option[value="'+this.data.floorNumber+'"]').prop('selected', true);
+	$('.property-rooms option[value="'+this.data.roomNumber+'"]').prop('selected', true);
+	$('.property-bedrooms option[value="'+this.data.bedroomNumber+'"]').prop('selected', true);
+	$('.property-bathrooms option[value="'+this.data.bathroomNumber+'"]').prop('selected', true);
+	$('.property-closet option[value="'+this.data.closetNumber+'"]').prop('selected', true);
+	$('.property-dependency option[value="'+this.data.dependencyNumber+'"]').prop('selected', true);
+	$('.state option[value="'+this.data.state+'"]').prop('selected', true);
+	$('.heating option[value="'+this.data.heating+'"]').prop('selected', true);
 	$('.dpe input').val(this.data.dpe);
 	$('.ges input').val(this.data.ges);
 	$('.taxes input').val(this.data.taxes);
@@ -75,13 +75,11 @@ Template.editProperty.onRendered(function(){
 	$('.commission input').val(this.data.commission);
 	$('.price input').val(this.data.price);
 	$('.property-year-container').datepicker('update', new Date(this.data.year));
-	if (this.data.estimation == false) {
-		$('.title input').val(this.data.title);
-		$('.description textarea').val(this.data.description);
-		$('.localInformations textarea').val(this.data.localInformations);
-		$('input[name="visible"][value="'+this.data.visible+'"]').prop('checked', true);
-		$('input[name="exclusive"][value="'+this.data.exclusive+'"]').prop('checked', true);
-	}
+	$('.title input').val(this.data.title);
+	$('.description textarea').val(this.data.description);
+	$('.localInformations textarea').val(this.data.localInformations);
+	$('input[name="visible"][value="'+this.data.visible+'"]').prop('checked', true);
+	$('input[name="exclusive"][value="'+this.data.exclusive+'"]').prop('checked', true);
 });
 
 Template.editProperty.helpers({
@@ -90,6 +88,11 @@ Template.editProperty.helpers({
 	},
 	img: function() {
 		return Images.find({_id: {$in: Template.instance().data.images||[]}})
+	},
+	lstVal: function(cl) {
+		return _.find(HomePage.findOne().lstVal, function(v) {
+			return cl == v.cl;
+		}).values;
 	}
 });
 
@@ -101,7 +104,7 @@ Template.editProperty.events({
 		var file = $('#file').get(0).files[0];
 		Images.insert(file, function(e,r) {
 			if (r) {
-				Properties.update({_id: Properties.findOne()._id}, {
+				Properties.update({_id: t.data._id}, {
 					$push: {images: r._id}
 				});
 			}
@@ -199,40 +202,37 @@ Template.editProperty.events({
 		var data = {
 			reference: t.data.reference,
 			transactionType: $('.transaction-type input[value="Vente"]').is(':checked') ? 'Vente' : 'Location',
-			propertyType: $('.property-type option[selected]').val(),
+			propertyType: $('.property-type select').val(),
 			geocode: geocode,
 			address: address,
 			year: parseInt($('.property-year-container span.year.active').html()),
 			price: parseFloat($('.price input').val()),
 			configuration: $('.property-configuration input').val(),
-			roomNumber: parseInt($('.property-rooms input').val()),
-			bedroomNumber: parseInt($('.property-bedrooms input').val()),
-			bathroomNumber: parseInt($('.property-bathrooms input').val()),
-			closetNumber: parseInt($('.property-closet input').val()),
-			floorNumber: parseInt($('.property-floors input').val()),
+			floorNumber: $('.property-floors select').val(),
+			roomNumber: $('.property-rooms select').val(),
+			bedroomNumber: $('.property-bedrooms select').val(),
+			bathroomNumber: $('.property-bathrooms select').val(),
+			closetNumber: $('.property-closet select').val(),
+			dependencyNumber: $('.property-dependency select').val(),
 			livingRoomSurface: parseInt($('.living-surface input').val()),
 			totalSurface: parseInt($('.total-surface input').val()),
 			terrainSurface: parseInt($('.terrain-surface input').val()),
-			state: $('.state input').val(),
-			heating: $('.heating input').val(),
+			state: $('.state select').val(),
+			heating: $('.heating select').val(),
 			garage: $('.garage input[value="true"]').is(':checked'),
-			dependencyNumber: parseInt($('.property-dependency input').val()),
 			dpe: parseInt($('.dpe input').val()),
 			ges: parseInt($('.ges input').val()),
 			taxes: parseFloat($('.taxes input').val()),
 			charges: parseFloat($('.charges input').val()),
 			commission: parseFloat($('.commission input').val()),
-			exclusive: true,
-			visible: false,
-			estimation: t.data.estimation
+			estimation: t.data.estimation,
+			title: $('.title input').val(),
+			description: $('.description textarea').val(),
+			localInformations: $('.localInformations textarea').val(),
+			visible: $('input[name="visible"][value="true"]').is(':checked'),
+			exclusive: $('input[name="exclusive"][value="true"]').is(':checked')
 		}
-		if (t.data.estimation == false) {
-			data.title = $('.title input').val();
-			data.description = $('.description textarea').val();
-			data.localInformations = $('.localInformations textarea').val();
-			data.visible = $('input[name="visible"][value="true"]').is(':checked');
-			data.exclusive = $('input[name="exclusive"][value="true"]').is(':checked');
-		}
+		console.log(data);
 		var ctx = PropertySchema.newContext();
 		if (ctx.validate(data)) {
 			Properties.update({_id: t.data._id}, {$set: data}, function(e, r) {

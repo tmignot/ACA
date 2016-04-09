@@ -1,26 +1,13 @@
 Template.addEstimation.onCreated(function() {
-	var maps = {
-		path: 'https://maps.googleapis.com/maps/api/staticmap?',
-		params: {
-			center: '155 rue jean jeaures coubron',
-			zoom: '17',
-			size: '600x250',
-			maptype: 'roadmap',
-			markers: 'color:red%7C48.9152408,2.5789193',
-			key: 'AIzaSyD4RgVp6VVGARHMw7snoozMIvUIaC198Ts'
-		}
-	};
-	var url = maps.path;
-	_.each(_.toPairs(maps.params), function(pair) {
-		url = url + '&' + pair[0] + '=' + pair[1];
-	});
-	this.map = new ReactiveVar(url);
+	this.marker = new ReactiveVar(0);
 });
 
 Template.addEstimation.onRendered(function() {
 	$('.nav-side-menu .active').removeClass('active');
 	$('.nav-side-menu .estimations-link').addClass('active');
+	GoogleMaps.load();
 	Session.set('geocode', 0);
+
 	$('.property-year-container').datepicker({
 		format: "yyyy",
 		startDate: "1900y",
@@ -46,8 +33,24 @@ Template.addEstimation.onRendered(function() {
 });
 
 Template.addEstimation.helpers({
-	map: function() {
-		return Template.instance().map.get();
+  mapOptions: function() {
+    if (GoogleMaps.loaded()) {
+      return {
+				center: new google.maps.LatLng(48.9152408, 2.579193),
+				zoom: 14,
+				zoomControl: true,
+				mapTypeControl: true,
+				scaleControl: true,
+				streetViewControl: true,
+				rotateControl: true,
+				fullscreenControl: true
+      };
+    }
+  },
+	lstVal: function(cl) {
+		return _.find(HomePage.findOne().lstVal, function(v) {
+			return cl == v.cl;
+		}).values;
 	}
 });
 
@@ -84,22 +87,15 @@ Template.addEstimation.events({
 						],function(attr) {
 							$('.'+attr+' input').val(r[0][attr]);
 						});
-						var maps = {
-							path: 'https://maps.googleapis.com/maps/api/staticmap?',
-							params: {
-								center: addr,
-								zoom: '17',
-								size: '600x250',
-								maptype: 'roadmap',
-								markers: 'color:red%7C'+r[0].latitude+','+r[0].longitude,
-								key: 'AIzaSyD4RgVp6VVGARHMw7snoozMIvUIaC198Ts'
-							}
-						};
-						var url = maps.path;
-						_.each(_.toPairs(maps.params), function(pair) {
-							url = url + '&' + pair[0] + '=' + pair[1];
+						GoogleMaps.maps.addressMap.instance.setCenter(new google.maps.LatLng(r[0].latitude, r[0].longitude));
+						var marker = t.marker.get();
+						if (marker != 0)
+							marker.setMap(null);
+						marker = new google.maps.Marker({
+							position: new google.maps.LatLng(r[0].latitude, r[0].longitude)
 						});
-						t.map.set(url);
+						marker.setMap(GoogleMaps.maps.addressMap.instance);
+						t.marker.set(marker);
 					}
 				});
 			}
@@ -146,25 +142,25 @@ Template.addEstimation.events({
 			propertyType: $('.property-type option[selected]').val(),
 			geocode: geocode,
 			address: address,
-			year: parseInt($('.property-year-container span.year.active').html()),
-			price: parseFloat($('.price input').val()),
-			roomNumber: parseInt($('.property-rooms input').val()),
-			bedroomNumber: parseInt($('.property-bedrooms input').val()),
-			bathroomNumber: parseInt($('.property-bathrooms input').val()),
-			closetNumber: parseInt($('.property-closet input').val()),
-			floorNumber: parseInt($('.property-floors input').val()),
-			livingRoomSurface: parseInt($('.living-surface input').val()),
-			totalSurface: parseInt($('.total-surface input').val()),
-			terrainSurface: parseInt($('.terrain-surface input').val()),
-			state: $('.state input').val(),
-			heating: $('.heating input').val(),
+			year: parseInt($('.property-year-container span.year.active').html()) || 1970,
+			price: parseFloat($('.price input').val()) || 0,
+			floorNumber: $('.property-floors select').val(),
+			roomNumber: $('.property-rooms select').val(),
+			bedroomNumber: $('.property-bedrooms select').val(),
+			bathroomNumber: $('.property-bathrooms select').val(),
+			closetNumber: $('.property-closet select').val(),
+			dependencyNumber: $('.property-dependency select').val(),
+			livingRoomSurface: parseInt($('.living-surface input').val()) || 0,
+			totalSurface: parseInt($('.total-surface input').val()) || 0,
+			terrainSurface: parseInt($('.terrain-surface input').val()) || 0,
+			state: $('.state select').val(),
+			heating: $('.heating select').val(),
 			garage: $('.garage input[value="true"]').is(':checked'),
-			dependencyNumber: parseInt($('.property-dependency input').val()),
 			dpe: parseInt($('.dpe input').val()),
 			ges: parseInt($('.ges input').val()),
-			taxes: parseFloat($('.taxes input').val()),
-			charges: parseFloat($('.charges input').val()),
-			commission: parseFloat($('.commission input').val()),
+			taxes: parseFloat($('.taxes input').val()) || 0,
+			charges: parseFloat($('.charges input').val()) || 0,
+			commission: parseFloat($('.commission input').val()) || 0,
 			exclusive: true,
 			visible: false,
 			estimation: true

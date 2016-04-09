@@ -10,6 +10,11 @@ Template.addCustomer.onRendered(function(){
 Template.addCustomer.helpers({
 	phonesInputs: function() {
 		return Template.instance().phonesInputs.get();
+	},
+	lstVal: function(v) {
+		return _.find(HomePage.findOne().lstVal, function(l) {
+			return l.cl == v;
+		}).values;
 	}
 });
 
@@ -45,19 +50,15 @@ Template.addCustomer.events({
 			}).value,
 			email: t.find('.customer-email input').value,
 			phones: phones,
-			address: {
-				streetNumber: t.find('.streetNumber input').value,
-				numCompl: _.find($('.num-compl option'), function(o) {
-					return $(o).is(':selected');
-				}).value,
-				streetName: t.find('.streetName input').value,
-				complement: t.find('.complement input').value,
-				zipcode: t.find('.zipcode input').value,
-				city: t.find('.city input').value,
-				country: t.find('.country input').value
-			},
 			earnings: parseInt(t.find('.customer-earnings input').value),
-			contribution: parseInt(t.find('.customer-contribution input').value)
+			contribution: parseInt(t.find('.customer-contribution input').value),
+			budget: parseInt(t.find('.customer-budget input').value),
+			wish: {
+				propertyType: $('.propertyType select').val(),
+				bedroomNumber: $('.bedroomNumber select').val(),
+				totalSurface: parseInt($('.total-surface input').val()) || 0,
+				city: $('.city input').val()
+			}
 		};
 		var new_customer = {};
 		_.each(_.toPairs(data), function(p) {
@@ -68,6 +69,7 @@ Template.addCustomer.events({
 		var ctx = CustomerSchema.newContext();
 		$('.add-customer-container div').removeClass('has-error');
 		if (!ctx.validate(new_customer)) {
+			console.log(ctx.invalidKeys());
 			_.each(ctx.invalidKeys(), function(k) {
 				$('.customer-'+k.name).addClass('has-error');
 			});

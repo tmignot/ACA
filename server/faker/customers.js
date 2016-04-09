@@ -2,6 +2,7 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+/*
 Meteor.startup(function(){
 	if (Customers.find().count() == 0) {
 		console.log("## No Customers found,\n\t- generate Customers");
@@ -73,3 +74,4 @@ Meteor.startup(function(){
 		});
 	}
 });
+*/

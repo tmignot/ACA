@@ -19,9 +19,8 @@
 						<div class="customer-type">
 							<label for="customer-type" class="control-label">Type de client</label>
 							<select class="form-control" id="customer-type">
-								<option value="search" {{isSelected 'type' 'search'}}>Acheteur</option>
-								<option value="sell" {{isSelected 'type' 'sell'}}>Vendeur/Bailleur</option>
-								<option value="rent" {{isSelected 'type' 'rent'}}>Locataire</option>
+								<option value="search" selected>Achat</option>
+								<option value="sell">Location</option>
 							</select>
 						</div>
 						<div class="customer-name">
@@ -81,48 +80,52 @@
 								<span id='contribution-addon' class='input-group-addon'>€</span>
 							</div>
 						</div>
+						<div class="customer-budget form-group">
+							<label class="control-label">Budget</label>
+							<div class="input input-group">
+								<input type="number" step=100 min=0  class="form-control" aria-describedby='contribution-addon' placeholder="2000" value='{{budget}}'>
+								<span id='contribution-addon' class='input-group-addon'>€</span>
+							</div>
+						</div>
 					</div>
 					<div class="col-xs-12 col-md-6">
-						<div class="full-addres">
-							<label class="control-label">Adresse</label>
+						<div class="wisho">
+							<label class="control-label">Recherche</label>
 							<div class="full-addres col-xs-12">
 								<div class='col-xs-12'>
-									<label class="control-label attr-input">Num</label>
-									<div class="input-group streetNumber">
-										<input type="text" class="form-control" placeholder="Num" value='{{address.streetNumber}}'>
-										<div class='input-group-btn'>
-										<select class="form-control num-compl">
-											<option value="" {{isSelected 'numCompl' ''}}></option>
-											<option value="Bis" {{isSelected 'numCompl' 'Bis'}}>Bis</option>
-											<option value="Ter" {{isSelected 'numCompl' 'Ter'}}>Ter</option>
-											<option value="Quater" {{isSelected 'numCompl' 'Quater'}}>Quater</option>
-											<option value="A" {{isSelected 'numCompl' 'A'}}>A</option>
-											<option value="B" {{isSelected 'numCompl' 'B'}}>B</option>
-											<option value="C" {{isSelected 'numCompl' 'C'}}>C</option>
-											<option value="D" {{isSelected 'numCompl' 'D'}}>D</option>
+									<label class="control-label attr-input">Type de bien</label>
+									<div class="input-group propertyType col-xs-12">
+										<select class="form-control" id="propertyType">
+											<option value="Maison" selected>Maison</option>
+											<option value="Appartement">Appartement</option>
+											<option value="Terrain">Terrain</option>
+											<option value="Fond de commerce">Fond de commerce</option>
+											<option value="Viager">Viager</option>
+											<option value="Loft">Loft</option>
+											<option value="Immeuble">Immeuble</option>
+											<option value="Local commercial">Local commercial</option>
+											<option value="Box et Parking">Box et Parking</option>
 										</select>
-										</div>
 									</div>
 								</div>
-								<div class="input streetName col-xs-12">
-									<label class="control-label">Voie</label>
-									<input type="text" class="form-control" placeholder="Libelle" value='{{address.streetName}}'>
+								<div class="input bedroomNumber col-xs-12">
+									<label class="control-label">Nombre de chambres</label>
+									<div class="col-xs-12 input-group">
+										<select class="form-control" id="floorNumber">
+											<option value='null'>Non renseigné</option>
+											{{#each lstVal 'nPieces'}}
+											<option value='{{this}}'>{{this}}</option>
+											{{/each}}
+										</select>
+									</div>
 								</div>
-								<div class="input col-xs-12 complement">
-									<label class="control-label">Complement</label>
-									<input type="text" class="form-control" placeholder="Lieu dit, Batiment,.." value='{{address.complement}}'>
-								</div>
-								<div class="input col-xs-12 zipcode">
-									<label class="control-label">CP</label>
-									<input type="text" class="form-control" placeholder="CP" value='{{address.zipcode}}'>
+								<div class="input col-xs-12 totalSurface">
+									<label class="control-label">Surface totale</label>
+									<input type="number" class="form-control" value='{{wish.totalSurface}}'>
 								</div>
 								<div class="input col-xs-12 city">
 									<label class="control-label">Ville</label>
-									<input type="text" class="form-control" placeholder="Ville" value='{{address.city}}'>
-								</div>
-								<div class="input col-xs-12 country">
-									<label class="control-label">Pays</label>
-									<input type="text" class="form-control" placeholder="Pays" value='{{address.country}}'>
+									<input type="text" class="form-control" value='{{wish.city}}'>
 								</div>
 							</div>
 						</div>

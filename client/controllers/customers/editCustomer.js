@@ -1,6 +1,7 @@
 Template.editCustomer.onRendered(function(){
 	$('.nav-side-menu .active').removeClass('active');
 	$('.nav-side-menu .customers-link').addClass('active');
+	$('.propertyType option[value="'+this.data.wish.propertyType+']"').prop('selected', true);
 });
 
 Template.editCustomer.onCreated(function(){
@@ -21,6 +22,11 @@ Template.editCustomer.helpers({
 		var d = Template.instance().data;
 		if (d[t] == v)
 			return 'selected'
+	},
+	lstVal: function(cl) {
+		return _.find(HomePage.findOne().lstVal, function(v) {
+			return cl == v.cl;
+		}).values;
 	}
 });
 
@@ -54,21 +60,17 @@ Template.editCustomer.events({
 			gender: _.find($('.gender option'), function(g) {
 				return $(g).is(':selected');
 			}).value,
-			email: t.find('.customer-email input').value,
+			email: t.find('.customer-email input').value|| undefined,
 			phones: phones,
-			address: {
-				streetNumber: t.find('.streetNumber input').value,
-				numCompl: _.find($('.num-compl option'), function(o) {
-					return $(o).is(':selected');
-				}).value,
-				streetName: t.find('.streetName input').value,
-				complement: t.find('.complement input').value,
-				zipcode: t.find('.zipcode input').value,
-				city: t.find('.city input').value,
-				country: t.find('.country input').value
+			wish: {
+				propertyType: $('.propertyType select').val(),
+				bedroomNumber: $('.bedroomNumber select').val(),
+				totalSurface: parseInt($('.totalSurface input').val()) || 0,
+				city: $('.city input').val()
 			},
 			earnings: parseInt(t.find('.customer-earnings input').value),
-			contribution: parseInt(t.find('.customer-contribution input').value)
+			contribution: parseInt(t.find('.customer-contribution input').value),
+			budget: parseInt(t.find('.customer-budget input').value)
 		};
 		var new_customer = {};
 		_.each(_.toPairs(data), function(p) {
@@ -80,6 +82,7 @@ Template.editCustomer.events({
 		var ctx = CustomerSchema.newContext();
 		$('.add-customer-container div').removeClass('has-error');
 		if (!ctx.validate(data)) {
+			console.log(ctx.invalidKeys());
 			_.each(ctx.invalidKeys(), function(k) {
 				$('.customer-'+k.name).addClass('has-error');
 			});

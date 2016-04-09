@@ -12,7 +12,7 @@
 <template name="editProperty">
 	<div class="add-estimation-container row">
 		<div class="heading-wrapper shadowed col-xs-12">
-			<h4>Editer une {{#if estimation}}estimation{{else}}propriete{{/if}}</h4>
+			<h4>Editer {{#if estimation}}une estimation{{else}}un mandat{{/if}}</h4>
 		</div>
 	</div>
 	<div class="col-xs-12">
@@ -178,12 +178,12 @@
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-6">
-					<div class="col-xs-12 input-grp property-configuration">
-						<label for="configuration" class="control-label col-xs-6"> 
-							Configuration
+					<div class="col-xs-12 input-grp total-surface">
+						<label for="totalSurface" class="control-label col-xs-6"> 
+							Surface totale
 						</label>
 						<div class="col-xs-6">
-							<input type="text" class="form-control" data-input="configuration">
+							<input type="number" class="form-control to-check" data-input="totalSurface">
 						</div>
 					</div>
 					<div class="col-xs-12 input-grp living-surface">
@@ -194,14 +194,6 @@
 							<input type="number" class="form-control to-check" data-input="livingRoomSurface">
 						</div>
 					</div>
-					<div class="col-xs-12 input-grp total-surface">
-						<label for="totalSurface" class="control-label col-xs-6"> 
-							Surface totale
-						</label>
-						<div class="col-xs-6">
-							<input type="number" class="form-control to-check" data-input="totalSurface">
-						</div>
-					</div>
 					<div class="col-xs-12 input-grp terrain-surface">
 						<label for="terrainSurface" class="control-label col-xs-6">
 							Surface du terrain
@@ -210,12 +202,25 @@
 							<input type="number" class="form-control to-check" data-input="terrainSurface">
 						</div>
 					</div>
+					<div class="col-xs-12 input-grp property-configuration">
+						<label for="configuration" class="control-label col-xs-6"> 
+							Configuration
+						</label>
+						<div class="col-xs-6">
+							<input type="text" class="form-control" data-input="configuration">
+						</div>
+					</div>
 					<div class="col-xs-12 input-grp property-floors">
 						<label for="floorNumber" class="control-label col-xs-6"> 
 							Etages
 						</label>
 						<div class="col-xs-6">
-							<input type="number" class="form-control to-check" data-input="floorNumber">
+							<select class="form-control" id="floorNumber">
+								<option value='null'>Non renseigné</option>
+								{{#each lstVal 'nPieces'}}
+								<option value='{{this}}'>{{this}}</option>
+								{{/each}}
+							</select>
 						</div>
 					</div>
 					<div class="col-xs-12 input-grp property-rooms">
@@ -223,7 +228,12 @@
 							Pieces
 						</label>
 						<div class="col-xs-6">
-							<input type="number" class="form-control to-check" data-input="roomNumber">
+							<select class="form-control" id="roomNumber">
+								<option value='null'>Non renseigné</option>
+								{{#each lstVal 'nPieces'}}
+								<option value='{{this}}'>{{this}}</option>
+								{{/each}}
+							</select>
 						</div>
 					</div>
 					<div class="col-xs-12 input-grp property-bedrooms">
@@ -231,7 +241,12 @@
 							Chambres
 						</label>
 						<div class="col-xs-6">
-							<input type="number" class="form-control to-check" data-input="bedroomNumber">
+							<select class="form-control" id="bedroomNumber">
+								<option value='null'>Non renseigné</option>
+								{{#each lstVal 'nPieces'}}
+								<option value='{{this}}'>{{this}}</option>
+								{{/each}}
+							</select>
 						</div>
 					</div>
 					<div class="col-xs-12 input-grp property-bathrooms">
@@ -239,7 +254,12 @@
 							SDB
 						</label>
 						<div class="col-xs-6">
-							<input type="number" class="form-control to-check" data-input="bathroomNumber">
+							<select class="form-control" id="bathroomNumber">
+								<option value='null'>Non renseigné</option>
+								{{#each lstVal 'nPieces'}}
+								<option value='{{this}}'>{{this}}</option>
+								{{/each}}
+							</select>
 						</div>
 					</div>
 					<div class="col-xs-12 input-grp property-closet">
@@ -247,15 +267,25 @@
 							WC
 						</label>
 						<div class="col-xs-6">
-							<input type="number" class="form-control to-check" data-input="closetNumber">
+							<select class="form-control" id="closetNumber">
+								<option value='null'>Non renseigné</option>
+								{{#each lstVal 'nPieces'}}
+								<option value='{{this}}'>{{this}}</option>
+								{{/each}}
+							</select>
 						</div>
 					</div>
 					<div class="col-xs-12 input-grp property-dependency">
 						<label for="dependencyNumber" class="control-label col-xs-6">
-							Depencences
+							Dépendances
 						</label>
 						<div class="col-xs-6">
-							<input type="number" class="form-control to-check" data-input="dependencyNumber">
+							<select class="form-control" id="dependencyNumber">
+								<option value='null'>Non renseigné</option>
+								{{#each lstVal 'nPieces'}}
+								<option value='{{this}}'>{{this}}</option>
+								{{/each}}
+							</select>
 						</div>
 					</div>
 				</div>
@@ -282,11 +312,21 @@
 				<div class="input-grp col-xs-12 col-sm-6">
 					<div class="col-xs-12 state">
 						<label for="state" class="control-label">Etat du bien</label>
-						<input type="text" class="form-control">
+						<select class="form-control" id="state">
+							<option selected disabled value='null'>Non renseigné</option>
+							{{#each lstVal 'nState'}}
+							<option value='{{this}}'>{{this}}</option>
+							{{/each}}
+						</select>
 					</div>
 					<div class="col-xs-12 heating">
 						<label for="heating" class="control-label">Chauffage</label>
-						<input type="text" class="form-control">
+						<select class="form-control" id="heating">
+							<option selected disabled value='null'>Non renseigné</option>
+							{{#each lstVal 'nHeating'}}
+							<option value='{{this}}'>{{this}}</option>
+							{{/each}}
+						</select>
 					</div>
 				</div>
 				<div class="col-xs-12">

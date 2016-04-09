@@ -14,6 +14,26 @@
 			{{/if}}
 		{{/each}}
 		{{>timetable_input blocks.agency_timetable}}
+		{{#each lstVal}}
+		<div class='col-xs-12 col-sm-6 col-md-4 {{cl}}'>
+			<label class='control-label'>{{label}}</label>
+				{{#each nValues this}}
+				<div class='col-xs-12'>
+					<input type='text' class='col-xs-12 block-input form-control' value='{{this}}'>
+				</div>
+				{{/each}}
+			<div class='col-xs-12'>
+				<div class="add-remove-phone btn-group pull-right">
+					<button type="button" class="remove {{cl}} btn btn-default">
+						<i class='glyphicon glyphicon-minus'></i>
+					</button>
+					<button type="button" class="add {{cl}} btn btn-default">
+						<i class='glyphicon glyphicon-plus'></i>
+					</button>
+				</div>
+			</div>
+		</div>
+		{{/each}}
 		<div class='col-xs-12'>
 			<button type='submit' class='btn btn-primary'>Valider</button>
 		</div>
