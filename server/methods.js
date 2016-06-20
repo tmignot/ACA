@@ -1,12 +1,23 @@
 Fiber = Npm.require('fibers');
 
 Meteor.methods({
+	servlog: function(data) {
+		console.log(data);
+	},
 	addUser: function(username) {
 		var new_user = Accounts.createUser({
 			username: username,
 			email: username+'@gmail.com'
 		});
 		Accounts.sendEnrollmentEmail(new_user);
+	},
+	removeAgent: function(id) {
+		var admin = Accounts.users.findOne({username: 'Administrator'});
+		if (admin && admin._id != id) {
+			if (this.userId && Roles.userIsInRole(this.userId, 'remove', 'Agents')) {
+				Accounts.users.remove({_id: id})
+			}
+		}
 	},
 	loginMethod: function(email) {
 		return {google: email == 'Administrator' ? false : true};
@@ -50,17 +61,13 @@ Meteor.methods({
 		}
 	},
 	updateRoles: function(data) {
-		console.log(data);
 		if (data && data.uid && data.collection && data.method) {
 			var methods = ['get','list','insert','update','remove'];
 			var collections = ['Agents','Customers','Meetings','Properties','Estimations','Editor'];
 			if (methods.indexOf(data.method) >= 0 && collections.indexOf(data.collection) >= 0) {
-				console.log('good query');
 				if (Roles.userIsInRole(this.userId, ['update'], 'Agents')) {
-					console.log('access granted');
 					var usr = Meteor.users.findOne({_id: data.uid});
 					if (usr && usr.username != 'test') {
-						console.log('user found:' + usr.username);
 						if (Roles.userIsInRole(data.uid, [data.method], data.collection))
 							Roles.removeUsersFromRoles(data.uid, [data.method], data.collection);
 						else

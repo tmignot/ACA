@@ -7,7 +7,6 @@ Template.addEstimation.onRendered(function() {
 	$('.nav-side-menu .estimations-link').addClass('active');
 	GoogleMaps.load();
 	Session.set('geocode', 0);
-
 	$('.property-year-container').datepicker({
 		format: "yyyy",
 		startDate: "1900y",
@@ -18,7 +17,6 @@ Template.addEstimation.onRendered(function() {
 		language: "fr",
 		defaultViewDate: { year: 1970 }
 	});
-
 	this.dpeges = new DpeGes();
 	this.dpeges.dpe({
 		domId: 'dpe',
@@ -137,34 +135,42 @@ Template.addEstimation.events({
 			}
 		});
 		var data = {
-			reference: ShortId.generate(),
+			ownerInfo: $('.ownerInfo input').val(),
 			transactionType: $('.transaction-type input[value="Vente"]').is(':checked') ? 'Vente' : 'Location',
 			propertyType: $('.property-type option[selected]').val(),
 			geocode: geocode,
 			address: address,
-			year: parseInt($('.property-year-container span.year.active').html()) || 1970,
-			price: parseFloat($('.price input').val()) || 0,
+			year: parseInt($('.property-year-container span.year.active').html()),
+			price: parseFloat($('.price input').val()),
 			floorNumber: $('.property-floors select').val(),
 			roomNumber: $('.property-rooms select').val(),
 			bedroomNumber: $('.property-bedrooms select').val(),
 			bathroomNumber: $('.property-bathrooms select').val(),
 			closetNumber: $('.property-closet select').val(),
 			dependencyNumber: $('.property-dependency select').val(),
-			livingRoomSurface: parseInt($('.living-surface input').val()) || 0,
-			totalSurface: parseInt($('.total-surface input').val()) || 0,
-			terrainSurface: parseInt($('.terrain-surface input').val()) || 0,
+			livingRoomSurface: parseInt($('.living-surface input').val()),
+			totalSurface: parseInt($('.total-surface input').val()),
+			terrainSurface: parseInt($('.terrain-surface input').val()),
 			state: $('.state select').val(),
 			heating: $('.heating select').val(),
 			garage: $('.garage input[value="true"]').is(':checked'),
 			dpe: parseInt($('.dpe input').val()),
 			ges: parseInt($('.ges input').val()),
-			taxes: parseFloat($('.taxes input').val()) || 0,
-			charges: parseFloat($('.charges input').val()) || 0,
-			commission: parseFloat($('.commission input').val()) || 0,
+			taxes: parseFloat($('.taxes input').val()),
+			charges: parseFloat($('.charges input').val()),
+			commission: parseFloat($('.commission input').val()),
 			exclusive: true,
 			visible: false,
 			estimation: true
 		}
+		data = _.mapValues(data, function(v,k) {
+			var tmp = {};
+			tmp[k] = v;
+			console.log(tmp, !isNaN(v), v!=='');
+			if (!_.isNaN(v) && v !== '' && v !== 'Non renseigné')
+				return v;
+		});
+		console.log(data);
 		var ctx = PropertySchema.newContext();
 		if (ctx.validate(data)) {
 			Properties.insert(data, function(e, r) {
@@ -175,11 +181,9 @@ Template.addEstimation.events({
 			});
 		}	else {
 			$('.add-estimation-form input.to-check').parent().removeClass('has-error');
-			$('.add-estimation-form input.to-check').parent().addClass('has-success');
 			_.each(ctx.invalidKeys(), function(key) {
-				var dom = $('.add-estimation-form input[data-input="'+key.name+'"]');
+				var dom = $('input[data-input="'+key.name+'"]');
 				if (dom.length) {
-					dom.parent().removeClass('has-success');
 					dom.parent().addClass('has-error');
 				}
 			});

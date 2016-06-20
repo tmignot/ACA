@@ -2,7 +2,7 @@ Tracker.autorun(function (c) {
 	if (Session.equals("mergingUserOk", false))
 		Router.go('/');
 	if (Session.equals("mergingUserOk", true))
-		Router.go('/admin/dashboard');
+		Router.go('/admin');
 });
 
 Template.Enroll.onCreated(function() {
@@ -25,6 +25,6 @@ Template.Enroll.onCreated(function() {
 	} else if (state !== 'finish') {
 		console.log('error: '+ state);
 	} else {
-		Router.go('/admin/dashboard');
+		Router.go('/admin');
 	}
 });

@@ -4,7 +4,7 @@
 			<li class="active">Properties</li>
 		</ol>
 		<div class="col-xs-9 col-sm-5">
-			<div class="input-group">
+			<div class="input-group search-property">
 				<input type="text" class="form-control" placeholder="Search...">
 				<span class="input-group-btn">
 					<button type="button" class="btn btn-default">
@@ -12,11 +12,6 @@
 					</button>
 				</span>
 			</div>
-		</div>
-		<div class="col-xs-3 col-sm-1">
-			<button class="btn btn-primary addProperty center-block">
-				Ajouter <span class="glyphicon glyphicon-plus"></span>
-			</button>
 		</div>
 	</div>
 	<div class="row">
@@ -28,11 +23,12 @@
 
 <template name="PropertyPages">
 	{{#if noItems}}
-	<div class='alert alert-danger'>
+	<div class='alert alert-warning'>
 		Aucune propriete trouvee
 	</div>
-	{{/if}}
+	{{else}}
 	{{>pagesNav}}
 	{{>pages}}
 	{{>pagesNav}}
+	{{/if}}
 </template>

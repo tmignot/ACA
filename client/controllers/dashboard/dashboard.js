@@ -1,4 +1,4 @@
-getEventList = function() {
+getEventList = function(callback) {
 	data = {
 		timeMin: moment().subtract(1, 'month').toISOString()
 	}
@@ -9,30 +9,22 @@ getEventList = function() {
 				var hint = Meteor.user().emails[0].address;
 				Meteor.loginWithGoogle({
 					loginHint: hint,
-					requestPermissions: ['email', 'https://www.googleapis.com/auth/calendar','https://www.googleapis.com/auth/calendar.readonly'],
+					requestPermissions: ['email', 'https://www.googleapis.com/auth/calendar','https://www.googleapis.com/auth/calendar.readonly']
 				});
 			} else {
-				console.log(r);
-				$('#calendar').fullCalendar({
-					header: {
-						left: 'title',
-						center: 'month,agendaWeek,agendaDay',
-						right: 'prev,today,next'
-					},
-					height: 'auto',
-					lang: 'fr',
-					events: _.map(r.result.items, function(item) {
-						return({
-							id: item.id,
-							title: item.summary,
-							start: item.start.date? item.start.date : item.start.dateTime,
-							end: item.end.dateTime
-						});
-					})
+				console.log('got result', r);
+				var retval = _.map(r.result.items, function(item) {
+					if (Meetings.findOne({gid: item.id}))
+						return
+					return({
+						id: item.id,
+						title: item.summary,
+						start: item.start.date? item.start.date : item.start.dateTime,
+						end: item.end.dateTime
+					});
 				});
-				$("button.fc-button").removeClass('fc-button')
-					 .removeClass('fc-state-default')
-					 .addClass('btn');
+				console.log('result mapped', retval);
+				callback(_.compact(retval));
 			}
 		}
 	});
@@ -74,6 +66,12 @@ Template.Dashboard.onRendered(function() {
 					if (!meeting.to)
 						data.allDay = false;
 					return data;
+				}
+			},
+			{
+				events: function(start, end, tz, cb) {
+					console.log('event func called');
+					getEventList(cb);
 				}
 			}
 		],

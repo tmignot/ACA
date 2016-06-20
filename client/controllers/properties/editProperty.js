@@ -1,28 +1,11 @@
 Template.editProperty.onCreated(function() {
-	var maps = {
-		path: 'https://maps.googleapis.com/maps/api/staticmap?',
-		params: {
-			center: this.data.geocode,
-			zoom: '17',
-			size: '600x250',
-			maptype: 'roadmap',
-			markers: 'color:red%7C'+this.data.address.latitude+','+this.data.address.longitude,
-			key: 'AIzaSyD4RgVp6VVGARHMw7snoozMIvUIaC198Ts'
-		}
-	};
-	var url = maps.path;
-	_.each(_.toPairs(maps.params), function(pair) {
-		url = url + '&' + pair[0] + '=' + pair[1];
-	});
-	this.map = new ReactiveVar(url);
-});
-
-Template.editPropertie.onRendered(function(){
-	$('.nav-side-menu .active').removeClass('active');
-	$('.nav-side-menu .properties-link').addClass('active');
+	this.marker = new ReactiveVar(0);
 });
 
 Template.editProperty.onRendered(function(){
+	GoogleMaps.load();
+	$('.nav-side-menu .active').removeClass('active');
+	$('.nav-side-menu .properties-link').addClass('active');
 	Session.set('geocode', 0);
 	var date = $('.property-year-container').datepicker({
 		format: "yyyy",
@@ -68,6 +51,7 @@ Template.editProperty.onRendered(function(){
 	$('.property-dependency option[value="'+this.data.dependencyNumber+'"]').prop('selected', true);
 	$('.state option[value="'+this.data.state+'"]').prop('selected', true);
 	$('.heating option[value="'+this.data.heating+'"]').prop('selected', true);
+	$('.ownerInfo input').val(this.data.ownerInfo);
 	$('.dpe input').val(this.data.dpe);
 	$('.ges input').val(this.data.ges);
 	$('.taxes input').val(this.data.taxes);
@@ -83,9 +67,35 @@ Template.editProperty.onRendered(function(){
 });
 
 Template.editProperty.helpers({
-	map: function() {
-		return Template.instance().map.get();
-	},
+  mapOptions: function() {
+    if (GoogleMaps.loaded()) {
+			var t = Template.instance();
+			Meteor.call('geocode', Template.instance().data.geocode, function(e,r) {
+				var d;
+				if (r && r.length) {
+					GoogleMaps.maps.adressMap.instance.setCenter(new google.maps.LatLng(r[0].latitude, r[0].longitude));
+					var marker = t.marker.get();
+					if (marker != 0)
+						marker.setMap(null);
+					marker = new google.maps.Marker({
+						position: new google.maps.LatLng(r[0].latitude, r[0].longitude)
+					});
+					marker.setMap(GoogleMaps.maps.adressMap.instance);
+					t.marker.set(marker);
+				}
+			});
+			return {
+				center: new google.maps.LatLng(0, 0),
+				zoom: 14,
+				zoomControl: true,
+				mapTypeControl: true,
+				scaleControl: true,
+				streetViewControl: true,
+				rotateControl: true,
+				fullscreenControl: true
+			};
+    }
+  },
 	img: function() {
 		return Images.find({_id: {$in: Template.instance().data.images||[]}})
 	},
@@ -144,22 +154,15 @@ Template.editProperty.events({
 						],function(attr) {
 							$('.'+attr+' input').val(r[0][attr]);
 						});
-						var maps = {
-							path: 'https://maps.googleapis.com/maps/api/staticmap?',
-							params: {
-								center: addr,
-								zoom: '17',
-								size: '600x250',
-								maptype: 'roadmap',
-								markers: 'color:red%7C'+r[0].latitude+','+r[0].longitude,
-								key: 'AIzaSyD4RgVp6VVGARHMw7snoozMIvUIaC198Ts'
-							}
-						};
-						var url = maps.path;
-						_.each(_.toPairs(maps.params), function(pair) {
-							url = url + '&' + pair[0] + '=' + pair[1];
+						GoogleMaps.maps.adressMap.instance.setCenter(new google.maps.LatLng(r[0].latitude, r[0].longitude));
+						var marker = t.marker.get();
+						if (marker != 0)
+							marker.setMap(null);
+						marker = new google.maps.Marker({
+							position: new google.maps.LatLng(r[0].latitude, r[0].longitude)
 						});
-						t.map.set(url);
+						marker.setMap(GoogleMaps.maps.adressMap.instance);
+						t.marker.set(marker);
 					}
 				});
 			}
@@ -200,7 +203,8 @@ Template.editProperty.events({
 			}
 		});
 		var data = {
-			reference: t.data.reference,
+			ownerInfo: $('.ownerInfo input').val(),
+			reference: 0,
 			transactionType: $('.transaction-type input[value="Vente"]').is(':checked') ? 'Vente' : 'Location',
 			propertyType: $('.property-type select').val(),
 			geocode: geocode,
@@ -232,9 +236,16 @@ Template.editProperty.events({
 			visible: $('input[name="visible"][value="true"]').is(':checked'),
 			exclusive: $('input[name="exclusive"][value="true"]').is(':checked')
 		}
+		data = _.mapValues(data, function(v,k) {
+			var tmp = {};
+			tmp[k] = v;
+			if (!_.isNaN(v) && v !== '' && v !== 'Non renseigné')
+				return v;
+		});
 		console.log(data);
 		var ctx = PropertySchema.newContext();
 		if (ctx.validate(data)) {
+			_.unset(data, 'reference');
 			Properties.update({_id: t.data._id}, {$set: data}, function(e, r) {
 				if (e) 
 					console.log(e);
@@ -245,11 +256,9 @@ Template.editProperty.events({
 			});
 		}	else {
 			$('.add-estimation-form input.to-check').parent().removeClass('has-error');
-			$('.add-estimation-form input.to-check').parent().addClass('has-success');
 			_.each(ctx.invalidKeys(), function(key) {
 				var dom = $('.add-estimation-form input[data-input="'+key.name+'"]');
 				if (dom.length) {
-					dom.parent().removeClass('has-success');
 					dom.parent().addClass('has-error');
 				}
 			});

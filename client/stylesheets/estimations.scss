@@ -170,10 +170,9 @@
 		zoom: 0.8;
 	}
 
-	.map-wrapper {
-		#map {
-			width: 100%;
-		}
+	#map {
+		width: 100%;
+		height: 180px;
 	}
 
 	.button-wrapper .center-block {

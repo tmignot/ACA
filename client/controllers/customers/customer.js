@@ -98,12 +98,51 @@ Template.Customer.events({
 				console.log(k);
 				$('.meetingInput .'+k.name).addClass('has-error');
 			});
-		} else
+		} else {
 			var m = Meetings.insert(new_meeting);
+			var user = Agents.find({_id: Meteor.user()._id},{fields: {services: 1, emails: 1}}).fetch();
+			user = user[0];
+			console.log(user);
+			if (user && user.services && user.services.google) {
+				var addr = user.emails[0].address;
+				var path = 'calendar/v3/calendars/primary/events';
+				var options = {
+					summary: new_meeting.summary = t.data.name,
+					start: { dateTime: (new Date(new_meeting.from)).toISOString()},
+					end: { dateTime: (new Date(new_meeting.to)).toISOString()}
+				}
+				console.log(options);
+				GoogleApi.post(path, {user: user, data: options}, function(e,r) {
+					if (!e) {
+						Meetings.update(m, {$set: {gid: r.id}});
+					}
+					console.log({error: e, result: r, m: m});
+				});
+			}
+		}
 	},
 	'click .remove-meeting': function(e,t) {
 		var id = $(e.currentTarget).data('meeting-id');
-		Meetings.remove({_id: id});
+		var m = Meetings.findOne({_id: id});
+		if (!m) { return }
+		else {
+			GoogleApi.delete('calendar/v3/calendars/primary/events/'+m.gid, 
+				{
+					user: Meteor.users.findOne({_id:m.agent}),
+				}, function(e,r) {
+					console.log(e,r);
+					if (!e)
+						Meetings.remove({_id: id});
+					else {
+						var hint = Meteor.user().emails[0].address;
+						Meteor.loginWithGoogle({
+							loginHint: hint,
+							requestPermissions: ['email', 'https://www.googleapis.com/auth/calendar','https://www.googleapis.com/auth/calendar.readonly']
+						});
+					}
+				}
+			);
+		}
 	},
 	'click .property-btn': function(e,t) {
 		console.log($('.propertyInput').val());

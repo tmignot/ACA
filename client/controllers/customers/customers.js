@@ -10,7 +10,13 @@ Template.Customers.helpers({
 });
 
 Template.Customers.events({
-	'click .addCustomer': function() { Router.go('/admin/customers/add'); }
+	'click .addCustomer': function() { Router.go('/admin/customers/add'); },
+	'keyup .search-customer input': function(e,t) {
+		var query = e.currentTarget.value;
+		if (!isNaN(parseInt(query)))
+			query = parseInt(query);
+		CustomersPages.set('filters', {$or: [{name: {$regex: '.*'+query+'.*', $options: 'i'}},{budget: query}]});
+	}
 });
 
 Template.CustomerCard.onCreated(function(){

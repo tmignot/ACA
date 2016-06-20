@@ -17,17 +17,8 @@ Template.Meetings.events({
 			adresse: $('#inputAdress_cal').val(),
 			buyer: $('#inputBuyer_cal').val()
 		};
-
-		console.log(opt.uid);
-		console.log(opt.date);
-		console.log(opt.property);
-		console.log(opt.agent);
-		console.log(opt.description);
-		console.log(opt.adresse);
-		console.log(opt.buyer);
-
+		console.log(opt);
 		var res = Meteor.call('addMeetings', opt);
-
 		console.log(res);
 	}
 });

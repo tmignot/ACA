@@ -4,7 +4,7 @@
 			<li class="active">Estimations</li>
 		</ol>
 		<div class="col-xs-9 col-sm-5">
-			<div class="input-group">
+			<div class="input-group search-estimation">
 				<input type="text" class="form-control" placeholder="Search...">
 				<span class="input-group-btn">
 					<button type="button" class="btn btn-default">
@@ -28,11 +28,12 @@
 
 <template name='EstimationsPages'>
 	{{#if noItems}}
-	<div class='alert alert-danger'>
+	<div class='alert alert-warning'>
 		Aucune estimation trouvee
 	</div>
-	{{/if}}
+	{{else}}
 	{{>pagesNav}}
 	{{>pages}}
 	{{>pagesNav}}
+	{{/if}}
 </template>

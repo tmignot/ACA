@@ -88,8 +88,10 @@ html, body
 .modal,
 .modal .modal-content,
 .modal .property-container {
+/*
 	background: black;
 	color: white;
+*/
 }
 
 .logo {

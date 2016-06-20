@@ -12,5 +12,11 @@ Template.Estimations.helpers({
 Template.Estimations.events({
 	'click button.addEstimation': function(e,t) {
 		Router.go('/admin/estimations/add');
+	},
+	'keyup .search-estimation input': function(e,t) {
+		var query = e.currentTarget.value;
+		if (!isNaN(parseInt(query)))
+			query = parseInt(query);
+		EstimationsPages.set('filters', {estimation: true, $or: [{ownerInfo: {$regex: '.*'+query+'.*', $options: 'i'}},{price: query}]});
 	}
 });

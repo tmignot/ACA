@@ -56,35 +56,53 @@
 					</div>
 					<div class="col-xs-12 separator"></div>
 				</div>
-				<div class='col-xs-12 col-md-6'>
+				<div class='col-xs-12 col-lg-6'>
 					<div class="wish attribute col-xs-12">
-						<div class='col-xs-12'>
+						<div class='col-xs-12 attribute'>
 							<i class='fa fa-search'></i>
-							<label class="">Recherche</label>
+							<label class="">Bien recherché</label>
 						</div>
 						{{#with wish}}
-						<div class="col-xs-12 col-md-6 bedroomNumber attribute">
-							<label class="">Nombre de chambres</label>
+						<div class="col-xs-12 col-md-6 propertyType">
+							<label class="">Type de bien</label>
 							<span class="attr-value">
-								{{ bedroomNumber }}
+								{{ propertyType }}
 							</span>
 						</div>
-						<div class="col-xs-12 col-md-6 total-surface attribute">
+						<div class="col-xs-12 col-md-6 bedroomNumber">
+							<label class="">Chambres</label>
+							<span class="attr-value">
+								{{#if $eq bedroomNumber 'null'}}
+								<small>Non renseigné</small>
+								{{else}}
+								{{ bedroomNumber }}
+								{{/if}}
+							</span>
+						</div>
+						<div class="col-xs-12 col-md-6 total-surface">
 							<label class="">Surface totale </label>
 							<span class="attr-value">
+								{{#if $eq totalSurface 0}}
+								<small>Non renseigné</small>
+								{{else}}
 								{{ totalSurface }} m²
+								{{/if}}
 							</span>
 						</div>
-						<div class="col-xs-12 col-md-6 city attribute">
+						<div class="col-xs-12 col-md-6 city">
 							<label class="">Ville </label>
 							<span class="attr-value">
+								{{#if $eq city 0}}
+								<small>Non renseigné</small>
+								{{else}}
 								{{ city }}
+								{{/if}}
 							</span>
 						</div>
 						{{/with}}
 					</div>
 					<div class="col-xs-12 separator"></div>
-					<div class="earnings attribute col-xs-12 col-md-6">
+					<div class="earnings attribute col-xs-12 col-md-4">
 						<i class='fa fa-money'></i>
 						<label class=""> Gains</label>
 						<span class="attr-value">
@@ -92,7 +110,7 @@
 						</span>
 					</div>
 					<div class="visible-sm col-xs-12 separator"></div>
-					<div class="contribution attribute col-xs-12 col-md-6">
+					<div class="contribution attribute col-xs-12 col-md-4">
 						<i class='fa fa-pie-chart'></i>
 						<label class=""> Apport</label>
 						<span class="attr-value">
@@ -100,8 +118,8 @@
 						</span>
 					</div>
 					<div class="visible-sm col-xs-12 separator"></div>
-					<div class="contribution attribute col-xs-12 col-md-6">
-						<i class='fa fa-usd'></i>
+					<div class="contribution attribute col-xs-12 col-md-4">
+						<i class='fa fa-euro'></i>
 						<label class=""> Budget</label>
 						<span class="attr-value">
 							{{budget}}€
