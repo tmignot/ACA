@@ -68,23 +68,21 @@
 					<div class="col-xs-12">
 						<label class="control-label col-xs-12">Images</label>
 						<div class="input col-xs-12 images">
-							<input id="file" type="file" class="form-control hidden"/>
-							<span class="filename col-xs-8">(pas de fichier selectionne)</span>
-							<div class="col-xs-4">
-								<button type='button' class='btn btn-default search'>
-									<span class="glyphicon glyphicon-search"></span>
-								</button>
-								<button type='button' class='btn btn-primary upload'>
-									<span class="glyphicon glyphicon-plus"></span>
-								</button>
-							</div>
-							<div class="separator col-xs-12"></div>
 							<div class="col-xs-12">
 								{{#carousel id=_id}}
 									{{#each img}}
 										{{>carouselImage src=this width='100%'}}
 									{{/each}}
 								{{/carousel}}
+							</div>
+							<div class="separator col-xs-12"></div>
+							<div class="col-xs-12">
+								<button type='button' class='pull-right btn btn-danger remove-image'>
+									<span class="glyphicon glyphicon-trash"></span>
+								</button>
+								<button type='button' class='pull-right btn btn-default upload'>
+									<span class="glyphicon glyphicon-plus"></span>
+								</button>
 							</div>
 						</div>
 					</div>

@@ -7,3 +7,15 @@
 <template name='carouselImage'>
 <div><img data-carousel-id="{{carousel_id}}" class="carousel-image" src='{{src}}' width="{{width}}" onload='loaded(this)' /></div>
 </template>
+
+<template name='imageModal'>
+	<div class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div><img class="carousel-image" src='{{src}}' width="{{width}}"/></div>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+</template>

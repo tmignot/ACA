@@ -1,4 +1,6 @@
 Template.editProperty.onCreated(function() {
+	if (!this.data)
+		return;
 	var self = this;
 	this.marker = new ReactiveVar(0);
 	this.images = [];
@@ -118,15 +120,32 @@ Template.editProperty.helpers({
 });
 
 Template.editProperty.events({
-	'click .search': function(e,t) {
-		$('.images input').click();
+	'click .remove-image': function(e,t) {
+		Modal.show('confirmation', {
+			type: 'danger',
+			title: 'Êtes-vous sûr?',
+			body: 'Attention, cette action est irreversible!',
+			action: 'Supprimer',
+			callback: function() {
+				var imgID = t.data.images[Session.get('currentSlide')];
+				Images.remove({_id: imgID}, function(e,r) {
+					if (e)
+						console.log(e);
+					else {
+						Properties.update({_id: t.data._id}, {$pull: {images: imgID}}, function(e,r) {
+							if (e)
+								console.log(e);
+							else
+								document.location.reload(true);
+						});
+					}
+				});
+			}
+		});
 	},
 	'click .upload': function(e,t) {
 		Modal.show('uploadImage', {id: t.data._id});
 	},	
-	'change .images input': function(e,t) {
-		$('.filename').html(_.last(e.currentTarget.value.split('\\')));
-	},
 	'change .dpe input': function(e,t) {
 		t.dpeges.dpe({
 			domId: 'dpe',

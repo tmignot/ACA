@@ -1,5 +1,7 @@
 Template.Property.onCreated(function(){
 	var self = this;
+	if (!this.data)
+		return;
 	this.type = this.data.estimation ? 'estimations' : 'properties';
 	this.images = [];
 	_.each(this.data.images, function(img) {
