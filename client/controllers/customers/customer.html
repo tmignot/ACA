@@ -57,6 +57,30 @@
 					<div class="col-xs-12 separator"></div>
 				</div>
 				<div class='col-xs-12 col-lg-6'>
+					<div class="contribution attribute col-xs-12 col-md-4">
+						<i class='fa fa-euro'></i>
+						<label class=""> Budget</label>
+						<span class="attr-value">
+							{{budget}}€
+						</span>
+					</div>
+					<div class="visible-sm col-xs-12 separator"></div>
+					<div class="earnings attribute col-xs-12 col-md-4">
+						<i class='fa fa-money'></i>
+						<label class=""> Gains</label>
+						<span class="attr-value">
+							{{earnings}}€
+						</span>
+					</div>
+					<div class="visible-sm col-xs-12 separator"></div>
+					<div class="contribution attribute col-xs-12 col-md-4">
+						<i class='fa fa-pie-chart'></i>
+						<label class=""> Apport</label>
+						<span class="attr-value">
+							{{contribution}}€
+						</span>
+					</div>
+					<div class="col-xs-12 separator"></div>
 					<div class="wish attribute col-xs-12">
 						<div class='col-xs-12 attribute'>
 							<i class='fa fa-search'></i>
@@ -90,40 +114,14 @@
 							</span>
 						</div>
 						<div class="col-xs-12 col-md-6 city">
-							<label class="">Ville </label>
+							<label class="">Villes </label>
 							<span class="attr-value">
-								{{#if $eq city 0}}
-								<small>Non renseigné</small>
-								{{else}}
-								{{ city }}
-								{{/if}}
+								{{#each city }}
+									{{ this }} 
+								{{/each}}
 							</span>
 						</div>
 						{{/with}}
-					</div>
-					<div class="col-xs-12 separator"></div>
-					<div class="earnings attribute col-xs-12 col-md-4">
-						<i class='fa fa-money'></i>
-						<label class=""> Gains</label>
-						<span class="attr-value">
-							{{earnings}}€
-						</span>
-					</div>
-					<div class="visible-sm col-xs-12 separator"></div>
-					<div class="contribution attribute col-xs-12 col-md-4">
-						<i class='fa fa-pie-chart'></i>
-						<label class=""> Apport</label>
-						<span class="attr-value">
-							{{contribution}}€
-						</span>
-					</div>
-					<div class="visible-sm col-xs-12 separator"></div>
-					<div class="contribution attribute col-xs-12 col-md-4">
-						<i class='fa fa-euro'></i>
-						<label class=""> Budget</label>
-						<span class="attr-value">
-							{{budget}}€
-						</span>
 					</div>
 				</div>
 			</div>
@@ -194,7 +192,7 @@
 				</div>
 			</div>
 		</div>
-		<div class='col-xs-12 col-lg-6'>
+		<div class='col-xs-12'>
 			<div class="customer-properties shadowed attribute col-xs-12">
 				<h5><span class="fa fa-building"></span> Proprietes</h5>
 				{{#if properties}}
@@ -202,15 +200,32 @@
 					<table class='table table-responsive table-hover'>
 						<tbody>
 							<tr>
-								<th>Reference</th><th>Ville</th><th>Prix</th><th>Commission</th><th></th>
+								<th>Nom</th><th>Taille</th><th>Chambres</th><th>Terrain</th><th>Ville</th><th>Prix</th>
 							</tr>
 							{{#each properties}}
 							<tr>
 								<td>
-									{{#if estimation}}
-									<a href='/admin/estimations/{{_id}}'>{{reference}}</a>
+									<a href='/admin/properties/{{_id}}'>{{ownerInfo}}</a>
+								</td>
+								<td>
+									{{#if totalSurface}}
+										{{totalSurface}}m²
 									{{else}}
-									<a href='/admin/properties/{{_id}}'>{{reference}}</a>
+									<small>non renseigné</small>
+									{{/if}}
+								</td>
+								<td>
+									{{#if bedroomNumber}}
+										{{bedroomNumber}} chambres
+									{{else}}
+									<small>non renseigné</small>
+									{{/if}}
+								</td>
+								<td>
+									{{#if terrainSurface}}
+										{{terrainSurface}}m²
+									{{else}}
+										non
 									{{/if}}
 								</td>
 								<td>
@@ -218,22 +233,14 @@
 										{{#if address.city}}
 											{{address.city}}
 										{{else}}
-										<small>pas de ville</small>
+										<small>non renseigné</small>
 										{{/if}}
 									{{else}}
-									<small>pas d'adresse</small>
+									<small>non reseigné</small>
 									{{/if}}
 								</td>
 								<td>
 									{{price}}€
-								</td>
-								<td>
-									{{commission}}€
-								</td>
-								<td>
-									{{#if isInRole 'update' 'Customers'}}
-									<i data-property-ref='{{reference}}' class='remove-property text-danger text-center glyphicon glyphicon-remove-circle'></i>
-									{{/if}}
 								</td>
 							</tr>
 							{{/each}}
@@ -242,26 +249,12 @@
 				</div>
 				{{else}}
 				<div class='col-xs-12 alert alert-warning text-center'>
-					Aucun biens associes
+					Aucun mandat ne correspond à la recherche
 				</div>
 				{{/if}}
-				<div class="col-xs-12 separator"></div>
-				<div class='col-xs-12'>
-					<label class='control-label'>
-						<small>Associer un bien</small>
-					</label>
-					<div class='input-group'>
-						<input class='propertyInput form-control' placeholder='Reference'>
-						<div class='input-group-btn'>
-							<button type='button' class='property-btn btn btn-primary'>
-								<i class='fa fa-tag'></i>
-							</button>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
-		<div class='col-xs-12 col-lg-6'>
+		<div class='hidden col-xs-12 col-lg-6'>
 			<div class="customer-properties shadowed attribute col-xs-12">
 				<h5><span class="fa fa-folder"></span> Documents</h5>
 				{{#if documents}}

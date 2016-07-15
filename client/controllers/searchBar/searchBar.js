@@ -171,7 +171,7 @@ Template.annonceCard.helpers({
 	}
 });
 
-Template.properties.uihooks({
+Template.PropertyClientPages.uihooks({
 	'.page-container': {
 		insert: function(node, next, tpl) {
 			$(node).insertBefore(next);

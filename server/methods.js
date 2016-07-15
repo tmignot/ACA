@@ -80,7 +80,7 @@ Meteor.methods({
 		return false;
 	},
 	geocode: function(addr) {
-		if (this.userId) {
+		if (this.userId && addr) {
 			var geo = new GeoCoder({
 				geocoderProvider: 'google',
 				httpAdapter: 'https',

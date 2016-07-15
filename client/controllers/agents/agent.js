@@ -46,11 +46,19 @@ Template.Agent.events({
 		Modal.show('editAgent', t.data);
 	},
 	'click .remove-btn': function(e,t) {
-		Meteor.call('removeAgent', t.data._id, function(e,r) {
-			if (e)
-				console.log(e);
-			else
-				Router.go('/admin/agents');
+		Modal.show('confirmation', {
+			type: 'danger',
+			title: 'Êtes-vous sûr?',
+			body: 'Attention, cette action est irreversible!',
+			action: 'Supprimer',
+			callback: function() {
+				Meteor.call('removeAgent', t.data._id, function(e,r) {
+					if (e)
+						console.log(e);
+					else
+						Router.go('/admin/agents');
+				});
+			}
 		});
 	}
 });

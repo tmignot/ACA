@@ -12,13 +12,7 @@
 	<div class="property-container row">
 		<div class="heading-wrapper shadowed col-xs-12">
 			<h4>
-				<span class="attr-value">{{ propertyType }}</span><small> a </small>
-				{{#if $eq transactionType 'Vente'}}
-				<span class="attr-value">vendre</span>
-				{{else}}
-				<span class="attr-value">louer</span>
-				{{/if}}
-				<small> Nom: {{ownerInfo}} </small>
+				<h4>{{ownerInfo}}<br><small>Tél: {{ownerPhone}}</small></h4>
 				{{#if $eq estimation true}}
 				{{#if isInRole 'insert' 'Properties'}}
 				<button class='btn btn-success transfer-btn pull-right' type='button'>Valider l'estimation
@@ -32,7 +26,12 @@
 			<div class="annonce-wrapper">
 				<div class="annonce shadowed col-xs-12">
 					<h5><span class="fa fa-bookmark"></span>
-						Annonce
+					<span class="attr-value">{{ propertyType }}</span> a 
+					{{#if $eq transactionType 'Vente'}}
+					<span class="attr-value">vendre</span>
+					{{else}}
+					<span class="attr-value">louer</span>
+					{{/if}}
 					</h5>
 					<div class="col-xs-12 col-lg-6">
 						<div class="attribute title">

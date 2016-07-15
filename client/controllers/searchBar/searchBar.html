@@ -59,7 +59,7 @@
 		{{else}}
 			<div class="results">
 			{{#if hlength}}
-				{{> properties}}
+				{{> PropertyClientPages}}
 			{{else}}
 				<h3 class='text-danger'><small>No results</small></h3>
 			{{/if}}
@@ -73,7 +73,7 @@
 	<label class="popval">{{value}}</label>
 </template>
 
-<template name="properties">
+<template name="PropertyClientPages">
 	{{#if $.Session.equals 'searched' true}}
 		<div class="page-container">
 			{{> pageNavig}}

@@ -1,9 +1,14 @@
 Template.editProperty.onCreated(function() {
+	var self = this;
 	this.marker = new ReactiveVar(0);
+	this.images = [];
+	_.each(this.data.images, function(img) {
+		self.images.push(img);
+	});
 });
 
 Template.editProperty.onRendered(function(){
-	GoogleMaps.load();
+	GoogleMaps.load({key: 'AIzaSyD4RgVp6VVGARHMw7snoozMIvUIaC198Ts'});
 	$('.nav-side-menu .active').removeClass('active');
 	$('.nav-side-menu .properties-link').addClass('active');
 	Session.set('geocode', 0);
@@ -52,6 +57,7 @@ Template.editProperty.onRendered(function(){
 	$('.state option[value="'+this.data.state+'"]').prop('selected', true);
 	$('.heating option[value="'+this.data.heating+'"]').prop('selected', true);
 	$('.ownerInfo input').val(this.data.ownerInfo);
+	$('.ownerPhone input').val(this.data.ownerPhone);
 	$('.dpe input').val(this.data.dpe);
 	$('.ges input').val(this.data.ges);
 	$('.taxes input').val(this.data.taxes);
@@ -97,7 +103,12 @@ Template.editProperty.helpers({
     }
   },
 	img: function() {
-		return Images.find({_id: {$in: Template.instance().data.images||[]}})
+		var img = Images.find({_id: {$in: Template.instance().data.images}}).fetch();
+		var arr = [];
+		_.each(img, function(i) {
+			arr.push(i.url());
+		});
+		return arr;
 	},
 	lstVal: function(cl) {
 		return _.find(HomePage.findOne().lstVal, function(v) {
@@ -111,14 +122,7 @@ Template.editProperty.events({
 		$('.images input').click();
 	},
 	'click .upload': function(e,t) {
-		var file = $('#file').get(0).files[0];
-		Images.insert(file, function(e,r) {
-			if (r) {
-				Properties.update({_id: t.data._id}, {
-					$push: {images: r._id}
-				});
-			}
-		});
+		Modal.show('uploadImage', {id: t.data._id});
 	},	
 	'change .images input': function(e,t) {
 		$('.filename').html(_.last(e.currentTarget.value.split('\\')));
@@ -204,6 +208,7 @@ Template.editProperty.events({
 		});
 		var data = {
 			ownerInfo: $('.ownerInfo input').val(),
+			ownerPhone: $('.ownerPhone input').val(),
 			reference: 0,
 			transactionType: $('.transaction-type input[value="Vente"]').is(':checked') ? 'Vente' : 'Location',
 			propertyType: $('.property-type select').val(),
@@ -264,5 +269,86 @@ Template.editProperty.events({
 			});
 			console.log(ctx.invalidKeys());
 		}
+	}
+});
+
+function getMaxSize(img, aspect) {
+	var scale = 1;
+	var iw = parseInt($(img).attr('width'));
+	var ih = parseInt($(img).attr('height'))
+	if (iw > $('#crop').width())
+		scale = iw / $('#crop').width();
+	console.log(scale);
+	var w = iw / scale;
+	var h = ih / scale;
+	console.log(w,h);
+	if (w > h) {
+		if (w/h < aspect) {
+			return {
+				square: [0,0,h*aspect,h],
+				scale: scale
+			}
+		}
+	}
+	// on prend x au max dans tous les cas
+	return {
+		square: [0,0,w,h/aspect],
+		scale: scale
+	}
+};
+
+Template.uploadImage.onCreated(function() {
+	this.jcrop = undefined;
+	this.img = undefined;
+});
+
+Template.uploadImage.events({
+	'change input': function(e,t) {
+		loadImage(e.currentTarget.files[0],
+			function(img) {
+				t.img = img;
+				var jcrop = t.jcrop;
+				if (jcrop) {
+					jcrop.destroy();
+					$('#crop')[0].appendChild(document.createElement('div'));
+				}
+				$('#crop div')[0].appendChild(img);
+				$('#crop div').Jcrop({ 
+					boxWidth: $('#crop').width(),
+					setSelect: getMaxSize(img, 4/3).square,
+					aspectRatio: 4/3,
+					allowSelect: false
+				}, function() {
+					jcrop = this;
+				});
+				t.jcrop = jcrop;
+			}, {});
+	},
+	'click .btn-primary': function(e,t,c) {
+		var img = new FS.File(t.find('input').files[0]);
+		var scale = getMaxSize(t.img, 4/3).scale;
+		var square = t.jcrop.tellScaled();
+		var x1 = _.ceil(square.x * scale),
+				x2 = _.ceil(square.x2 * scale),
+				y1 = _.ceil(square.y * scale),
+				y2 = _.ceil(square.y2 * scale);
+				
+		img.croppingSquare = {
+			width: x2 - x1,
+			height: y2 - y1,
+			x: x1, y: y1
+		};
+		console.log(img.croppingSquare);
+		Images.insert(img, function(e,r) {
+			if (e)
+				console.log(e);
+			if (r) {
+				console.log(r);
+				Properties.update({_id: t.data.id}, {
+					$push: {images: r._id}
+				});
+				Modal.hide();
+			}
+		});
 	}
 });

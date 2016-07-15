@@ -5,7 +5,8 @@ Template.Editor.onCreated(function() {
 		nPieces: hp.lstVal[0].values.length,
 		nState: hp.lstVal[1].values.length,
 		nHeating: hp.lstVal[2].values.length,
-		nCustomerType: hp.lstVal[3].values.length
+		nCustomerType: hp.lstVal[3].values.length,
+		nCities: hp.lstVal[4].values.length
 	});
 });
 
@@ -76,6 +77,8 @@ Template.Editor.events({
 			lv.nHeating -= 1;
 		if ($(e.currentTarget).hasClass('nCustomerType'))
 			lv.nCustomerType -= 1;
+		if ($(e.currentTarget).hasClass('nCities'))
+			lv.nCities -= 1;
 		t.lstVal.set(lv);
 	},
 	'click button.add': function(e,t) {
@@ -88,6 +91,8 @@ Template.Editor.events({
 			lv.nHeating += 1;
 		if ($(e.currentTarget).hasClass('nCustomerType'))
 			lv.nCustomerType += 1;
+		if ($(e.currentTarget).hasClass('nCities'))
+			lv.nCities += 1;
 		t.lstVal.set(lv);
 	},
 });

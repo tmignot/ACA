@@ -43,11 +43,19 @@ Template.Customer.helpers({
 			return moment(date).format('DD/MM/YYYY HH[h]mm');
 	},
 	properties: function() {
-		if (Template.instance().data) {
-			var properties = Template.instance().data.properties;
-			if (properties && properties.length)
-				return Properties.find({reference: {$in: properties}});
-		}
+		var data = Template.instance().data;
+		var p = Properties.find({
+			estimation: false,
+			price: {
+				$gt: data.budget - 20000,
+				$lt: data.budget + 20000
+			},
+			'address.city': {
+				$in: data.wish.city
+			}
+		}).fetch();
+		console.log(p);
+		return p;
 	},
 	fileClass: function(type) {
 		switch(type) {
@@ -145,7 +153,6 @@ Template.Customer.events({
 		}
 	},
 	'click .property-btn': function(e,t) {
-		console.log($('.propertyInput').val());
 		if (Properties.find({reference: $('.propertyInput').val()}).count())
 			Customers.update({_id: t.data._id}, {$push: {properties: $('.propertyInput').val()}});
 	},
@@ -185,18 +192,26 @@ Template.Customer.events({
 	},
 	'click .remove-btn': function(e,t) {
 		if (Roles.userIsInRole(Meteor.user()._id, 'remove', 'Customers')) {
-			var c = t.data;
-			_.each(c.documents, function(d) {
-				Documents.remove({_id: d}, function(e,r) {
-					if (e)
-						throw e
-				});
-			});
-			Customers.remove(t.data._id, function(e,r) {
-				if (!e)
-					Router.go('/admin/customers');
-				else
-					throw e
+			Modal.show('confirmation', {
+				type: 'danger',
+				title: 'Êtes-vous sûr?',
+				body: 'Attention, cette action est irreversible!',
+				action: 'Supprimer',
+				callback: function() {
+					var c = t.data;
+					_.each(c.documents, function(d) {
+						Documents.remove({_id: d}, function(e,r) {
+							if (e)
+								throw e
+						});
+					});
+					Customers.remove(t.data._id, function(e,r) {
+						if (!e)
+							Router.go('/admin/customers');
+						else
+							throw e
+					});
+				}
 			});
 		}
 	}

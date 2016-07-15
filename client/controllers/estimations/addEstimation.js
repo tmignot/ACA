@@ -5,7 +5,7 @@ Template.addEstimation.onCreated(function() {
 Template.addEstimation.onRendered(function() {
 	$('.nav-side-menu .active').removeClass('active');
 	$('.nav-side-menu .estimations-link').addClass('active');
-	GoogleMaps.load();
+	GoogleMaps.load({key: 'AIzaSyD4RgVp6VVGARHMw7snoozMIvUIaC198Ts'});
 	Session.set('geocode', 0);
 	$('.property-year-container').datepicker({
 		format: "yyyy",
@@ -136,6 +136,7 @@ Template.addEstimation.events({
 		});
 		var data = {
 			ownerInfo: $('.ownerInfo input').val(),
+			ownerPhone: $('.ownerPhone input').val(),
 			transactionType: $('.transaction-type input[value="Vente"]').is(':checked') ? 'Vente' : 'Location',
 			propertyType: $('.property-type option[selected]').val(),
 			geocode: geocode,

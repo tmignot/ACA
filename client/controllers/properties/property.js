@@ -21,7 +21,7 @@ Template.Property.onCreated(function(){
 Template.Property.onRendered(function(){
 	$('.nav-side-menu .active').removeClass('active');
 	$('.nav-side-menu .properties-link').addClass('active');
-	GoogleMaps.load();
+	GoogleMaps.load({key: 'AIzaSyD4RgVp6VVGARHMw7snoozMIvUIaC198Ts'});
 	this.dpeges = new DpeGes();
 	this.dpeges.dpe({
 		domId: 'dpe',
@@ -81,13 +81,30 @@ Template.Property.events({
 	},
 	'click .remove-btn': function(e,t) {
 		if (t.data.estimation) {
-			if (Roles.userIsInRole(Meteor.user()._id, 'remove', 'Estimations'))
-				Properties.remove({_id: t.data._id});
-				Router.go('/admin/estimations/');
+			if (Roles.userIsInRole(Meteor.user()._id, 'remove', 'Estimations')) {
+				Modal.show('confirmation', {
+					type: 'danger',
+					title: 'Êtes-vous sûr?',
+					body: 'Attention, cette action est irreversible!',
+					action: 'Supprimer',
+					callback: function() {
+						Properties.remove({_id: t.data._id});
+						Router.go('/admin/estimations/');
+					}
+				});
+			}
 		} else {
 			if (Roles.userIsInRole(Meteor.user()._id, 'remove', 'Properties')) {
-				Properties.update({_id: t.data._id}, {$set: {estimation: true}});
-				Router.go('/admin/estimations/' + t.data._id);
+				Modal.show('confirmation', {
+					type: 'warning',
+					title: 'Êtes-vous sûr?',
+					body: "Le mandat sera supprimé, mais l'estimation originale persistera.",
+					action: 'Supprimer',
+					callback: function() {
+						Properties.update({_id: t.data._id}, {$set: {estimation: true, reference: null}});
+						Router.go('/admin/estimations/' + t.data._id);
+					}
+				});
 			}
 		}
 	}

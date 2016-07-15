@@ -233,3 +233,10 @@
 .separator {
 	margin-bottom: 20px;
 }
+
+#crop {
+	img { 
+		width: 100%; 
+		height: auto;
+	}
+}

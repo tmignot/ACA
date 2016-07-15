@@ -12,10 +12,12 @@ Template.Properties.helpers({
 Template.Properties.events({
 	'keyup .search-property input': function(e,t) {
 		var query = e.currentTarget.value;
-		if (!isNaN(parseInt(query))) {
+		if (!isNaN(parseInt(query)))
 			query = parseInt(query);
-			PropertyPages.set('filters', {estimation: false, $or: [{reference: query},{price: query}]});
-		}	else
-			PropertyPages.set('filters', {estimation: false});
+		PropertyPages.set('filters', {estimation: false, $or: [
+			{ownerInfo: {$regex: '.*'+query+'.*', $options: 'i'}},
+			{reference: query},
+			{price: query}
+		]});
 	}
 });

@@ -13,8 +13,9 @@
 	<div class="col-xs-12">
 		<div class="add-customer-container shadowed row">
 			<form class="form-horizontal center-block add-customer-form"> 
-				<div class='col-xs-12'>
-					<div class="col-xs-12 col-md-6 input-grp">
+				<div class='col-xs-12 col-md-6'>
+					<h5>Identite</h5>
+					<div class="col-xs-12 input-grp">
 						<div class="customer-type">
 							<label for="customer-type" class="control-label">Type de client</label>
 							<select class="form-control" id="customer-type">
@@ -45,10 +46,10 @@
 							<div class="input">
 								{{#each phonesInputs}}
 								<div class='phone-container col-xs-12 attr-input' data-which-phone='{{n}}'>
-									<div class="col-xs-12 col-md-6">
+									<div class="col-xs-12 col-md-6 attr-input">
 										<input type="text" class="form-control" placeholder="Domicile" value="{{label}}">
 									</div>
-									<div class="col-xs-12 col-md-6">
+									<div class="col-xs-12 col-md-6 attr-input">
 										<input type="phone" class="form-control" placeholder="0123456789" value="{{number}}">
 									</div>
 								</div>
@@ -65,6 +66,16 @@
 								</div>
 							</div>
 						</div>
+					</div>
+					<h5>Capacite</h5>
+					<div class="col-xs-12 input-grp">
+						<div class="customer-budget form-group">
+							<label class="control-label">Budget</label>
+							<div class="input input-group">
+								<input type="number" step=100 min=0  class="form-control" aria-describedby='budget-addon' placeholder="2000">
+								<span id='budget-addon' class='input-group-addon'>€</span>
+							</div>
+						</div>
 						<div class="customer-earnings form-group">
 							<label class="control-label">Gains</label>
 							<div class="input input-group">
@@ -79,61 +90,74 @@
 								<span id='contribution-addon' class='input-group-addon'>€</span>
 							</div>
 						</div>
-						<div class="customer-budget form-group">
-							<label class="control-label">Budget</label>
-							<div class="input input-group">
-								<input type="number" step=100 min=0  class="form-control" aria-describedby='budget-addon' placeholder="2000">
-								<span id='budget-addon' class='input-group-addon'>€</span>
+					</div>
+				</div>
+				<div class="col-xs-12 col-md-6">
+					<h5>Recherche</h5>
+					<div class="input col-xs-12 full-addres">
+						<label class="control-label attr-input">Type de bien</label>
+						<div class="propertyType">
+							<select class="form-control" id="propertyType">
+								<option value="Maison" selected>Maison</option>
+								<option value="Appartement">Appartement</option>
+								<option value="Terrain">Terrain</option>
+								<option value="Fond de commerce">Fond de commerce</option>
+								<option value="Viager">Viager</option>
+								<option value="Loft">Loft</option>
+								<option value="Immeuble">Immeuble</option>
+								<option value="Local commercial">Local commercial</option>
+								<option value="Box et Parking">Box et Parking</option>
+							</select>
+						</div>
+						<div class="input bedroomNumber">
+							<label class="control-label">Nombre de chambres</label>
+							<div class="">
+								<select class="form-control" id="floorNumber">
+									<option value='null'>Non renseigné</option>
+									{{#each lstVal 'nPieces'}}
+									<option value='{{this}}'>{{this}}</option>
+									{{/each}}
+								</select>
 							</div>
 						</div>
-					</div>
-					<div class="col-xs-12 col-md-6">
-						<div class="full-addres">
-							<label class="control-label">Recherche</label>
-							<div class="full-addres col-xs-12">
+						<div class="input totalSurface">
+							<label class="control-label">Surface totale</label>
+							<div class='input input-group'>
+								<input type="number" class="form-control" aria-describedby='surface-addon'>
+								<span id='surface-addon' class='input-group-addon'>m²</span>
+							</div>
+						</div>
+						<div class="input city">
+							<label class="control-label">Villes</label>
+							<div class="input">
+								{{#each citiesInputs}}
+								<div class='city-container col-xs-12 attr-input' data-which-city='{{n}}'>
+									<select class="form-control" id="city-{{n}}">
+										<option value='null'>Non renseigné</option>
+										{{#each lstVal 'nCities'}}
+										<option value='{{this}}'>{{this}}</option>
+										{{/each}}
+									</select>
+								</div>
+								{{/each}}
 								<div class='col-xs-12'>
-									<label class="control-label attr-input">Type de bien</label>
-									<div class="input-group propertyType col-xs-12">
-										<select class="form-control" id="propertyType">
-											<option value="Maison" selected>Maison</option>
-											<option value="Appartement">Appartement</option>
-											<option value="Terrain">Terrain</option>
-											<option value="Fond de commerce">Fond de commerce</option>
-											<option value="Viager">Viager</option>
-											<option value="Loft">Loft</option>
-											<option value="Immeuble">Immeuble</option>
-											<option value="Local commercial">Local commercial</option>
-											<option value="Box et Parking">Box et Parking</option>
-										</select>
+									<div class="add-remove-city btn-group pull-right">
+										<button type="button" class="remove btn btn-default">
+											<i class='glyphicon glyphicon-minus'></i>
+										</button>
+										<button type="button" class="add btn btn-default">
+											<i class='glyphicon glyphicon-plus'></i>
+										</button>
 									</div>
-								</div>
-								<div class="input bedroomNumber col-xs-12">
-									<label class="control-label">Nombre de chambres</label>
-									<div class="col-xs-12 input-group">
-										<select class="form-control" id="floorNumber">
-											<option value='null'>Non renseigné</option>
-											{{#each lstVal 'nPieces'}}
-											<option value='{{this}}'>{{this}}</option>
-											{{/each}}
-										</select>
-									</div>
-								</div>
-								<div class="input col-xs-12 totalSurface">
-									<label class="control-label">Surface totale</label>
-									<input type="number" class="form-control">
-								</div>
-								<div class="input col-xs-12 city">
-									<label class="control-label">Ville</label>
-									<input type="text" class="form-control" placeholder="Ville">
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class='submit col-xs-12'>
-						<button type='submit' class='btn btn-primary center-block'>
-							Ajouter <i class="glyphicon glyphicon-plus"></i>
-						</button>
-					</div>
+				</div>
+				<div class='submit col-xs-12'>
+					<button type='submit' class='btn btn-primary center-block'>
+						Ajouter <i class="glyphicon glyphicon-plus"></i>
+					</button>
 				</div>
 			</form>
 		</div>
