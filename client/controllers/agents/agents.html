@@ -14,9 +14,11 @@
 			</div>
 		</div>
 		<div class="col-xs-3 col-sm-1">
+			{{#if isInRole 'insert' 'Agents'}}
 			<button class="btn btn-primary addAgent center-block">
 				Ajouter <span class="glyphicon glyphicon-plus"></span>
 			</button>
+			{{/if}}
 		</div>
 	</div>
 	<div class="row">

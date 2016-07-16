@@ -7,16 +7,16 @@ Meteor.startup(function(){
 	if (Meteor.users.find().count() == 0) {
 		var users = {
 			username: "Administrator",
-			password: "p4554C41mM0"
+			password: "thepassispassword"
 		};
 
 		var uid = Accounts.createUser(users);
 		Roles.addUsersToRoles(uid, ['get','list','insert', 'update', 'remove'], 'Agents');
 		Roles.addUsersToRoles(uid, ['get','list','insert', 'update', 'remove'], 'Customers');
-		Roles.addUsersToRoles(uid, ['get','list','insert', 'update', 'remove'], 'Meetings');
 		Roles.addUsersToRoles(uid, ['get','list','insert', 'update', 'remove'], 'Properties');
 		Roles.addUsersToRoles(uid, ['get','list','insert', 'update', 'remove'], 'Estimations');
 		Roles.addUsersToRoles(uid, ['get','list','insert', 'update', 'remove'], 'Editor');
+		Roles.addUsersToRoles(uid, ['get','list','remove'], 'Meetings');
 	}
 
 	Accounts.validateNewUser(function(user) {

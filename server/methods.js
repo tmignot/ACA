@@ -10,6 +10,12 @@ Meteor.methods({
 			email: username+'@gmail.com'
 		});
 		Accounts.sendEnrollmentEmail(new_user);
+		Roles.addUsersToRoles(new_user, ['get','list'], 'Agents');
+		Roles.addUsersToRoles(new_user, ['get','list','insert','update','remove'], 'Customers');
+		Roles.addUsersToRoles(new_user, ['get','list','insert','update','remove'], 'Properties');
+		Roles.addUsersToRoles(new_user, ['get','list','insert','update','remove'], 'Estimations');
+		Roles.addUsersToRoles(new_user, ['get','list','insert','update','remove'], 'Editor');
+		Roles.addUsersToRoles(new_user, ['get','list','insert','update','remove'], 'Meetings');
 	},
 	removeAgent: function(id) {
 		var admin = Accounts.users.findOne({username: 'Administrator'});
